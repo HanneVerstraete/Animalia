@@ -18,31 +18,48 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <ScrollView
+            android:id="@+id/lesson_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/nextlesson_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animal_image">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lesson_textview"
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:text="@{lessonBook.currentLesson}"
+                    tools:text="Here comes a lesson" />
+            </LinearLayout>
+        </ScrollView>
+
         <ImageView
             android:id="@+id/animal_image"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginTop="32dp"
             android:contentDescription="@string/description_image_lesson"
-            app:layout_constraintBottom_toTopOf="@+id/lesson_textview"
+            app:layout_constraintBottom_toTopOf="@+id/lesson_scrollview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/empty_vector"
             tools:srcCompat="@drawable/dog" />
-
-        <TextView
-            android:id="@+id/lesson_textview"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="32dp"
-            android:text="@{lessonBook.currentLesson}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/animal_image"
-            tools:text="Here comes a lesson" />
 
         <Button
             android:id="@+id/nextlesson_button"
