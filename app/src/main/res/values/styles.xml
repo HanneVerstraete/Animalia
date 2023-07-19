@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="text_regular">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="button_regular">
+        <item name="android:textSize">16sp</item>
+        <item name="backgroundTint">@android:color/holo_green_dark</item>
+    </style>
+</resources>

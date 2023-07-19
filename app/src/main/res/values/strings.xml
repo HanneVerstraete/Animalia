@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Animalia</string>
-    <string name="greeting">Hello!</string>
-    <string name="button_skill">Test skills</string>
-    <string name="button_learn">Learn</string>
-    <string name="button_lesson_quit">Quit lesson</string>
-    <string name="button_lesson_next">Next lesson</string>
+    <string name="greeting">Hallo!</string>
+    <string name="button_skill">Test vaardigheden</string>
+    <string name="button_learn">Leer</string>
+    <string name="button_lesson_quit">Stop les</string>
+    <string name="button_lesson_next">Volgende les</string>
+    <string name="description_image_lesson">Foto van het dier waar de les over gaat</string>
 </resources>
