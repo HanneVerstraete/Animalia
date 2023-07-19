@@ -1,11 +1,14 @@
 package com.example.animalia
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.animalia.databinding.FragmentLessonBinding
 
-class LessonFragment : AppCompatActivity() {
+class LessonFragment : Fragment() {
     private val myLessonBook = LessonBook()
 
     private lateinit var binding: FragmentLessonBinding
@@ -13,7 +16,14 @@ class LessonFragment : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.fragment_lesson)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lesson, container, false)
 
         binding.lessonBook = myLessonBook
 
@@ -22,6 +32,7 @@ class LessonFragment : AppCompatActivity() {
             quitlessonButton.setOnClickListener { quitLesson() }
         }
 
+        return binding.root
     }
 
     private fun nextLesson() {

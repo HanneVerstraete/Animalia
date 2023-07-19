@@ -18,20 +18,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        drawerLayout = findViewById(R.id.drawerLayout)
-        val navView: NavigationView = findViewById(R.id.navView)
-
-        val navController = this.findNavController(R.id.navHostFragment)
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
-
-        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        NavigationUI.setupWithNavController(navView, navController)
+//        drawerLayout = findViewById(R.id.drawerLayout)
+//        val navView: NavigationView = findViewById(R.id.navView)
+//
+//        val navController = this.findNavController(R.id.navHostFragment)
+//        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+//
+//        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+//        NavigationUI.setupWithNavController(navView, navController)
 
     }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.navHostFragment)
-        return NavigationUI.navigateUp(navController, drawerLayout)
-    }
+//
+//    override fun onSupportNavigateUp(): Boolean {
+//        val navController = this.findNavController(R.id.navHostFragment)
+//        return NavigationUI.navigateUp(navController, drawerLayout)
+//    }
 
 }

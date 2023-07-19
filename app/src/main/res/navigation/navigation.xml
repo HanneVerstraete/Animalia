@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/truefalseFragment"
-        android:name="com.example.animalia.TruefalseFragement"
+        android:name="com.example.animalia.TruefalseFragment"
         android:label="TruefalseFragment"
         tools:layout="@layout/fragment_truefalse">
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/truefalseLoseFragment"
-        android:name="com.example.animalia.TruefalseLoseFragement"
+        android:name="com.example.animalia.TruefalseLoseFragment"
         android:label="TruefalseLoseFragment"
         tools:layout="@layout/fragment_truefalse_lose">
         <action
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/truefalseWinFragment"
-        android:name="com.example.animalia.TruefalseWinFragement"
+        android:name="com.example.animalia.TruefalseWinFragment"
         android:label="TruefalseWinFragment"
         tools:layout="@layout/fragment_truefalse_win">
         <action
