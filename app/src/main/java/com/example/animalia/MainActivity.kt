@@ -1,47 +1,37 @@
 package com.example.animalia
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.example.animalia.databinding.ActivityMainBinding
+import android.os.Bundle
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity : AppCompatActivity() {
-    private val myLessonBook = LessonBook()
 
-    private lateinit var binding: ActivityMainBinding
-    var lessonNumber: Int = 0
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-        binding.lessonBook = myLessonBook
+        drawerLayout = findViewById(R.id.drawerLayout)
+        val navView: NavigationView = findViewById(R.id.navView)
 
-        binding.apply {
-            nextlessonButton.setOnClickListener { nextLesson() }
-            quitlessonButton.setOnClickListener { quitLesson() }
-        }
+        val navController = this.findNavController(R.id.navHostFragment)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        NavigationUI.setupWithNavController(navView, navController)
 
     }
 
-    private fun nextLesson() {
-        binding.apply {
-            lessonBook?.getNextLesson(lessonNumber)
-
-            when (lessonNumber) {
-                0 -> animalImage.setImageResource(R.drawable.dog)
-                1 -> animalImage.setImageResource(R.drawable.lion)
-                2 -> animalImage.setImageResource(R.drawable.duck)
-                else -> animalImage.setImageResource(R.drawable.empty_vector)
-            }
-
-            invalidateAll()
-        }
-
-        lessonNumber += 1
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.navHostFragment)
+        return NavigationUI.navigateUp(navController, drawerLayout)
     }
 
-    private fun quitLesson() {
-        // TODO
-    }
 }

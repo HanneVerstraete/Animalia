@@ -1,86 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="lessonBook"
-            type="com.example.animalia.LessonBook" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
+        android:layout_height="match_parent">
 
-        <ScrollView
-            android:id="@+id/lesson_scrollview"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/nextlesson_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/animal_image">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+
+            <fragment
+                android:id="@+id/navHostFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/navigation" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/lesson_textview"
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="32dp"
-                    android:text="@{lessonBook.currentLesson}"
-                    tools:text="Here comes a lesson" />
-            </LinearLayout>
-        </ScrollView>
-
-        <ImageView
-            android:id="@+id/animal_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="32dp"
-            android:contentDescription="@string/description_image_lesson"
-            app:layout_constraintBottom_toTopOf="@+id/lesson_scrollview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/empty_vector"
-            tools:srcCompat="@drawable/dog" />
-
-        <Button
-            android:id="@+id/nextlesson_button"
-            style="@style/button_regular"
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_lesson_next"
-            app:layout_constraintBottom_toTopOf="@+id/quitlesson_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/navdrawer_menu" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-        <Button
-            android:id="@+id/quitlesson_button"
-            style="@style/button_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/button_lesson_quit"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

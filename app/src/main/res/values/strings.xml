@@ -6,4 +6,9 @@
     <string name="button_lesson_quit">Stop les</string>
     <string name="button_lesson_next">Volgende les</string>
     <string name="description_image_lesson">Foto van het dier waar de les over gaat</string>
+    <string name="button_question_true">Juist</string>
+    <string name="button_question_false">Fout</string>
+    <string name="textview_question_win">Hoera! Gewonnen!</string>
+    <string name="textview_question_lose">Helaas, je hebt verloren</string>
+    <string name="button_question_continue">Verdergaan</string>
 </resources>

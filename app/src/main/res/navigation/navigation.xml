@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.animalia.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_lessonFragment"
+            app:destination="@id/lessonFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_truefalseFragment"
+            app:destination="@id/truefalseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lessonFragment"
+        android:name="com.example.animalia.LessonFragment"
+        android:label="LessonFragment"
+        tools:layout="@layout/fragment_lesson">
+        <action
+            android:id="@+id/action_lessonFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/truefalseFragment"
+        android:name="com.example.animalia.TruefalseFragement"
+        android:label="TruefalseFragment"
+        tools:layout="@layout/fragment_truefalse">
+        <action
+            android:id="@+id/action_truefalseFragment_to_truefalseLoseFragment"
+            app:destination="@id/truefalseLoseFragment" />
+        <action
+            android:id="@+id/action_truefalseFragment_to_truefalseWinFragment"
+            app:destination="@id/truefalseWinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/truefalseLoseFragment"
+        android:name="com.example.animalia.TruefalseLoseFragement"
+        android:label="TruefalseLoseFragment"
+        tools:layout="@layout/fragment_truefalse_lose">
+        <action
+            android:id="@+id/action_trueFalseLoseFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/truefalseWinFragment"
+        android:name="com.example.animalia.TruefalseWinFragement"
+        android:label="TruefalseWinFragment"
+        tools:layout="@layout/fragment_truefalse_win">
+        <action
+            android:id="@+id/action_trueFalseWinFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+</navigation>

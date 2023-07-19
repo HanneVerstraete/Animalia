@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="currentQuestion"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+
+        <TextView
+            android:id="@+id/lesson_textview"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{currentQuestion}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Is dit juist of fout" />
+
+
+        <Button
+            android:id="@+id/true_button"
+            style="@style/button_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/button_question_true"
+            app:layout_constraintEnd_toStartOf="@id/false_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lesson_textview" />
+
+        <Button
+            android:id="@+id/false_button"
+            style="@style/button_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/button_question_false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/true_button"
+            app:layout_constraintTop_toBottomOf="@+id/lesson_textview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
