@@ -2,5 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/lessonFragment"
-        android:title="Lesson" />
+        android:title="@string/menu_lesson" />
+    <item
+        android:id="@+id/truefalseFragment"
+        android:title="@string/menu_truefalse" />
 </menu>

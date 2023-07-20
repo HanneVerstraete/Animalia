@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.animalia.HomeFragment"
-        android:label="HomeFragment"
+        android:label="Home"
         tools:layout="@layout/fragment_home">
 
         <action
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/lessonFragment"
         android:name="com.example.animalia.LessonFragment"
-        android:label="LessonFragment"
+        android:label="Les"
         tools:layout="@layout/fragment_lesson">
         <action
             android:id="@+id/action_lessonFragment_to_homeFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/truefalseFragment"
         android:name="com.example.animalia.TruefalseFragment"
-        android:label="TruefalseFragment"
+        android:label="True/false spel"
         tools:layout="@layout/fragment_truefalse">
         <action
             android:id="@+id/action_truefalseFragment_to_truefalseLoseFragment"
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/truefalseLoseFragment"
         android:name="com.example.animalia.TruefalseLoseFragment"
-        android:label="TruefalseLoseFragment"
+        android:label="Verloren"
         tools:layout="@layout/fragment_truefalse_lose">
         <action
             android:id="@+id/action_trueFalseLoseFragment_to_homeFragment"
@@ -51,10 +51,15 @@
     <fragment
         android:id="@+id/truefalseWinFragment"
         android:name="com.example.animalia.TruefalseWinFragment"
-        android:label="TruefalseWinFragment"
+        android:label="Gewonnen"
         tools:layout="@layout/fragment_truefalse_win">
         <action
             android:id="@+id/action_trueFalseWinFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.animalia.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
 </navigation>

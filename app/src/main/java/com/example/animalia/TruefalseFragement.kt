@@ -6,8 +6,9 @@ import androidx.databinding.DataBindingUtil
 import com.example.animalia.databinding.FragmentTruefalseBinding
 
 class TruefalseFragement : AppCompatActivity() {
-    //    private val myLessonBook = LessonBook()
-//
+    private val currentQuestion = "Is dit juist of fout?"
+
+    //
     private lateinit var binding: FragmentTruefalseBinding
 //    var lessonNumber: Int = 0
 
