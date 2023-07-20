@@ -9,6 +9,7 @@ class QuestionBook(var numQuestions: Int = 0, var goodQuestions: Int = 0) {
     private var currentQuestionIndex = 0
 
     // TODO convert to list of objects
+    // TODO show answer an description
     private val questions = listOf(
         "Papegaaien kunnen menselijke taal begrijpen en betekenisvolle gesprekken voeren.", "Fout", "Hoewel papegaaien in staat zijn om enkele woorden of zinnen na te bootsen, begrijpen ze meestal niet de betekenis van wat ze zeggen.",
         "De blauwe vinvis is het grootste dier dat ooit op aarde heeft geleefd.", "Juist", "De blauwe vinvis is het grootste dier dat ooit bekend is, zowel in het heden als in het verleden.",
