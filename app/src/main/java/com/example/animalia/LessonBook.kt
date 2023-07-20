@@ -27,4 +27,8 @@ class LessonBook {
         }
         currentLesson = lesson
     }
+
+    fun isLastLesson(lessonNumber: Int): Boolean {
+        return lessons.size < lessonNumber
+    }
 }

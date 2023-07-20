@@ -5,23 +5,21 @@ import android.view.*
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.animalia.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-//    lateinit var binding: FragmentHomeBinding
+    lateinit var binding: FragmentHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val menuHost = requireActivity()
 
         menuHost.addMenuProvider(object : MenuProvider {
@@ -41,33 +39,20 @@ class HomeFragment : Fragment() {
 
         }, viewLifecycleOwner)
 
-        return inflater.inflate(R.layout.fragment_home, container, false)
-//        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-//
-//        setOnClickListeners()
-//
-//        setHasOptionsMenu(true)
-//        return binding.root
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        setOnClickListeners()
+
+        return binding.root
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater?.inflate(R.menu.overflow_menu, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return NavigationUI.onNavDestinationSelected(
-//            item!!,
-//            requireView().findNavController()
-//        )
-//                || super.onOptionsItemSelected(item)
-//    }
-//
-//    private fun setOnClickListeners() {
-//        binding.startlessonButton.setOnClickListener(
-//            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_lessonFragment)
-//        )
-//    }
-
-
+    private fun setOnClickListeners() {
+        binding.startTruefalseButton.setOnClickListener { view: View ->
+            view.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToTruefalseFragment())
+        }
+        binding.startLessonButton.setOnClickListener { view: View ->
+            view.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToLessonFragment())
+        }
+    }
 }

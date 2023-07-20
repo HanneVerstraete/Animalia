@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.animalia.databinding.FragmentLessonBinding
 
 class LessonFragment : Fragment() {
-    private val myLessonBook = LessonBook()
-
+    private var myLessonBook = LessonBook()
     private lateinit var binding: FragmentLessonBinding
+    // TODO move logic of number to lessonBook
     var lessonNumber: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,14 +23,21 @@ class LessonFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lesson, container, false)
 
         binding.lessonBook = myLessonBook
 
+        nextLesson()
+
         binding.apply {
-            nextlessonButton.setOnClickListener { nextLesson() }
-            quitlessonButton.setOnClickListener { quitLesson() }
+            nextlessonButton.setOnClickListener {
+                nextLesson()
+            }
+            quitlessonButton.setOnClickListener {
+                view?.findNavController()
+                    ?.navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
+            }
         }
 
         return binding.root
@@ -50,9 +58,9 @@ class LessonFragment : Fragment() {
         }
 
         lessonNumber += 1
-    }
 
-    private fun quitLesson() {
-        // TODO
+        if (myLessonBook.isLastLesson(lessonNumber)) {
+            binding.nextlessonButton.visibility = View.GONE
+        }
     }
 }

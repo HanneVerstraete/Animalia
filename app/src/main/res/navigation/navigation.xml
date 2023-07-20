@@ -34,10 +34,14 @@
         tools:layout="@layout/fragment_truefalse">
         <action
             android:id="@+id/action_truefalseFragment_to_truefalseLoseFragment"
-            app:destination="@id/truefalseLoseFragment" />
+            app:destination="@id/truefalseLoseFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_truefalseFragment_to_truefalseWinFragment"
-            app:destination="@id/truefalseWinFragment" />
+            app:destination="@id/truefalseWinFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/truefalseLoseFragment"

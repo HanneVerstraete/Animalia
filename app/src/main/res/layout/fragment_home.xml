@@ -17,7 +17,7 @@
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/startlesson_button"
+            android:id="@+id/start_lesson_button"
             style="@style/button_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,6 +25,7 @@
             android:text="@string/button_learn" />
 
         <Button
+            android:id="@+id/start_truefalse_button"
             style="@style/button_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -6,56 +6,56 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.animalia.databinding.FragmentTruefalseBinding
 
 class TruefalseFragment : Fragment() {
-    //    private val myLessonBook = LessonBook()
-//
+    private var myQuestionBook = QuestionBook()
     private lateinit var binding: FragmentTruefalseBinding
-//    var lessonNumber: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-//        binding.lessonBook = myLessonBook
-
-//        binding.apply {
-//            nextlessonButton.setOnClickListener { nextLesson() }
-//            quitlessonButton.setOnClickListener { quitLesson() }
-//        }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        //Step 1, use databinding to inflate the xml
-
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse, container, false)
+
+        binding.questionBook = myQuestionBook
+
+        myQuestionBook.getNextQuestion()
+
+        binding.apply {
+            trueButton.setOnClickListener {
+                myQuestionBook.evaluateTrue()
+                getNextQuestion()
+            }
+            falseButton.setOnClickListener {
+                myQuestionBook.evaluateFalse()
+                getNextQuestion()
+            }
+        }
 
         return binding.root
     }
-//    private fun nextLesson() {
-//        binding.apply {
-//            lessonBook?.getNextLesson(lessonNumber)
-//
-//            when (lessonNumber) {
-//                0 -> animalImage.setImageResource(R.drawable.dog)
-//                1 -> animalImage.setImageResource(R.drawable.lion)
-//                2 -> animalImage.setImageResource(R.drawable.duck)
-//                else -> animalImage.setImageResource(R.drawable.empty_vector)
-//            }
-//
-//            invalidateAll()
-//        }
-//
-//        lessonNumber += 1
-//    }
-//
-//    private fun quitLesson() {
-//        // TODO
-//    }
+
+    private fun getNextQuestion() {
+        binding.apply {
+            if (!myQuestionBook.isEnded()) {
+                myQuestionBook.getNextQuestion()
+                invalidateAll()
+            } else {
+                if (myQuestionBook.isWon()) {
+                    view?.findNavController()
+                        ?.navigate(TruefalseFragmentDirections.actionTruefalseFragmentToTruefalseWinFragment())
+                } else {
+                    view?.findNavController()
+                        ?.navigate(TruefalseFragmentDirections.actionTruefalseFragmentToTruefalseLoseFragment())
+
+                }
+            }
+        }
+    }
 }

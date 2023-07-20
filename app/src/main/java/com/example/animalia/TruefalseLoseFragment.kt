@@ -6,54 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.animalia.databinding.FragmentTruefalseBinding
+import androidx.navigation.findNavController
+import com.example.animalia.databinding.FragmentTruefalseLoseBinding
 
 class TruefalseLoseFragment : Fragment() {
-    //    private val myLessonBook = LessonBook()
-//
-    private lateinit var binding: FragmentTruefalseBinding
-//    var lessonNumber: Int = 0
+    private lateinit var binding: FragmentTruefalseLoseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        binding.lessonBook = myLessonBook
-
-//        binding.apply {
-//            nextlessonButton.setOnClickListener { nextLesson() }
-//            quitlessonButton.setOnClickListener { quitLesson() }
-//        }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse_lose, container, false)
+        setOnClickListeners()
 
         return binding.root
     }
 
-//    private fun nextLesson() {
-//        binding.apply {
-//            lessonBook?.getNextLesson(lessonNumber)
-//
-//            when (lessonNumber) {
-//                0 -> animalImage.setImageResource(R.drawable.dog)
-//                1 -> animalImage.setImageResource(R.drawable.lion)
-//                2 -> animalImage.setImageResource(R.drawable.duck)
-//                else -> animalImage.setImageResource(R.drawable.empty_vector)
-//            }
-//
-//            invalidateAll()
-//        }
-//
-//        lessonNumber += 1
-//    }
-//
-//    private fun quitLesson() {
-//        // TODO
-//    }
+    private fun setOnClickListeners() {
+        binding.continueButton.setOnClickListener{
+            view?.findNavController()?.navigate(TruefalseLoseFragmentDirections.actionTrueFalseLoseFragmentToHomeFragment())
+        }
+    }
 }
