@@ -9,6 +9,7 @@
     <string name="button_question_true">Juist</string>
     <string name="button_question_false">Fout</string>
     <string name="textview_question_win">Hoera! Gewonnen!</string>
+    <string name="textview_score">Score: %d / %d</string>
     <string name="textview_question_lose">Helaas, je hebt verloren</string>
     <string name="button_question_continue">Verdergaan</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

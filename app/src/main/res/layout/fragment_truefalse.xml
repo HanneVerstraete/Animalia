@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="questionBook"
-            type="com.example.animalia.QuestionBook" />
+            name="truefalseViewModel"
+            type="com.example.animalia.models.TruefalseViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +24,7 @@
             style="@style/text_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{questionBook.currentQuestion}"
+            android:text="@{truefalseViewModel.currentQuestion}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:onClick="@{()->truefalseViewModel.answerTrue()}"
             android:text="@string/button_question_true"
             app:layout_constraintEnd_toStartOf="@id/false_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,10 +50,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:onClick="@{()->truefalseViewModel.answerFalse()}"
             android:text="@string/button_question_false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/true_button"
             app:layout_constraintTop_toBottomOf="@+id/lesson_textview" />
+
+        <TextView
+            android:id="@+id/lesson_score_textview"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/textview_score(truefalseViewModel.goodQuestions, truefalseViewModel.currentQuestionIndex)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/false_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

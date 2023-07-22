@@ -1,13 +1,6 @@
 package com.example.animalia
 
-import kotlin.math.ceil
-
-val TOTAL_QUESTIONS = 3
-
-class QuestionBook(var numQuestions: Int = 0, var goodQuestions: Int = 0) {
-    var currentQuestion = ""
-    private var currentQuestionIndex = 0
-
+class QuestionBook() {
     // TODO convert to list of objects
     // TODO show answer an description
     private val questions = listOf(
@@ -17,25 +10,15 @@ class QuestionBook(var numQuestions: Int = 0, var goodQuestions: Int = 0) {
         "Een kangoeroe is een buideldier.", "Juist", "Kangoeroes behoren tot de buideldierenfamilie, wat betekent dat ze hun jongen in een buidel dragen om ze te beschermen en te voeden totdat ze volledig zijn ontwikkeld."
     )
 
-    fun getNextQuestion() {
-        currentQuestion = questions[currentQuestionIndex]
-        currentQuestionIndex += 3
+    fun getQuestion(questionIndex: Int): String {
+        return questions[questionIndex * 3]
     }
 
-    fun evaluateTrue() {
-        if (questions[currentQuestionIndex + 1] == "Juist") {
-            goodQuestions++
-        }
-        numQuestions++
+    fun isAnswerTrue(questionIndex: Int): Boolean {
+        return questions[questionIndex * 3 + 1] == "Juist"
     }
 
-    fun evaluateFalse() {
-        if (questions[currentQuestionIndex + 1] == "Fout") {
-            goodQuestions++
-        }
-        numQuestions++
+    fun isAnswerFalse(questionIndex: Int): Boolean {
+        return questions[questionIndex * 3 + 1] == "Fout"
     }
-
-    fun isEnded() = numQuestions >= TOTAL_QUESTIONS
-    fun isWon() = goodQuestions > ceil((TOTAL_QUESTIONS / 2).toDouble())
 }
