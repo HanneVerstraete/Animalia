@@ -26,20 +26,23 @@ class TruefalseWinFragment : Fragment() {
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse_win, container, false)
-        setOnClickListeners()
 
         binding.apply {
             viewModel = this@TruefalseWinFragment.viewModel
             lifecycleOwner = lifecycleOwner
         }
 
+        viewModel.shouldLeaveGame.observe(viewLifecycleOwner) {
+            if (it) {
+                endGame()
+            }
+        }
+
         return binding.root
     }
 
-    private fun setOnClickListeners() {
-        binding.continueButton.setOnClickListener {
-            view?.findNavController()
-                ?.navigate(TruefalseWinFragmentDirections.actionTrueFalseWinFragmentToHomeFragment())
-        }
+    private fun endGame() {
+        view?.findNavController()
+            ?.navigate(TruefalseWinFragmentDirections.actionTrueFalseWinFragmentToHomeFragment())
     }
 }

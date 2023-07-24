@@ -24,20 +24,25 @@ class TruefalseLoseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse_lose, container, false)
-        setOnClickListeners()
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse_lose, container, false)
 
         binding.apply {
             viewModel = this@TruefalseLoseFragment.viewModel
             lifecycleOwner = lifecycleOwner
         }
 
+        viewModel.shouldLeaveGame.observe(viewLifecycleOwner) {
+            if (it) {
+                endGame()
+            }
+        }
+
         return binding.root
     }
 
-    private fun setOnClickListeners() {
-        binding.continueButton.setOnClickListener{
-            view?.findNavController()?.navigate(TruefalseLoseFragmentDirections.actionTrueFalseLoseFragmentToHomeFragment())
-        }
+    private fun endGame() {
+        view?.findNavController()
+            ?.navigate(TruefalseLoseFragmentDirections.actionTrueFalseLoseFragmentToHomeFragment())
     }
 }

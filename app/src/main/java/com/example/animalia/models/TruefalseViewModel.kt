@@ -10,52 +10,73 @@ const val TOTAL_QUESTIONS = 3
 
 class TruefalseViewModel : ViewModel() {
     private var myQuestionBook = QuestionBook()
+    private var currentQuestionIndex = 0
 
     private var _currentQuestion = MutableLiveData("")
     val currentQuestion: LiveData<String>
         get() = _currentQuestion
 
-    private val _shouldEvaluate = MutableLiveData<Boolean>()
-    val shouldEvaluate: LiveData<Boolean>
-        get() = _shouldEvaluate
+    private val _numberOfQuestionsAsked = MutableLiveData<Int>()
+    val numberOfQuestionsAsked: LiveData<Int>
+        get() = _numberOfQuestionsAsked
 
     private val _goodQuestions = MutableLiveData<Int>()
     val goodQuestions: LiveData<Int>
         get() = _goodQuestions
 
-    private val _currentQuestionIndex = MutableLiveData<Int>()
-    val currentQuestionIndex: LiveData<Int>
-        get() = _currentQuestionIndex
+    private val _shouldEvaluate = MutableLiveData<Boolean>()
+    val shouldEvaluate: LiveData<Boolean>
+        get() = _shouldEvaluate
+
+    private val _shouldLeaveGame = MutableLiveData<Boolean>()
+    val shouldLeaveGame: LiveData<Boolean>
+        get() = _shouldLeaveGame
 
     init {
-        _currentQuestion.value = myQuestionBook.getQuestion(0)
         _goodQuestions.value = 0
-        _currentQuestionIndex.value = 0
+        _numberOfQuestionsAsked.value = 0
+        _currentQuestion.value = myQuestionBook.getQuestion(currentQuestionIndex)
     }
 
     fun answerTrue() {
-        if (myQuestionBook.isAnswerTrue(_currentQuestionIndex.value!!)) {
+        if (myQuestionBook.isAnswerTrue(currentQuestionIndex)) {
             _goodQuestions.value = _goodQuestions.value!! + 1
         }
-        getNextQuestion()
+        increaseIndex()
+        getQuestion()
     }
 
     fun answerFalse() {
-        if (myQuestionBook.isAnswerFalse(_currentQuestionIndex.value!!)) {
+        if (myQuestionBook.isAnswerFalse(currentQuestionIndex)) {
             _goodQuestions.value = _goodQuestions.value!! + 1
         }
-        getNextQuestion()
+        increaseIndex()
+        getQuestion()
     }
 
-    private fun getNextQuestion() {
-        _currentQuestionIndex.value = _currentQuestionIndex.value!! + 1
+    private fun increaseIndex() {
+        _shouldLeaveGame.value = false
+        _numberOfQuestionsAsked.value = _numberOfQuestionsAsked.value!! + 1
+        currentQuestionIndex++
+    }
+
+    private fun getQuestion() {
         if (isEnded()) {
             _shouldEvaluate.value = true
         } else {
-            _currentQuestion.value = myQuestionBook.getQuestion(_currentQuestionIndex.value!!)
+            _currentQuestion.value = myQuestionBook.getQuestion(currentQuestionIndex)
         }
     }
 
-    private fun isEnded() = _currentQuestionIndex.value!! >= TOTAL_QUESTIONS
+    fun endGame() {
+        _goodQuestions.value = 0
+        _numberOfQuestionsAsked.value = 0
+        _shouldEvaluate.value = false
+        _shouldLeaveGame.value = true
+        _currentQuestion.value = myQuestionBook.getQuestion(currentQuestionIndex)
+    }
+
+    private fun isEnded() = _numberOfQuestionsAsked.value!! >= TOTAL_QUESTIONS
+
     fun isWon() = _goodQuestions.value!! > ceil((TOTAL_QUESTIONS / 2).toDouble())
 }

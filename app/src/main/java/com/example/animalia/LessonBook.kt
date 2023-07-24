@@ -21,6 +21,7 @@ class LessonBook {
         val lesson = if (!isLastLesson(lessonNumber)) {
             lessons.elementAt(lessonNumber)
         } else {
+            // TODO better handling
             "Finished all lessons"
         }
         return lesson
