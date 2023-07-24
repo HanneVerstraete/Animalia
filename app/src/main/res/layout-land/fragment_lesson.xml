@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="lessonBook"
-            type="com.example.animalia.LessonBook" />
+            name="lessonViewModel"
+            type="com.example.animalia.models.LessonViewModel" />
     </data>
 
     <LinearLayout
@@ -57,7 +57,7 @@
                         style="@style/text_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{lessonBook.currentLesson}"
+                        android:text="@{lessonViewModel.currentLesson}"
                         tools:text="Here comes a lesson" />
                 </LinearLayout>
             </ScrollView>
@@ -68,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:onClick="@{()->lessonViewModel.getNextLesson()}"
                 android:text="@string/button_lesson_next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/quitlesson_button"

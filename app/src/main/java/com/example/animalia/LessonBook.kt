@@ -1,8 +1,6 @@
 package com.example.animalia
 
 class LessonBook {
-    var currentLesson = ""
-
     private val lessons = listOf(
         "Welkom in de liefdevolle wereld van honden!\n\n" +
                 "Deze trouwe metgezellen staan bekend om hun onvoorwaardelijke genegenheid en vreugdevolle persoonlijkheden.\n\n" +
@@ -19,16 +17,27 @@ class LessonBook {
                 "Met hun ondeugende geest en innemende persoonlijkheden blijven eenden een bron van verwondering en inspiratie voor ons allemaal!"
     )
 
-    fun getNextLesson(lessonNumber: Int) {
-        val lesson = if (lessons.size > lessonNumber) {
+    fun getLesson(lessonNumber: Int): String {
+        val lesson = if (!isLastLesson(lessonNumber)) {
             lessons.elementAt(lessonNumber)
         } else {
             "Finished all lessons"
         }
-        currentLesson = lesson
+        return lesson
+    }
+
+    fun getLessonPicture(lessonNumber: Int): Int {
+        val picture: Int = when (lessonNumber) {
+            0 -> R.drawable.dog
+            1 -> R.drawable.lion
+            2 -> R.drawable.duck
+            else -> R.drawable.empty_vector
+        }
+
+        return picture
     }
 
     fun isLastLesson(lessonNumber: Int): Boolean {
-        return lessons.size < lessonNumber
+        return lessons.size - 1 < lessonNumber
     }
 }
