@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.animalia.databinding.FragmentTruefalseLoseBinding
 import com.example.animalia.models.TruefalseViewModel
 
+// TODO combine with winfragment?
 class TruefalseLoseFragment : Fragment() {
     private lateinit var binding: FragmentTruefalseLoseBinding
     private val viewModel: TruefalseViewModel by activityViewModels()
@@ -32,17 +33,17 @@ class TruefalseLoseFragment : Fragment() {
             lifecycleOwner = lifecycleOwner
         }
 
-        viewModel.shouldLeaveGame.observe(viewLifecycleOwner) {
-            if (it) {
-                endGame()
-            }
-        }
-
         return binding.root
     }
 
-    private fun endGame() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this
+    }
+
+    fun endGame() {
         view?.findNavController()
             ?.navigate(TruefalseLoseFragmentDirections.actionTrueFalseLoseFragmentToHomeFragment())
+        viewModel.endGame()
     }
 }

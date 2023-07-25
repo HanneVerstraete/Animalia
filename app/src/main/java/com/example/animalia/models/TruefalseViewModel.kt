@@ -28,10 +28,6 @@ class TruefalseViewModel : ViewModel() {
     val shouldEvaluate: LiveData<Boolean>
         get() = _shouldEvaluate
 
-    private val _shouldLeaveGame = MutableLiveData<Boolean>()
-    val shouldLeaveGame: LiveData<Boolean>
-        get() = _shouldLeaveGame
-
     init {
         _goodQuestions.value = 0
         _numberOfQuestionsAsked.value = 0
@@ -55,7 +51,6 @@ class TruefalseViewModel : ViewModel() {
     }
 
     private fun increaseIndex() {
-        _shouldLeaveGame.value = false
         _numberOfQuestionsAsked.value = _numberOfQuestionsAsked.value!! + 1
         currentQuestionIndex++
     }
@@ -72,7 +67,6 @@ class TruefalseViewModel : ViewModel() {
         _goodQuestions.value = 0
         _numberOfQuestionsAsked.value = 0
         _shouldEvaluate.value = false
-        _shouldLeaveGame.value = true
         _currentQuestion.value = myQuestionBook.getQuestion(currentQuestionIndex)
     }
 

@@ -32,17 +32,17 @@ class TruefalseWinFragment : Fragment() {
             lifecycleOwner = lifecycleOwner
         }
 
-        viewModel.shouldLeaveGame.observe(viewLifecycleOwner) {
-            if (it) {
-                endGame()
-            }
-        }
-
         return binding.root
     }
 
-    private fun endGame() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this
+    }
+
+    fun endGame() {
         view?.findNavController()
             ?.navigate(TruefalseWinFragmentDirections.actionTrueFalseWinFragmentToHomeFragment())
+        viewModel.endGame()
     }
 }
