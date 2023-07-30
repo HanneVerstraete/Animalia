@@ -1,4 +1,4 @@
-package com.example.animalia
+package com.example.animalia.screens.lesson
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.example.animalia.R
 import com.example.animalia.databinding.FragmentLessonBinding
-import com.example.animalia.models.LessonViewModel
 
 class LessonFragment : Fragment() {
     private lateinit var binding: FragmentLessonBinding

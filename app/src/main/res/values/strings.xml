@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Animalia</string>
     <string name="greeting">Hallo!</string>
-    <string name="button_skill">Test vaardigheden</string>
+    <string name="button_skill">Oefen</string>
     <string name="button_learn">Leer</string>
     <string name="button_lesson_quit">Stop les</string>
     <string name="button_lesson_next">Volgende les</string>
@@ -16,4 +16,6 @@
     <string name="about">Over deze app</string>
     <string name="menu_lesson">Les</string>
     <string name="menu_truefalse">Juist/fout spel</string>
+    <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>
+    <string name="auth_domain">dev-7lib3b4rq1u5iajd.us.auth0.com</string>
 </resources>

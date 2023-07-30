@@ -1,4 +1,4 @@
-package com.example.animalia
+package com.example.animalia.screens.truefalse
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,18 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.example.animalia.R
+import com.example.animalia.database.questions.QuizElementDatabase
 import com.example.animalia.databinding.FragmentTruefalseLoseBinding
-import com.example.animalia.models.TruefalseViewModel
 
 // TODO combine with winfragment?
 class TruefalseLoseFragment : Fragment() {
+    //TODO fix score
     private lateinit var binding: FragmentTruefalseLoseBinding
-    private val viewModel: TruefalseViewModel by activityViewModels()
+    private val viewModel: TruefalseViewModel by viewModels {
+        getTruefalseViewModelFactory()
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private fun getTruefalseViewModelFactory(): TruefalseViewModelFactory {
+        val appContext = requireNotNull(this.activity).application
+        val datasource = QuizElementDatabase.getInstance(appContext).quizElementDatabaseDao
+
+        return TruefalseViewModelFactory(datasource, appContext)
     }
 
     override fun onCreateView(
@@ -28,10 +35,8 @@ class TruefalseLoseFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse_lose, container, false)
 
-        binding.apply {
-            viewModel = this@TruefalseLoseFragment.viewModel
-            lifecycleOwner = lifecycleOwner
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }

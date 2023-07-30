@@ -6,10 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.animalia.models.TruefalseViewModel" />
+            type="com.example.animalia.screens.truefalse.TruefalseViewModel" />
         <variable
             name="fragment"
-            type="com.example.animalia.TruefalseWinFragment" />
+            type="com.example.animalia.screens.truefalse.TruefalseWinFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

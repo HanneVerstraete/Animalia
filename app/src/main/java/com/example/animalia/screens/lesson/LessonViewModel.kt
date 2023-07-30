@@ -1,9 +1,8 @@
-package com.example.animalia.models
+package com.example.animalia.screens.lesson
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.animalia.LessonBook
 
 class LessonViewModel : ViewModel() {
     private var myLessonBook = LessonBook()

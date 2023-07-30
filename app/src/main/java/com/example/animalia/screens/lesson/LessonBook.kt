@@ -1,4 +1,6 @@
-package com.example.animalia
+package com.example.animalia.screens.lesson
+
+import com.example.animalia.R
 
 class LessonBook {
     private val lessons = listOf(

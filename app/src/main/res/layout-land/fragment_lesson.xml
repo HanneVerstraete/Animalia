@@ -7,7 +7,7 @@
 
         <variable
             name="lessonViewModel"
-            type="com.example.animalia.models.LessonViewModel" />
+            type="com.example.animalia.screens.lesson.LessonViewModel" />
     </data>
 
     <LinearLayout
