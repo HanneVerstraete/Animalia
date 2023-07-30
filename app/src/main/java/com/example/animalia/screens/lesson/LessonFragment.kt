@@ -9,11 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.animalia.R
+import com.example.animalia.database.lessons.LessonDatabase
 import com.example.animalia.databinding.FragmentLessonBinding
 
 class LessonFragment : Fragment() {
     private lateinit var binding: FragmentLessonBinding
-    private val viewModel: LessonViewModel by viewModels()
+    private val viewModel: LessonViewModel by viewModels() {
+        getLessonViewModelFactory()
+    }
+
+    private fun getLessonViewModelFactory(): LessonViewModelFactory {
+        val appContext = requireActivity().application
+        val datasource = LessonDatabase.getInstance(appContext).lessonDatabaseDao
+
+        return LessonViewModelFactory(datasource)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

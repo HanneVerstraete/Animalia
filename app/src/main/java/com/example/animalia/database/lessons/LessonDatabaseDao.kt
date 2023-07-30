@@ -20,7 +20,7 @@ interface LessonDatabaseDao {
     @Query("DELETE FROM lesson_table")
     suspend fun clear()
 
-    @Query("SELECT * FROM lesson_table ORDER BY lesson_id DESC")
+    @Query("SELECT * FROM lesson_table ORDER BY lesson_id ASC")
     suspend fun getAllLessons(): List<Lesson>
 
     @Query("SELECT * FROM lesson_table ORDER BY lesson_index ASC")
