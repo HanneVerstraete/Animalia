@@ -6,17 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.animalia.R
 import com.example.animalia.database.questions.QuizElementDatabase
 import com.example.animalia.databinding.FragmentTruefalseWinBinding
 
 class TruefalseWinFragment : Fragment() {
-
-    //TODO fix score
     private lateinit var binding: FragmentTruefalseWinBinding
-    private val viewModel: TruefalseViewModel by viewModels {
+    private val viewModel: TruefalseViewModel by activityViewModels() {
         getTruefalseViewModelFactory()
     }
 

@@ -8,6 +8,7 @@ import kotlinx.coroutines.*
 import kotlin.math.ceil
 
 const val TOTAL_QUESTIONS = 3
+// TODO fix issue when playing second time
 
 class TruefalseViewModel(
     private val database: QuizElementDatabaseDao,
