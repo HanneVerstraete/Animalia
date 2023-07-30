@@ -66,4 +66,8 @@
         android:name="com.example.animalia.screens.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/lessonOverviewFragment"
+        android:name="com.example.animalia.screens.lessonOverview.LessonOverviewFragment"
+        android:label="LessonOverviewFragment" />
 </navigation>

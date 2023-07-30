@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
+// TODO use lessons from db
 class LessonViewModel : ViewModel() {
     private var myLessonBook = LessonBook()
     private var lessonNumber: Int = 0

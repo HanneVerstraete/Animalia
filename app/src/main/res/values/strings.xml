@@ -6,6 +6,7 @@
     <string name="button_lesson_quit">Stop les</string>
     <string name="button_lesson_next">Volgende les</string>
     <string name="description_image_lesson">Foto van het dier waar de les over gaat</string>
+    <string name="description_image_lesson_overview">Ster die aangeeft of de les al gevolgd is of niet</string>
     <string name="button_question_true">Juist</string>
     <string name="button_question_false">Fout</string>
     <string name="textview_question_win">Hoera! Gewonnen!</string>
@@ -14,8 +15,9 @@
     <string name="button_question_continue">Verdergaan</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about">Over deze app</string>
-    <string name="menu_lesson">Les</string>
-    <string name="menu_truefalse">Juist/fout spel</string>
+    <string name="menu_lesson_overview">Lesoverzicht</string>
+    <string name="menu_lesson">Start les</string>
+    <string name="menu_truefalse">Start juist/fout spel</string>
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>
     <string name="auth_domain">dev-7lib3b4rq1u5iajd.us.auth0.com</string>
 </resources>
