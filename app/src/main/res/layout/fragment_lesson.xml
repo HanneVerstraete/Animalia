@@ -28,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageResource="@{lessonViewModel.image}"
+            app:lessonImage="@{lessonViewModel.currentLesson}"
             tools:srcCompat="@drawable/dog" />
 
         <ScrollView
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_top"
                     android:layout_marginBottom="@dimen/margin_bottom"
-                    android:text="@{lessonViewModel.currentLesson}"
+                    android:text="@{lessonViewModel.currentLesson.content}"
                     tools:text="Here comes a lesson" />
             </LinearLayout>
         </ScrollView>

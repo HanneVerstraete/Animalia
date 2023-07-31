@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.animalia.R
 import com.example.animalia.database.lessons.Lesson
 import com.example.animalia.database.lessons.LessonDatabase
-import com.example.animalia.database.users.User
 import com.example.animalia.databinding.FragmentLessonOverviewBinding
+import com.example.animalia.databinding.LessonOverviewRowItemBinding
 
 class LessonOverviewFragment : Fragment() {
     private lateinit var binding: FragmentLessonOverviewBinding
@@ -35,7 +35,11 @@ class LessonOverviewFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_lesson_overview, container, false)
 
-        val adapter = CustomAdapter()
+        val adapter = CustomAdapter(LessonListener {
+            // TODO
+            lessonId -> Toast.makeText(context, "$lessonId", Toast.LENGTH_SHORT).show()
+        })
+
         binding.lessonOverview.adapter = adapter
 
         viewModel.lessons.observe(viewLifecycleOwner) {
@@ -46,13 +50,29 @@ class LessonOverviewFragment : Fragment() {
     }
 }
 
-class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val lessonText: TextView = view.findViewById(R.id.lessonText)
-    val lessonImage: ImageView = view.findViewById(R.id.imageView)
+class ViewHolder(val binding: LessonOverviewRowItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    private val lessonText: TextView = binding.lessonText
+
+    fun bind(clickListener: LessonListener, lesson: Lesson) {
+        lessonText.text = lesson.title
+        binding.lesson = lesson
+        binding.clickListener = clickListener
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): ViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = LessonOverviewRowItemBinding.inflate(layoutInflater, parent, false)
+            return ViewHolder(binding)
+        }
+    }
 }
 
-// TODO no 2 classes in 1 file?
-class CustomAdapter() :
+class LessonListener(val clickListener: (lessonId: Long)->Unit) {
+    fun onClick(lesson: Lesson) = clickListener(lesson.lessonId)
+}
+
+class CustomAdapter(private val clickListener: LessonListener) :
     ListAdapter<Lesson, ViewHolder>(object : DiffUtil.ItemCallback<Lesson>() {
         override fun areItemsTheSame(
             oldLesson: Lesson, newLesson: Lesson
@@ -68,25 +88,11 @@ class CustomAdapter() :
         }
 
     }) {
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.lesson_overview_row_item, viewGroup, false)
-
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder.from(parent)
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        // TODO get actual user
-        val user = User(301, 1)
         val lesson = getItem(position)
-
-        viewHolder.lessonText.text = lesson.title
-        val drawableResource: Int = if (user.lastLessonIndex >= lesson.index) {
-            R.drawable.star_gold
-        } else {
-            R.drawable.star_empty
-        }
-        viewHolder.lessonImage.setImageResource(drawableResource)
+        viewHolder.bind(clickListener, lesson)
     }
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.animalia.R
 import com.example.animalia.database.lessons.Lesson
 import com.example.animalia.database.lessons.LessonDatabaseDao
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +17,9 @@ class LessonViewModel(
 
     private var lessonNumber: Int = 0
 
-    private var _currentLesson = MutableLiveData<String>()
-    val currentLesson: LiveData<String>
+    private var _currentLesson = MutableLiveData<Lesson>()
+    val currentLesson: LiveData<Lesson>
         get() = _currentLesson
-
-    private var _image = MutableLiveData<Int>()
-    val image: LiveData<Int>
-        get() = _image
 
     private val _shouldEnd = MutableLiveData<Boolean>()
     val shouldEnd: LiveData<Boolean>
@@ -44,25 +39,13 @@ class LessonViewModel(
 
     // TODO handle when no more lessons
     fun getNextLesson() {
-        _currentLesson.value = lessons[lessonNumber].content
-        _image.value = getLessonPicture(lessonNumber)
+        _currentLesson.value = lessons[lessonNumber]
 
         if (isLastLesson(lessonNumber)) {
             _shouldEnd.value = true
         } else {
             lessonNumber++
         }
-    }
-
-    fun getLessonPicture(lessonNumber: Int): Int {
-        val picture: Int = when (lessonNumber) {
-            0 -> R.drawable.dog
-            1 -> R.drawable.lion
-            2 -> R.drawable.duck
-            else -> R.drawable.empty_vector
-        }
-
-        return picture
     }
 
     fun isLastLesson(lessonNumber: Int): Boolean {
