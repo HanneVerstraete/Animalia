@@ -21,7 +21,7 @@ interface LessonDatabaseDao {
     suspend fun clear()
 
     @Query("SELECT * FROM lesson_table ORDER BY lesson_id ASC")
-    suspend fun getAllLessons(): List<Lesson>
+    suspend fun getAllLessons(): Array<Lesson>
 
     @Query("SELECT * FROM lesson_table ORDER BY lesson_index ASC")
     fun getAllLessonsAsLiveData(): LiveData<List<Lesson>>

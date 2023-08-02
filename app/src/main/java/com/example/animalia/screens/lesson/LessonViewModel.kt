@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 class LessonViewModel(
     private val database: LessonDatabaseDao
 ) : ViewModel() {
-    var lessons: List<Lesson> = listOf()
+    var lessons: Array<Lesson> = listOf<Lesson>().toTypedArray()
 
     private var lessonNumber: Int = 0
 
