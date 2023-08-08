@@ -18,17 +18,17 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/animal_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="@dimen/margin_top"
-            android:contentDescription="@string/description_image_lesson"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lessonImage="@{lessonViewModel.currentDatabaseLesson}"
-            tools:srcCompat="@drawable/dog" />
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/animal_image"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:layout_marginTop="@dimen/margin_top"-->
+<!--            android:contentDescription="@string/description_image_lesson"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:lessonImage="@{lessonViewModel.currentDatabaseLesson}"-->
+<!--            tools:srcCompat="@drawable/dog" />-->
 
         <TextView
             android:id="@+id/lesson_title_textview"
@@ -36,10 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top"
-            android:text="@{lessonViewModel.currentDatabaseLesson.title}"
+            app:lessonTitle="@{lessonViewModel.lessons}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/animal_image"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Here comes a title" />
 
         <ScrollView
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_top"
                     android:layout_marginBottom="@dimen/margin_bottom"
-                    android:text="@{lessonViewModel.currentDatabaseLesson.content}"
+                    app:lessonContent="@{lessonViewModel.lessons}"
                     tools:text="Here comes a lesson" />
             </LinearLayout>
         </ScrollView>

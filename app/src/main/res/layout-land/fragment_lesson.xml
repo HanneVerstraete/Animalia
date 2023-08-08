@@ -15,18 +15,18 @@
         android:layout_height="match_parent">
 
 
-        <ImageView
-            android:id="@+id/animal_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:contentDescription="@string/description_image_lesson"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lessonImage="@{lessonViewModel.currentDatabaseLesson}"
-            tools:srcCompat="@drawable/dog" />
+<!--        <ImageView-->
+<!--            android:id="@+id/animal_image"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:contentDescription="@string/description_image_lesson"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:lessonImage="@{lessonViewModel.currentDatabaseLesson}"-->
+<!--            tools:srcCompat="@drawable/dog" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -57,7 +57,7 @@
                         style="@style/text_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{lessonViewModel.currentDatabaseLesson.content}"
+                        app:lessonContent="@{lessonViewModel.lessons}"
                         tools:text="Here comes a lesson" />
                 </LinearLayout>
             </ScrollView>
