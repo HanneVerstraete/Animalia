@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.animalia.R
-import com.example.animalia.database.lessons.LessonDatabase
+import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentLessonBinding
 
 class LessonFragment : Fragment() {
@@ -20,7 +20,7 @@ class LessonFragment : Fragment() {
 
     private fun getLessonViewModelFactory(): LessonViewModelFactory {
         val appContext = requireActivity().application
-        val datasource = LessonDatabase.getInstance(appContext).lessonDatabaseDao
+        val datasource = AnimaliaDatabase.getInstance(appContext).lessonDatabaseDao
 
         return LessonViewModelFactory(datasource)
     }

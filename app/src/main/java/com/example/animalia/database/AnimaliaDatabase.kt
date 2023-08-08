@@ -1,20 +1,22 @@
-package com.example.animalia.database.lessons
+package com.example.animalia.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.animalia.database.lessons.DatabaseLesson
+import com.example.animalia.database.lessons.LessonDatabaseDao
 
-@Database(entities = [Lesson::class], version = 1, exportSchema = false)
-abstract class LessonDatabase : RoomDatabase() {
+@Database(entities = [DatabaseLesson::class], version = 1, exportSchema = false)
+abstract class AnimaliaDatabase : RoomDatabase() {
     abstract val lessonDatabaseDao: LessonDatabaseDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE: LessonDatabase? = null
+        private var INSTANCE: AnimaliaDatabase? = null
 
-        fun getInstance(context: Context): LessonDatabase {
+        fun getInstance(context: Context): AnimaliaDatabase {
             var instance = INSTANCE
 
             if (instance != null) {
@@ -25,8 +27,8 @@ abstract class LessonDatabase : RoomDatabase() {
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        LessonDatabase::class.java,
-                        "lesson_database"
+                        AnimaliaDatabase::class.java,
+                        "animalia_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

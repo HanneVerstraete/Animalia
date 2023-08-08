@@ -8,23 +8,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animalia.R
-import com.example.animalia.database.lessons.Lesson
-import com.example.animalia.database.lessons.LessonDatabase
 import com.example.animalia.databinding.FragmentLessonOverviewBinding
 import com.example.animalia.databinding.LessonOverviewRowItemBinding
+import com.example.animalia.domain.Lesson
 
 class LessonOverviewFragment : Fragment() {
-    private lateinit var binding: FragmentLessonOverviewBinding
-    private val viewModel: LessonOverviewViewModel by viewModels {
-        val appContext = requireActivity().application
-        val dataSource = LessonDatabase.getInstance(appContext).lessonDatabaseDao
-
-        LessonOverviewViewModelFactory(dataSource)
+    private val viewModel: LessonOverviewViewModel by lazy {
+        val activity = requireNotNull(this.activity)
+        ViewModelProvider(this, LessonOverviewViewModelFactory(activity.application)).get(LessonOverviewViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -32,7 +28,7 @@ class LessonOverviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
+        val binding : FragmentLessonOverviewBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_lesson_overview, container, false)
 
         val adapter = CustomAdapter(LessonListener {
@@ -43,7 +39,7 @@ class LessonOverviewFragment : Fragment() {
         binding.lessonOverview.adapter = adapter
 
         viewModel.lessons.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.submitList(it.asList())
         }
 
         return binding.root

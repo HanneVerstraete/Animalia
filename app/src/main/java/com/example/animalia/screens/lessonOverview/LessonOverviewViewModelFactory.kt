@@ -1,17 +1,15 @@
 package com.example.animalia.screens.lessonOverview
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.animalia.database.lessons.LessonDatabaseDao
 
-class LessonOverviewViewModelFactory(
-    private val dataSource: LessonDatabaseDao
-) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+class LessonOverviewViewModelFactory(val app: Application) : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LessonOverviewViewModel::class.java)) {
-            return LessonOverviewViewModel(dataSource) as T
+            @Suppress("UNCHECKED_CAST")
+            return LessonOverviewViewModel(app) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException("Unable to construct viewmodel")
     }
 }

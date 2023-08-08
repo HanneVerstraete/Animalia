@@ -5,7 +5,7 @@
     <data>
         <variable
             name="lesson"
-            type="com.example.animalia.database.lessons.Lesson" />
+            type="com.example.animalia.domain.Lesson" />
         <variable
             name="clickListener"
             type="com.example.animalia.screens.lessonOverview.LessonListener" />

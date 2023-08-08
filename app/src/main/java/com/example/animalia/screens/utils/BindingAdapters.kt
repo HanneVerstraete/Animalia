@@ -3,13 +3,14 @@ package com.example.animalia.screens.utils
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.example.animalia.R
-import com.example.animalia.database.lessons.Lesson
+import com.example.animalia.database.lessons.DatabaseLesson
 import com.example.animalia.database.users.User
+import com.example.animalia.domain.Lesson
 
 @BindingAdapter("lessonImage")
-fun ImageView.setLessonImage(lesson: Lesson?) {
+fun ImageView.setLessonImage(databaseLesson: DatabaseLesson?) {
     setImageResource(
-        when (lesson?.lessonId) {
+        when (databaseLesson?.lessonId) {
             200L -> R.drawable.dog
             201L -> R.drawable.lion
             202L -> R.drawable.duck
