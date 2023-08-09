@@ -1,7 +1,6 @@
 package com.example.animalia.screens.utils
 
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.animalia.R
 import com.example.animalia.database.users.User
@@ -19,20 +18,6 @@ import java.util.*
 //        }
 //    )
 //}
-
-@BindingAdapter("lessonContent")
-fun TextView.bindContent(lessons: Array<Lesson>?){
-    lessons?.let{
-        text = lessons[0].content
-    }
-}
-
-@BindingAdapter("lessonTitle")
-fun TextView.bindTitle(lessons: Array<Lesson>?){
-    lessons?.let{
-        text = lessons[0].title
-    }
-}
 
 @BindingAdapter("lessonCompletedImage")
 fun ImageView.setLessonCompletedImage(lesson: Lesson?) {

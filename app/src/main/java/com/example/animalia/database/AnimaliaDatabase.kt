@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.animalia.database.lessons.DatabaseLesson
 import com.example.animalia.database.lessons.LessonDatabaseDao
 
-@Database(entities = [DatabaseLesson::class], version = 1, exportSchema = false)
+@Database(entities = [DatabaseLesson::class], version = 2, exportSchema = false)
 abstract class AnimaliaDatabase : RoomDatabase() {
     abstract val lessonDatabaseDao: LessonDatabaseDao
 

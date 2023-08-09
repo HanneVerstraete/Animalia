@@ -7,9 +7,9 @@ import com.example.animalia.domain.Lesson
 
 @Entity(tableName = "lesson_table")
 data class DatabaseLesson(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "lesson_id")
-    var lessonId: Long = 0L,
+    var lessonId: String = "",
 
     @ColumnInfo(name = "lesson_index")
     var index: Int = 0,
@@ -27,4 +27,12 @@ fun Array<DatabaseLesson>.asDomainModel(): Array<Lesson> {
             title = it.title
         )
     }.toTypedArray()
+}
+
+fun DatabaseLesson.asDomainModel(): Lesson {
+    return Lesson(
+        index = index,
+        content = content,
+        title = title
+    )
 }

@@ -24,4 +24,8 @@ class LessonRepository(private val database: AnimaliaDatabase) {
             Timber.i("end suspend")
         }
     }
+
+    suspend fun getLessonByIndex(index: Int): Lesson{
+        return database.lessonDatabaseDao.getLessonByIndex(index).asDomainModel()
+    }
 }
