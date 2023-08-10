@@ -7,17 +7,17 @@ import com.example.animalia.database.users.User
 import com.example.animalia.domain.Lesson
 import java.util.*
 
-//@BindingAdapter("lessonImage")
-//fun ImageView.setLessonImage(databaseLesson: DatabaseLesson?) {
-//    setImageResource(
-//        when (databaseLesson?.lessonId) {
-//            200L -> R.drawable.dog
-//            201L -> R.drawable.lion
-//            202L -> R.drawable.duck
-//            else -> R.drawable.empty_vector
-//        }
-//    )
-//}
+@BindingAdapter("lessonImage")
+fun ImageView.setLessonImage(lesson: Lesson?) {
+    setImageResource(
+        when (lesson?.index) {
+            0 -> R.drawable.dog
+            1 -> R.drawable.lion
+            2 -> R.drawable.duck
+            else -> R.drawable.empty_vector
+        }
+    )
+}
 
 @BindingAdapter("lessonCompletedImage")
 fun ImageView.setLessonCompletedImage(lesson: Lesson?) {

@@ -18,28 +18,27 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-<!--        <androidx.appcompat.widget.AppCompatImageView-->
-<!--            android:id="@+id/animal_image"-->
-<!--            android:layout_width="200dp"-->
-<!--            android:layout_height="200dp"-->
-<!--            android:layout_marginTop="@dimen/margin_top"-->
-<!--            android:contentDescription="@string/description_image_lesson"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:lessonImage="@{lessonViewModel.currentDatabaseLesson}"-->
-<!--            tools:srcCompat="@drawable/dog" />-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/animal_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/margin_top"
+            android:contentDescription="@string/description_image_lesson"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lessonImage="@{lessonViewModel.currentLesson}"
+            tools:srcCompat="@drawable/dog" />
 
         <TextView
             android:id="@+id/lesson_title_textview"
             style="@style/text_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top"
             android:text="@{lessonViewModel.currentLesson.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animal_image"
             tools:text="Here comes a title" />
 
         <ScrollView
@@ -71,7 +70,6 @@
 
         <Button
             android:id="@+id/nextlesson_button"
-            style="@style/button_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{()->lessonViewModel.getNextLesson()}"
@@ -82,7 +80,6 @@
 
         <Button
             android:id="@+id/quitlesson_button"
-            style="@style/button_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_bottom"
