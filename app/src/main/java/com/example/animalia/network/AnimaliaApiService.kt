@@ -1,6 +1,7 @@
 package com.example.animalia.network
 
 import com.example.animalia.network.lessons.ApiLesson
+import com.example.animalia.network.quizElements.ApiQuizElement
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,6 +34,9 @@ private val retrofit = Retrofit.Builder()
 interface AnimaliaApiService{
     @GET("lessons")
     fun getLessonsAsync(): Deferred<Array<ApiLesson>>
+
+    @GET("quizElements")
+    fun getQuizElementsAsync(): Deferred<Array<ApiQuizElement>>
 }
 
 object AnimaliaApi{
