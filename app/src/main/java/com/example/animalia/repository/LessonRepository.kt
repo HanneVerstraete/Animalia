@@ -16,6 +16,17 @@ class LessonRepository(private val database: AnimaliaDatabase) {
         Transformations.map(database.lessonDatabaseDao.getAllLessonsLive()){
             it.asDomainModel()
         }
+    // TODO get actual currentLesson
+    val doneLessons: LiveData<Array<Lesson>> =
+        Transformations.map(database.lessonDatabaseDao.getDoneLessonsLive(1)){
+            it.asDomainModel()
+        }
+    // TODO get actual currentLesson
+    val newLessons: LiveData<Array<Lesson>> =
+        Transformations.map(database.lessonDatabaseDao.getNewLessonsLive(1)){
+            it.asDomainModel()
+        }
+
 
     suspend fun refreshLessons(){
         withContext(Dispatchers.IO){

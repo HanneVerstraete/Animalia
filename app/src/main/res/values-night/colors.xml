@@ -10,6 +10,9 @@
     <color name="secondaryDarkColor">#dde6cd</color>
     <color name="secondaryTextColor">#1b1c18</color>
 
+    <color name="colorOnSurface">#273715</color>
+
     <color name="backGroundColor">#ffffff</color>
     <color name="textColor">#111111</color>
+    <color name="colorSurface">#dde6cd</color>
 </resources>

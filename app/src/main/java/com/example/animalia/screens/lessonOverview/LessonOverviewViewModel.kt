@@ -2,6 +2,8 @@ package com.example.animalia.screens.lessonOverview
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.repository.LessonRepository
@@ -13,7 +15,15 @@ class LessonOverviewViewModel(application: Application) : AndroidViewModel(appli
     private val database = AnimaliaDatabase.getInstance(application.applicationContext)
     private val lessonRepository = LessonRepository(database)
 
-    val lessons = lessonRepository.lessons
+    private val _filter = MutableLiveData<String?>(null)
+
+    val lessons = Transformations.switchMap(_filter) {
+        when (it) {
+            "gedaan" -> lessonRepository.doneLessons
+            "nieuw" -> lessonRepository.newLessons
+            else -> lessonRepository.lessons
+        }
+    }
 
     init {
         Timber.i("getting lessons")
@@ -25,5 +35,9 @@ class LessonOverviewViewModel(application: Application) : AndroidViewModel(appli
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
+    }
+
+    fun filterChip(tag: String, checked: Boolean) {
+        _filter.value = if (checked) tag else null
     }
 }

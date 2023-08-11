@@ -16,8 +16,10 @@ import com.example.animalia.R
 import com.example.animalia.databinding.FragmentLessonOverviewBinding
 import com.example.animalia.databinding.LessonOverviewRowItemBinding
 import com.example.animalia.domain.Lesson
+import com.google.android.material.chip.Chip
 
 class LessonOverviewFragment : Fragment() {
+    private lateinit var binding : FragmentLessonOverviewBinding
     private val viewModel: LessonOverviewViewModel by lazy {
         val activity = requireNotNull(this.activity)
         ViewModelProvider(this, LessonOverviewViewModelFactory(activity.application)).get(LessonOverviewViewModel::class.java)
@@ -28,13 +30,15 @@ class LessonOverviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding : FragmentLessonOverviewBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_lesson_overview, container, false)
 
         val adapter = CustomAdapter(LessonListener {
             // TODO
             lessonId -> Toast.makeText(context, "$lessonId", Toast.LENGTH_SHORT).show()
         })
+
+        addChips(listOf("gedaan", "nieuw", "alles"))
 
         binding.lessonOverview.adapter = adapter
 
@@ -43,6 +47,21 @@ class LessonOverviewFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun addChips(chips: List<String>) {
+        val chipGroup = binding.chipGroup
+        val inflater = LayoutInflater.from(chipGroup.context)
+        chips.forEach{
+            val chip = inflater.inflate(R.layout.chip_filter, chipGroup, false) as Chip
+            chip.text = it
+            chip.tag = it
+            chip.setOnCheckedChangeListener{
+                button, isChecked ->
+                viewModel.filterChip(button.tag as String, isChecked)
+            }
+            chipGroup.addView(chip)
+        }
     }
 }
 

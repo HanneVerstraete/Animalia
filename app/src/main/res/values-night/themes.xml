@@ -1,5 +1,5 @@
 <resources >
-    <style name="Theme.AnimaliaApp" parent="Theme.MaterialComponents">
+    <style name="Theme.AnimaliaApp" parent="Theme.Material3.Dark">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
@@ -12,5 +12,8 @@
 
         <item name="android:windowBackground">@color/backGroundColor</item>
         <item name="android:textColor">@color/textColor</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <!--        chip-->
+        <item name="colorOnSurface">@color/colorOnSurface</item>
     </style>
 </resources>

@@ -12,6 +12,15 @@
         android:layout_height="match_parent"
         tools:context=".screens.lessonOverview.LessonOverviewFragment">
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:singleSelection="true" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lessonOverview"
             android:layout_width="0dp"
@@ -20,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
