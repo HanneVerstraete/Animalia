@@ -33,4 +33,8 @@
     <string name="login_nok">Login mislukt, probeer opnieuw aub</string>
     <string name="logout_ok">Tot ziens!</string>
     <string name="logout_nok">Logout mislukt, probeer opnieuw aub</string>
+
+    <string name="about_text">
+Welkom op Animalia!\n\nOnze app biedt je de mogelijkheid om meer te ontdekken over verschillende diersoorten van over de hele wereld.\n\nMaar het gaat niet alleen om leren, we hebben ook quizvragen gecreëerd om je kennis te testen.\n\nDank je voor het kiezen van Animalia om je dierenkennis te vergroten. Veel plezier met ontdekken, leren en spelen!\n\nHet Animalia Team
+    </string>
 </resources>
