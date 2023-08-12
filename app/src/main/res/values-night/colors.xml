@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    // TODO change to dark colors-->
-    <color name="primaryColor">#496727</color>
-    <color name="primaryDarkColor">#496727</color>
-    <color name="primaryLightColor">#496727</color>
-    <color name="primaryTextColor">#ffffff</color>
+    <color name="primaryColor">#324f10</color>
+    <color name="primaryLightColor">#aed285</color>
+    <color name="primaryDarkColor">#414937</color>
+    <color name="primaryTextColor">#c9ee9e</color>
 
-    <color name="secondaryColor">#dde6cd</color>
-    <color name="secondaryDarkColor">#dde6cd</color>
-    <color name="secondaryTextColor">#1b1c18</color>
+    <color name="secondaryColor">#2b4c4a</color>
+    <color name="secondaryDarkColor">#1c2b2a</color>
+    <color name="secondaryTextColor">#c5eae7</color>
 
-    <color name="colorOnSurface">#273715</color>
+    <color name="colorOnSurface">#414937</color>
 
-    <color name="backGroundColor">#ffffff</color>
-    <color name="textColor">#111111</color>
-    <color name="colorSurface">#dde6cd</color>
+    <color name="backGroundColor">#1b1c18</color>
+    <color name="textColor">#e4e3dd</color>
+    <color name="colorSurface">#e4e3dd</color>
 </resources>
