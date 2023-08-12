@@ -3,7 +3,6 @@ package com.example.animalia
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import com.example.animalia.databinding.ActivityLoginBinding
 import com.example.animalia.utilities.SharedPreferences
 
@@ -13,7 +12,6 @@ val sharedPreferences: SharedPreferences by lazy {
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding : ActivityLoginBinding
-    private lateinit var backButton: Button
 
     companion object {
         var sharedPreferences: SharedPreferences? = null
@@ -31,8 +29,7 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        backButton = findViewById(R.id.back_button)
-        backButton.setOnClickListener{
+        if((sharedPreferences?.loggedIn?.length ?: 0) > 0) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

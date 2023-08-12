@@ -5,6 +5,8 @@
     android:id="@+id/navigation"
     app:startDestination="@id/homeFragment">
 
+    <include app:graph="@navigation/login" />
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.animalia.screens.home.HomeFragment"

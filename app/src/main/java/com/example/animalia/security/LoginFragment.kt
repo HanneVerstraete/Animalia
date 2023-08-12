@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -31,22 +30,12 @@ import com.example.animalia.databinding.FragmentLoginBinding
 import com.example.animalia.sharedPreferences
 import timber.log.Timber
 
-/**
- * A simple [Fragment] subclass
- * Displays the login functionality
- * @property account The Auth0 account information
- * @property loggedInText The text mentioning that you are logged in
- * @property welcomeText The text set to welcome a user
- * @property loggedIn The text stating whether you are logged in or not
- */
 class LoginFragment: Fragment() {
 
     private lateinit var account : Auth0
-    private lateinit var loggedInText: TextView
-    private lateinit var welcomeText: TextView
+    private lateinit var loginLogoutMessage: TextView
     private lateinit var loginButton: Button
     private lateinit var logoutButton: Button
-    private lateinit var backButton: Button
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: LoginViewModel
     private var sharedPrefs = sharedPreferences
@@ -76,7 +65,6 @@ class LoginFragment: Fragment() {
             getString(R.string.auth_domain)
         )
 
-        backButton = binding.backButton
         loginButton = binding.loginButton
         loginButton.setOnClickListener {
             loginWithBrowser()
@@ -91,15 +79,12 @@ class LoginFragment: Fragment() {
         if (sharedPrefs.loggedIn == "true") {
             loginButton.setVisibility(View.GONE)
             logoutButton.setVisibility(View.VISIBLE)
-            backButton.setVisibility(View.VISIBLE)
         } else {
             loginButton.setVisibility(View.VISIBLE)
             logoutButton.setVisibility(View.GONE)
-            backButton.setVisibility(View.GONE)
         }
 
-        welcomeText = binding.welcomeText
-        loggedInText = binding.loginText
+        loginLogoutMessage = binding.loginLogoutMessage
 
         binding.loginViewModel = viewModel
         binding.lifecycleOwner = this
@@ -109,11 +94,6 @@ class LoginFragment: Fragment() {
 
         Timber.tag("The activity is ").i(requireActivity().localClassName)
 
-        backButton.setOnClickListener {
-//            TODO right fragment
-            requireView().findNavController().navigate(R.id.aboutFragment)
-        }
-
         return binding.root
     }
 
@@ -122,9 +102,6 @@ class LoginFragment: Fragment() {
             requireView().findNavController()) || super.onOptionsItemSelected(item)
     }
 
-    /**
-     * Checks if an access token is present
-     */
     private fun checkIfToken(){
         val token = CredentialsManager.getAccessToken(requireContext())
         if(token != null){
@@ -135,25 +112,15 @@ class LoginFragment: Fragment() {
         }
     }
 
-    /**
-     * Sets the text when you are logged in
-     */
-    private fun setLoggedInText(email: String = "") {
+    private fun setLoggedInText() {
         if(sharedPrefs.loggedIn == "true") {
-            val welcomeMessage = StringBuilder()
-            welcomeText.text = welcomeMessage.append(getText(R.string.welcome_text))
-            welcomeText.text = welcomeMessage.append(" " + email)
-            loggedInText.text = getText(R.string.login_text)
+            loginLogoutMessage.text = getText(R.string.logout_text_confirm)
         }
         else {
-            welcomeText.text = getText(R.string.welcome_text)
-            loggedInText.text = getText(R.string.logout_text)
+            loginLogoutMessage.text = getText(R.string.logout_text)
         }
     }
 
-    /**
-     * Method used for login, stating success or failure
-     */
     private fun loginWithBrowser() {
 
         WebAuthProvider.login(account)
@@ -167,7 +134,6 @@ class LoginFragment: Fragment() {
                     // Set visibility for logout
                     sharedPrefs.loggedIn = "false"
                     logoutButton.setVisibility(View.GONE)
-                    backButton.setVisibility(View.GONE)
                     loginButton.setVisibility(View.VISIBLE)
                 }
                 override fun onSuccess(result: Credentials) {
@@ -180,7 +146,6 @@ class LoginFragment: Fragment() {
                     sharedPrefs.loggedIn = "true"
                     loginButton.setVisibility(View.GONE)
                     logoutButton.setVisibility(View.VISIBLE)
-                    backButton.setVisibility(View.VISIBLE)
 
                     // Check if email is returned
                     showUserProfile(result.accessToken)
@@ -193,9 +158,6 @@ class LoginFragment: Fragment() {
             })
     }
 
-    /**
-     * Method used to logout of the app
-     */
     private fun logout() {
         WebAuthProvider.logout(account)
             .withScheme("demo")
@@ -205,10 +167,9 @@ class LoginFragment: Fragment() {
                     // Set visibility for login
                     sharedPrefs.loggedIn = "false"
                     logoutButton.setVisibility(View.GONE)
-                    backButton.setVisibility(View.GONE)
                     loginButton.setVisibility(View.VISIBLE)
 
-                    setLoggedInText("")
+                    setLoggedInText()
                 }
 
                 override fun onFailure(error: AuthenticationException) {
@@ -218,16 +179,10 @@ class LoginFragment: Fragment() {
                     sharedPrefs.loggedIn = "true"
                     loginButton.setVisibility(View.GONE)
                     logoutButton.setVisibility(View.VISIBLE)
-                    backButton.setVisibility(View.VISIBLE)
                 }
             })
     }
 
-    /**
-     * Method used to display the user profile
-     *
-     * @property accessToken The access token of the user
-     */
     private fun showUserProfile(accessToken: String){
         val client = AuthenticationAPIClient(account)
 
@@ -246,7 +201,7 @@ class LoginFragment: Fragment() {
                     Timber.tag("The email address setter shared prefs via Auth 0 is: ").i(email!!)
                     sharedPrefs.emailCurrentUser = email
 
-                    setLoggedInText(email!!)
+                    setLoggedInText()
                     viewModel.setUserOnLogin()
                 }
             })

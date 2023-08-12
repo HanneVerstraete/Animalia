@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/lessonOverviewFragment"
-        android:title="@string/menu_lesson_overview" />
-    <item
-        android:id="@+id/lessonFragment"
-        android:title="@string/menu_lesson" />
-    <item
-        android:id="@+id/truefalseFragment"
-        android:title="@string/menu_truefalse" />
+    <group>
+        <item
+            android:id="@+id/lessonOverviewFragment"
+            android:title="@string/menu_lesson_overview" />
+        <item
+            android:id="@+id/lessonFragment"
+            android:title="@string/menu_lesson" />
+        <item
+            android:id="@+id/truefalseFragment"
+            android:title="@string/menu_truefalse" />
+    </group>
+    <group android:id="@+id/authentication">
+        <item
+            android:id="@+id/login"
+            android:title="@string/logout_title" />
+    </group>
 </menu>
