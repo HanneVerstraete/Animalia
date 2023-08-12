@@ -9,21 +9,21 @@ import androidx.room.Update
 @Dao
 interface UserDatabaseDao {
     @Insert
-    suspend fun insert(user: User)
+    suspend fun insert(user: DatabaseUser)
 
     @Update
-    suspend fun update(user: User)
+    suspend fun update(user: DatabaseUser)
 
     @Query("SELECT * from user_table WHERE user_id = :key")
-    suspend fun get(key: Long): User?
+    suspend fun get(key: Long): DatabaseUser?
 
     @Query("DELETE FROM user_table")
     suspend fun clear()
 
     @Query("SELECT * FROM user_table ORDER BY user_id DESC")
-    suspend fun getAllUsers(): List<User>
+    suspend fun getAllUsers(): List<DatabaseUser>
 
     @Query("SELECT * FROM user_table ORDER BY user_id DESC")
-    fun getAllUsersAsLiveData(): LiveData<List<User>>
+    fun getAllUsersAsLiveData(): LiveData<List<DatabaseUser>>
 
 }

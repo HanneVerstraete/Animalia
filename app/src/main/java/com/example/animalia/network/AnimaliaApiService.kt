@@ -2,6 +2,7 @@ package com.example.animalia.network
 
 import com.example.animalia.network.lessons.ApiLesson
 import com.example.animalia.network.quizElements.ApiQuizElement
+import com.example.animalia.network.users.ApiUser
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -11,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL = "http://192.168.0.176:9000/api/"
 
@@ -37,6 +39,9 @@ interface AnimaliaApiService{
 
     @GET("quizElements")
     fun getQuizElementsAsync(): Deferred<Array<ApiQuizElement>>
+
+    @GET("users/{email}")
+    fun getUserByEmailAsync(@Path("email") email: String): Deferred<ApiUser>
 }
 
 object AnimaliaApi{

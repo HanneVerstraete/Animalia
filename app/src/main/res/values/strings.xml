@@ -20,4 +20,26 @@
     <string name="menu_truefalse">Start juist/fout spel</string>
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>
     <string name="auth_domain">dev-7lib3b4rq1u5iajd.us.auth0.com</string>
+
+<!--    TODO checken of ze allemaal gebruikt worden-->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Wachtwoord</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="welcome">Welkom</string>
+    <string name="login_failed">Login mislukt</string>
+    <string name="login_text">Je bent ingelogd</string>
+    <string name="logout_text">Je bent uitgelogd</string>
+    <string name="welcome_text">Welkom</string>
+    <string name="login_button">Login</string>
+    <string name="logout_button">Logout</string>
+    <!--    TODO checken of ze allemaal gebruikt worden-->
+    <!-- Login and logout -->
+    <string name="login_title">Login</string>
+    <string name="logout_title">Logout</string>
+    <string name="no_login_button">Ga verder zonder in te loggen</string>
+    <string name="invalid_login">Ongeldige login, probeer opnieuw aub</string>
+    <string name="login_ok">Hallo!</string>
+    <string name="login_nok">Login mislukt, probeer opnieuw aub</string>
+    <string name="logout_ok">Tot ziens!</string>
+    <string name="logout_nok">Logout mislukt, probeer opnieuw aub</string>
 </resources>

@@ -8,11 +8,14 @@ import com.example.animalia.database.lessons.DatabaseLesson
 import com.example.animalia.database.lessons.LessonDatabaseDao
 import com.example.animalia.database.questions.DatabaseQuizElement
 import com.example.animalia.database.questions.QuizElementDatabaseDao
+import com.example.animalia.database.users.DatabaseUser
+import com.example.animalia.database.users.UserDatabaseDao
 
-@Database(entities = [DatabaseLesson::class, DatabaseQuizElement::class], version = 3, exportSchema = false)
+@Database(entities = [DatabaseLesson::class, DatabaseQuizElement::class, DatabaseUser::class], version = 4, exportSchema = false)
 abstract class AnimaliaDatabase : RoomDatabase() {
     abstract val lessonDatabaseDao: LessonDatabaseDao
     abstract val quizElementDatabaseDao: QuizElementDatabaseDao
+    abstract val userDatabaseDao: UserDatabaseDao
 
     companion object {
 

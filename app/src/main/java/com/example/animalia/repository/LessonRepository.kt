@@ -7,6 +7,7 @@ import com.example.animalia.database.lessons.asDomainModel
 import com.example.animalia.domain.Lesson
 import com.example.animalia.network.AnimaliaApi
 import com.example.animalia.network.lessons.asDatabaseModel
+import com.example.animalia.sharedPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -16,14 +17,14 @@ class LessonRepository(private val database: AnimaliaDatabase) {
         Transformations.map(database.lessonDatabaseDao.getAllLessonsLive()){
             it.asDomainModel()
         }
-    // TODO get actual currentLesson
+
     val doneLessons: LiveData<Array<Lesson>> =
-        Transformations.map(database.lessonDatabaseDao.getDoneLessonsLive(1)){
+        Transformations.map(database.lessonDatabaseDao.getDoneLessonsLive(sharedPreferences.currentLesson)){
             it.asDomainModel()
         }
-    // TODO get actual currentLesson
+
     val newLessons: LiveData<Array<Lesson>> =
-        Transformations.map(database.lessonDatabaseDao.getNewLessonsLive(1)){
+        Transformations.map(database.lessonDatabaseDao.getNewLessonsLive(sharedPreferences.currentLesson)){
             it.asDomainModel()
         }
 
