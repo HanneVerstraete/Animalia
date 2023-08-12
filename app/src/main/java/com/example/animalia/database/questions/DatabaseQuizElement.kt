@@ -24,6 +24,7 @@ data class DatabaseQuizElement(
 fun Array<DatabaseQuizElement>.asDomainModel(): Array<QuizElement> {
     return map {
         QuizElement(
+            questionId = it.questionId,
             index = it.index,
             question = it.question,
             answer = it.answer,
@@ -34,6 +35,7 @@ fun Array<DatabaseQuizElement>.asDomainModel(): Array<QuizElement> {
 
 fun DatabaseQuizElement.asDomainModel(): QuizElement {
     return QuizElement(
+        questionId = questionId,
         index = index,
         question = question,
         answer = answer,

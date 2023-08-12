@@ -22,6 +22,7 @@ data class DatabaseLesson(
 fun Array<DatabaseLesson>.asDomainModel(): Array<Lesson> {
     return map {
         Lesson(
+            lessonId = it.lessonId,
             index = it.index,
             content = it.content,
             title = it.title
@@ -31,6 +32,7 @@ fun Array<DatabaseLesson>.asDomainModel(): Array<Lesson> {
 
 fun DatabaseLesson.asDomainModel(): Lesson {
     return Lesson(
+        lessonId = lessonId,
         index = index,
         content = content,
         title = title

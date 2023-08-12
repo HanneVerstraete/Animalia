@@ -1,7 +1,7 @@
 package com.example.animalia.domain
 
 data class QuizElement (
-    var questionId: Long = 0L,
+    var questionId: String = "",
     var index: Int = 0,
     var question: String = "",
     var answer: String = "",

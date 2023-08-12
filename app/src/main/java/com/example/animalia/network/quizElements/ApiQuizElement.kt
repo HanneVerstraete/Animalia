@@ -14,6 +14,7 @@ data class ApiQuizElement(
 fun Array<ApiQuizElement>.asDomainModel(): Array<QuizElement> {
     return map {
         QuizElement(
+            questionId = it.id,
             index = it.index,
             question = it.question,
             answer = it.answer,

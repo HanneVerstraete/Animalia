@@ -9,7 +9,7 @@
             type="com.example.animalia.screens.truefalse.TruefalseViewModel" />
         <variable
             name="fragment"
-            type="com.example.animalia.screens.truefalse.TruefalseWinFragment" />
+            type="com.example.animalia.screens.truefalse.TruefalseEndFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             style="@style/text_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/textview_question_win"
+            android:text="@{viewModel.resultMessage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

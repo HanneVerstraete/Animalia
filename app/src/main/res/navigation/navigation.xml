@@ -35,32 +35,18 @@
         android:label="True/false spel"
         tools:layout="@layout/fragment_truefalse">
         <action
-            android:id="@+id/action_truefalseFragment_to_truefalseLoseFragment"
-            app:destination="@id/truefalseLoseFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/action_truefalseFragment_to_truefalseWinFragment"
-            app:destination="@id/truefalseWinFragment"
+            android:id="@+id/action_truefalseFragment_to_truefalseEndFragment"
+            app:destination="@id/truefalseEndFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/truefalseLoseFragment"
-        android:name="com.example.animalia.screens.truefalse.TruefalseLoseFragment"
+        android:id="@+id/truefalseEndFragment"
+        android:name="com.example.animalia.screens.truefalse.TruefalseEndFragment"
         android:label="Verloren"
-        tools:layout="@layout/fragment_truefalse_lose">
+        tools:layout="@layout/fragment_truefalse_end">
         <action
-            android:id="@+id/action_trueFalseLoseFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/truefalseWinFragment"
-        android:name="com.example.animalia.screens.truefalse.TruefalseWinFragment"
-        android:label="Gewonnen"
-        tools:layout="@layout/fragment_truefalse_win">
-        <action
-            android:id="@+id/action_trueFalseWinFragment_to_homeFragment"
+            android:id="@+id/action_trueFalseEndFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment

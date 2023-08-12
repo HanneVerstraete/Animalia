@@ -13,6 +13,7 @@ data class ApiLesson(
 fun Array<ApiLesson>.asDomainModel(): Array<Lesson>{
     return map{
         Lesson(
+            lessonId = it.id,
             index = it.index,
             content = it.content,
             title = it.title

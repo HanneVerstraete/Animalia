@@ -83,7 +83,7 @@ class ViewHolder(val binding: LessonOverviewRowItemBinding) : RecyclerView.ViewH
     }
 }
 
-class LessonListener(val clickListener: (lessonId: Long)->Unit) {
+class LessonListener(val clickListener: (lessonId: String)->Unit) {
     fun onClick(lesson: Lesson) = clickListener(lesson.lessonId)
 }
 

@@ -1,28 +1,23 @@
 package com.example.animalia.screens.truefalse
 
 import android.app.Application
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.*
+import com.example.animalia.R
 import com.example.animalia.database.AnimaliaDatabase
-import com.example.animalia.database.questions.DatabaseQuizElement
 import com.example.animalia.domain.QuizElement
 import com.example.animalia.repository.QuizElementRepository
+import com.example.animalia.sharedPreferences
 import kotlinx.coroutines.*
 import kotlin.math.ceil
 
 const val TOTAL_QUESTIONS = 3
-// TODO fix issue when playing second time
 
 class TruefalseViewModel(application: Application) : AndroidViewModel(application) {
     private val database = AnimaliaDatabase.getInstance(application.applicationContext)
     private val quizElementRepository = QuizElementRepository(database)
 
-    var questions: MutableList<DatabaseQuizElement> = mutableListOf()
-
-    // TODO remember questions that are already done
-    private var currentQuestionIndex = 0
-
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private var currentQuestionIndex = sharedPreferences.currentQuestion
 
     private var _currentQuestion = MutableLiveData<QuizElement>()
     val currentQuestion: LiveData<QuizElement>
@@ -36,6 +31,8 @@ class TruefalseViewModel(application: Application) : AndroidViewModel(applicatio
     val goodQuestions: LiveData<Int>
         get() = _goodQuestions
 
+    var resultMessage = ObservableInt()
+
     private val _shouldEvaluate = MutableLiveData<Boolean>()
     val shouldEvaluate: LiveData<Boolean>
         get() = _shouldEvaluate
@@ -44,10 +41,11 @@ class TruefalseViewModel(application: Application) : AndroidViewModel(applicatio
         initializeLiveData()
         _goodQuestions.value = 0
         _numberOfQuestionsAsked.value = 0
+        _shouldEvaluate.value = false
     }
 
     private fun initializeLiveData() {
-        uiScope.launch {
+        viewModelScope.launch {
             quizElementRepository.refreshQuizElements()
             _currentQuestion.value =
                 quizElementRepository.getQuizElementByIndex(currentQuestionIndex)
@@ -56,7 +54,7 @@ class TruefalseViewModel(application: Application) : AndroidViewModel(applicatio
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        viewModelScope.cancel()
     }
 
     fun answerTrue() {
@@ -82,6 +80,11 @@ class TruefalseViewModel(application: Application) : AndroidViewModel(applicatio
 
     private fun getQuestion() {
         if (isEnded()) {
+            if(isWon()) {
+                resultMessage.set(R.string.textview_question_win)
+            } else {
+                resultMessage.set(R.string.textview_question_lose)
+            }
             _shouldEvaluate.value = true
         } else {
             viewModelScope.launch {
@@ -95,8 +98,6 @@ class TruefalseViewModel(application: Application) : AndroidViewModel(applicatio
         _goodQuestions.value = 0
         _numberOfQuestionsAsked.value = 0
         _shouldEvaluate.value = false
-        // TODO
-//        _currentQuestion.value = ""
     }
 
     private fun isEnded() = _numberOfQuestionsAsked.value!! >= TOTAL_QUESTIONS

@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.animalia.R
-import com.example.animalia.databinding.FragmentTruefalseBinding
+import com.example.animalia.databinding.FragmentTruefalseEndBinding
 
-class TruefalseFragment : Fragment() {
-    private lateinit var binding: FragmentTruefalseBinding
+class TruefalseEndFragment : Fragment() {
+    private lateinit var binding: FragmentTruefalseEndBinding
     private val viewModel: TruefalseViewModel by activityViewModels() {
         getTruefalseViewModelFactory()
     }
@@ -27,17 +27,23 @@ class TruefalseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse, container, false)
-        binding.truefalseViewModel = viewModel
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_truefalse_end, container, false)
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.shouldEvaluate.observe(viewLifecycleOwner) {
-            if (it) {
-                view?.findNavController()
-                    ?.navigate(TruefalseFragmentDirections.actionTruefalseFragmentToTruefalseEndFragment())
-            }
-        }
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.fragment = this
+    }
+
+    fun endGame() {
+        view?.findNavController()
+            ?.navigate(TruefalseEndFragmentDirections.actionTrueFalseEndFragmentToHomeFragment())
+        viewModel.endGame()
+
     }
 }
