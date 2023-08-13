@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.animalia.R
+import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentTruefalseBinding
+import com.example.animalia.repository.QuizElementRepository
+import com.example.animalia.sharedPreferences
 
 class TruefalseFragment : Fragment() {
     private lateinit var binding: FragmentTruefalseBinding
@@ -19,7 +22,9 @@ class TruefalseFragment : Fragment() {
 
     private fun getTruefalseViewModelFactory(): TruefalseViewModelFactory {
         val appContext = requireNotNull(this.activity).application
-        return TruefalseViewModelFactory(appContext)
+        val database = AnimaliaDatabase.getInstance(appContext.applicationContext)
+        val quizElementRepository = QuizElementRepository(database)
+        return TruefalseViewModelFactory(quizElementRepository, sharedPreferences.currentQuestion)
     }
 
     override fun onCreateView(

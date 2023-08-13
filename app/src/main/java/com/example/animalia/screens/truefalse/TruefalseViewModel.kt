@@ -1,23 +1,19 @@
 package com.example.animalia.screens.truefalse
 
-import android.app.Application
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.*
 import com.example.animalia.R
-import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.domain.QuizElement
 import com.example.animalia.repository.QuizElementRepository
-import com.example.animalia.sharedPreferences
 import kotlinx.coroutines.*
 import kotlin.math.ceil
 
 const val TOTAL_QUESTIONS = 3
 
-class TruefalseViewModel(application: Application) : AndroidViewModel(application) {
-    private val database = AnimaliaDatabase.getInstance(application.applicationContext)
-    private val quizElementRepository = QuizElementRepository(database)
-
-    private var currentQuestionIndex = sharedPreferences.currentQuestion
+class TruefalseViewModel(
+    private val quizElementRepository: QuizElementRepository,
+    private var currentQuestionIndex: Int
+) : ViewModel() {
 
     private var _currentQuestion = MutableLiveData<QuizElement>()
     val currentQuestion: LiveData<QuizElement>
@@ -80,7 +76,7 @@ class TruefalseViewModel(application: Application) : AndroidViewModel(applicatio
 
     private fun getQuestion() {
         if (isEnded()) {
-            if(isWon()) {
+            if (isWon()) {
                 resultMessage.set(R.string.textview_question_win)
             } else {
                 resultMessage.set(R.string.textview_question_lose)
