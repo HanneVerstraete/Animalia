@@ -95,7 +95,6 @@ class CustomAdapter(private val clickListener: LessonListener) :
             return oldLesson.lessonId === newLesson.lessonId
         }
 
-        // TODO also check user?
         override fun areContentsTheSame(
             oldLesson: Lesson, newLesson: Lesson
         ): Boolean {

@@ -34,4 +34,7 @@ interface LessonDatabaseDao {
 
     @Query("SELECT * from lesson_table WHERE lesson_index = :index")
     suspend fun getLessonByIndex(index: Int): DatabaseLesson
+
+    @Query("SELECT COUNT(*) FROM lesson_table")
+    suspend fun getLessonCount(): Int
 }

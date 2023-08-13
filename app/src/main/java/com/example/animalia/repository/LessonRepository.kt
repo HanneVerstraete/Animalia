@@ -40,4 +40,8 @@ class LessonRepository(private val database: AnimaliaDatabase) {
     suspend fun getLessonByIndex(index: Int): Lesson{
         return database.lessonDatabaseDao.getLessonByIndex(index).asDomainModel()
     }
+
+    suspend fun getLessonCount(): Int {
+        return database.lessonDatabaseDao.getLessonCount()
+    }
 }
