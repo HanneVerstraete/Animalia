@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.animalia.R
 import com.example.animalia.databinding.FragmentHomeBinding
+import com.example.animalia.sharedPreferences
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
@@ -23,7 +24,7 @@ class HomeFragment : Fragment() {
 
         val appContext = requireNotNull(this.activity).application
         val viewModelFactory = HomeViewModelFactory(appContext)
-        val viewModel: HomeViewModel by viewModels{viewModelFactory}
+        val viewModel: HomeViewModel by viewModels { viewModelFactory }
 
         binding.homeViewModel = viewModel
         binding.lifecycleOwner = this
@@ -43,8 +44,10 @@ class HomeFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!,
-            requireView().findNavController())
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            requireView().findNavController()
+        )
     }
 
     private fun setOnClickListeners() {
@@ -54,7 +57,11 @@ class HomeFragment : Fragment() {
         }
         binding.startLessonButton.setOnClickListener { view: View ->
             view.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToLessonFragment())
+                .navigate(
+                    HomeFragmentDirections.actionHomeFragmentToLessonFragment(
+                        sharedPreferences.currentLesson
+                    )
+                )
         }
     }
 }

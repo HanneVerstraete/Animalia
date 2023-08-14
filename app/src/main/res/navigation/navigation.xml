@@ -12,7 +12,6 @@
         android:name="com.example.animalia.screens.home.HomeFragment"
         android:label="Animalia"
         tools:layout="@layout/fragment_home">
-
         <action
             android:id="@+id/action_homeFragment_to_lessonFragment"
             app:destination="@id/lessonFragment" />
@@ -28,6 +27,9 @@
         <action
             android:id="@+id/action_lessonFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="lessonIndex"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/truefalseFragment"
@@ -57,5 +59,9 @@
     <fragment
         android:id="@+id/lessonOverviewFragment"
         android:name="com.example.animalia.screens.lessonOverview.LessonOverviewFragment"
-        android:label="LessonOverviewFragment" />
+        android:label="LessonOverviewFragment">
+        <action
+            android:id="@+id/action_lessonOverviewFragment_to_lessonFragment"
+            app:destination="@id/lessonFragment" />
+    </fragment>
 </navigation>

@@ -14,4 +14,7 @@
     <color name="backGroundColor">#fefcf6</color>
     <color name="textColor">#111111</color>
     <color name="colorSurface">#dde6cd</color>
+
+    <!--    specific color-->
+    <color name="textDisabled">#979797</color>
 </resources>

@@ -1,44 +1,40 @@
 package com.example.animalia.screens.lesson
 
-import android.app.Application
 import androidx.lifecycle.*
-import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.domain.Lesson
 import com.example.animalia.repository.LessonRepository
-import com.example.animalia.sharedPreferences
 import kotlinx.coroutines.launch
 
-class LessonViewModel(application: Application) : AndroidViewModel(application) {
-    var lessonNumber: Int = sharedPreferences.currentLesson
-
+class LessonViewModel(
+    private val lessonRepository: LessonRepository,
+    private var lessonNumber: Int
+) : ViewModel() {
     private var _currentLesson = MutableLiveData<Lesson>()
     val currentLesson: LiveData<Lesson>
         get() = _currentLesson
 
-    private val _shouldEnd = MutableLiveData<Boolean>()
-    val shouldEnd: LiveData<Boolean>
-        get() = _shouldEnd
+    private val _isDoingLastLesson = MutableLiveData<Boolean>()
+    val isDoingLastLesson: LiveData<Boolean>
+        get() = _isDoingLastLesson
 
     private val _isFinished = MutableLiveData<Boolean>()
     val isFinished: LiveData<Boolean>
         get() = _isFinished
 
-
-    private val database = AnimaliaDatabase.getInstance(application.applicationContext)
-    private val lessonRepository = LessonRepository(database)
     private var totalNumberOfLessons = 0
 
     init {
-        _isFinished.value = isLastLesson(lessonNumber)
         initializeLiveData()
     }
 
     private fun initializeLiveData() {
         viewModelScope.launch {
+            lessonRepository.refreshLessons()
+            totalNumberOfLessons = lessonRepository.getLessonCount()
+            _isDoingLastLesson.value = isDoingLastLesson(lessonNumber)
+            _isFinished.value = isFinished(lessonNumber)
             if (!isFinished.value!!) {
-                lessonRepository.refreshLessons()
                 _currentLesson.value = lessonRepository.getLessonByIndex(lessonNumber)
-                totalNumberOfLessons = lessonRepository.getLessonCount()
             }
 
         }
@@ -46,16 +42,21 @@ class LessonViewModel(application: Application) : AndroidViewModel(application) 
 
     fun getNextLesson() {
         lessonNumber++
-        if (isLastLesson(lessonNumber)) {
-            _shouldEnd.value = true
+        if (isFinished(lessonNumber)) {
+            _isFinished.value = true
         } else {
+            _isDoingLastLesson.value = isDoingLastLesson(lessonNumber)
             viewModelScope.launch {
                 _currentLesson.value = lessonRepository.getLessonByIndex(lessonNumber)
             }
         }
     }
 
-    private fun isLastLesson(lessonNumber: Int): Boolean {
+    private fun isDoingLastLesson(lessonNumber: Int): Boolean {
         return totalNumberOfLessons - 1 <= lessonNumber
+    }
+
+    private fun isFinished(lessonNumber: Int): Boolean {
+        return totalNumberOfLessons <= lessonNumber
     }
 }

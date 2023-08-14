@@ -7,11 +7,25 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.animalia.R
+import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentLessonBinding
+import com.example.animalia.repository.LessonRepository
 
 class LessonFragment : Fragment() {
     private lateinit var binding: FragmentLessonBinding
+    private val viewModel: LessonViewModel by viewModels() {
+        getLessonViewModelFactory()
+    }
+    private val args: LessonFragmentArgs by navArgs()
+
+    private fun getLessonViewModelFactory(): LessonViewModelFactory {
+        val appContext = requireNotNull(this.activity).application
+        val database = AnimaliaDatabase.getInstance(appContext.applicationContext)
+        val lessonRepository = LessonRepository(database)
+        return LessonViewModelFactory(lessonRepository, args.lessonIndex)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,15 +33,10 @@ class LessonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lesson, container, false)
-
-        val appContext = requireNotNull(this.activity).application
-        val viewModelFactory = LessonViewModelFactory(appContext)
-        val viewModel: LessonViewModel by viewModels{viewModelFactory}
-
         binding.lessonViewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.shouldEnd.observe(viewLifecycleOwner) {
+        viewModel.isDoingLastLesson.observe(viewLifecycleOwner) {
             if (it) {
                 binding.nextlessonButton.visibility = View.GONE
             }
@@ -36,7 +45,6 @@ class LessonFragment : Fragment() {
         viewModel.isFinished.observe(viewLifecycleOwner) {
             if (it) {
                 binding.animalImage.visibility = View.GONE
-                binding.nextlessonButton.visibility = View.GONE
                 binding.finishedLessonsText!!.visibility = View.VISIBLE
             }
         }

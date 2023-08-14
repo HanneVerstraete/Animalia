@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,13 +17,16 @@ import com.example.animalia.R
 import com.example.animalia.databinding.FragmentLessonOverviewBinding
 import com.example.animalia.databinding.LessonOverviewRowItemBinding
 import com.example.animalia.domain.Lesson
+import com.example.animalia.sharedPreferences
 import com.google.android.material.chip.Chip
 
 class LessonOverviewFragment : Fragment() {
-    private lateinit var binding : FragmentLessonOverviewBinding
+    private lateinit var binding: FragmentLessonOverviewBinding
     private val viewModel: LessonOverviewViewModel by lazy {
         val activity = requireNotNull(this.activity)
-        ViewModelProvider(this, LessonOverviewViewModelFactory(activity.application)).get(LessonOverviewViewModel::class.java)
+        ViewModelProvider(this, LessonOverviewViewModelFactory(activity.application)).get(
+            LessonOverviewViewModel::class.java
+        )
     }
 
     override fun onCreateView(
@@ -33,9 +37,16 @@ class LessonOverviewFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_lesson_overview, container, false)
 
-        val adapter = CustomAdapter(LessonListener {
-            // TODO
-            lessonId -> Toast.makeText(context, "$lessonId", Toast.LENGTH_SHORT).show()
+        val adapter = CustomAdapter(LessonListener { lessonIndex ->
+            if (lessonIndex <= sharedPreferences.currentLesson) {
+                view?.findNavController()?.navigate(
+                    LessonOverviewFragmentDirections.actionLessonOverviewFragmentToLessonFragment(
+                        lessonIndex
+                    )
+                )
+            } else {
+                Toast.makeText(context, getString(R.string.warning_lesson_not_enabled), Toast.LENGTH_LONG).show()
+            }
         })
 
         addChips(listOf("gedaan", "nieuw", "alles"))
@@ -52,12 +63,11 @@ class LessonOverviewFragment : Fragment() {
     private fun addChips(chips: List<String>) {
         val chipGroup = binding.chipGroup
         val inflater = LayoutInflater.from(chipGroup.context)
-        chips.forEach{
+        chips.forEach {
             val chip = inflater.inflate(R.layout.chip_filter, chipGroup, false) as Chip
             chip.text = it
             chip.tag = it
-            chip.setOnCheckedChangeListener{
-                button, isChecked ->
+            chip.setOnCheckedChangeListener { button, isChecked ->
                 viewModel.filterChip(button.tag as String, isChecked)
             }
             chipGroup.addView(chip)
@@ -65,11 +75,21 @@ class LessonOverviewFragment : Fragment() {
     }
 }
 
-class ViewHolder(val binding: LessonOverviewRowItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    private val lessonText: TextView = binding.lessonText
+class ViewHolder(val binding: LessonOverviewRowItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    private val lessonTextEnabled: TextView = binding.lessonTextEnabled
+    private val lessonTextDisabled: TextView = binding.lessonTextDisabled
 
     fun bind(clickListener: LessonListener, lesson: Lesson) {
-        lessonText.text = lesson.title
+        if (lesson.index > sharedPreferences.currentLesson) {
+            lessonTextEnabled.visibility = View.GONE
+            lessonTextDisabled.visibility = View.VISIBLE
+            lessonTextDisabled.text = lesson.title
+        } else {
+            lessonTextDisabled.visibility = View.GONE
+            lessonTextEnabled.visibility = View.VISIBLE
+            lessonTextEnabled.text = lesson.title
+        }
         binding.lesson = lesson
         binding.clickListener = clickListener
     }
@@ -83,8 +103,8 @@ class ViewHolder(val binding: LessonOverviewRowItemBinding) : RecyclerView.ViewH
     }
 }
 
-class LessonListener(val clickListener: (lessonId: String)->Unit) {
-    fun onClick(lesson: Lesson) = clickListener(lesson.lessonId)
+class LessonListener(val clickListener: (index: Int) -> Unit) {
+    fun onClick(lesson: Lesson) = clickListener(lesson.index)
 }
 
 class CustomAdapter(private val clickListener: LessonListener) :

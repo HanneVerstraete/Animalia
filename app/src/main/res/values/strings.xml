@@ -19,6 +19,7 @@
     <string name="menu_lesson">Start les</string>
     <string name="menu_truefalse">Start juist/fout spel</string>
     <string name="lesson_finished_text">Proficiat, je hebt alle lessen afgewerkt!</string>
+    <string name="warning_lesson_not_enabled">Volg eerst voorgaande lessen om deze les vrij te geven</string>
 
     <!--    auth0-->
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>

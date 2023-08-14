@@ -22,7 +22,7 @@ fun ImageView.setLessonImage(lesson: Lesson?) {
 @BindingAdapter("lessonCompletedImage")
 fun ImageView.setLessonCompletedImage(lesson: Lesson?) {
     setImageResource(
-        if (lesson?.index is Int && sharedPreferences.currentLesson >= lesson.index) {
+        if (lesson?.index is Int && sharedPreferences.currentLesson > lesson.index) {
             R.drawable.star_gold
         } else {
             R.drawable.star_empty

@@ -26,10 +26,10 @@ interface LessonDatabaseDao {
     @Query("SELECT * FROM lesson_table ORDER BY lesson_index ASC")
     fun getAllLessonsLive(): LiveData<Array<DatabaseLesson>>
 
-    @Query("SELECT * FROM lesson_table WHERE lesson_index <= :currentLesson ORDER BY lesson_index ASC")
+    @Query("SELECT * FROM lesson_table WHERE lesson_index < :currentLesson ORDER BY lesson_index ASC")
     fun getDoneLessonsLive(currentLesson: Int): LiveData<Array<DatabaseLesson>>
 
-    @Query("SELECT * FROM lesson_table WHERE lesson_index > :currentLesson ORDER BY lesson_index ASC")
+    @Query("SELECT * FROM lesson_table WHERE lesson_index >= :currentLesson ORDER BY lesson_index ASC")
     fun getNewLessonsLive(currentLesson: Int): LiveData<Array<DatabaseLesson>>
 
     @Query("SELECT * from lesson_table WHERE lesson_index = :index")
