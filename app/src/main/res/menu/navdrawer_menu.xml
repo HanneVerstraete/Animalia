@@ -4,12 +4,6 @@
         <item
             android:id="@+id/lessonOverviewFragment"
             android:title="@string/menu_lesson_overview" />
-        <item
-            android:id="@+id/lessonFragment"
-            android:title="@string/menu_lesson" />
-        <item
-            android:id="@+id/truefalseFragment"
-            android:title="@string/menu_truefalse" />
     </group>
     <group android:id="@+id/authentication">
         <item

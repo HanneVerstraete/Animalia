@@ -22,6 +22,8 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         setOnClickListeners()
 
+        setHasOptionsMenu(true)
+
         val appContext = requireNotNull(this.activity).application
         val viewModelFactory = HomeViewModelFactory(appContext)
         val viewModel: HomeViewModel by viewModels { viewModelFactory }
