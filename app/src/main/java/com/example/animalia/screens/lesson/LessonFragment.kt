@@ -45,13 +45,6 @@ class LessonFragment : Fragment() {
             }
         }
 
-        viewModel.isFinished.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.animalImage.visibility = View.GONE
-                binding.finishedLessonsText!!.visibility = View.VISIBLE
-            }
-        }
-
         return binding.root
     }
 

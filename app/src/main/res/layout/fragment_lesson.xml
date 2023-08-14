@@ -68,20 +68,6 @@
             </LinearLayout>
         </ScrollView>
 
-        <TextView
-            android:id="@+id/finished_lessons_text"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top"
-            android:layout_marginBottom="@dimen/margin_bottom"
-            android:text="@string/lesson_finished_text"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/quitlesson_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/nextlesson_button"
             android:layout_width="wrap_content"
