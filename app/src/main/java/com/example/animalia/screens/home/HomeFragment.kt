@@ -38,6 +38,13 @@ class HomeFragment : Fragment() {
             }
         }
 
+        viewModel.isFinishedQuizElements.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.startTruefalseButton.visibility = View.GONE
+                binding.startTruefalseFinishedText.visibility = View.VISIBLE
+            }
+        }
+
         return binding.root
     }
 

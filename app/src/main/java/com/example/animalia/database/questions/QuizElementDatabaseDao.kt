@@ -27,7 +27,7 @@ interface QuizElementDatabaseDao {
     fun getAllQuizElementsLive(): LiveData<Array<DatabaseQuizElement>>
 
     @Query("SELECT COUNT(*) FROM quiz_element_table")
-    suspend fun numberOfQuizElements(): Int
+    suspend fun getNumberOfQuizElements(): Int
 
     @Query("SELECT * from quiz_element_table WHERE quiz_element_index = :index")
     suspend fun getByIndex(index: Int): DatabaseQuizElement?

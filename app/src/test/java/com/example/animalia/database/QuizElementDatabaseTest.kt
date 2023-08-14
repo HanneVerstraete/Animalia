@@ -77,7 +77,7 @@ class QuizElementDatabaseTest {
         val elements = arrayOf(testQuizElement4, testQuizElement5)
         quizElementDao.insertAll(*elements)
         quizElementDao.clear()
-        val numberOfItems = quizElementDao.numberOfQuizElements()
+        val numberOfItems = quizElementDao.getNumberOfQuizElements()
         assertEquals(0, numberOfItems)
     }
 
@@ -98,12 +98,12 @@ class QuizElementDatabaseTest {
     fun `database should count all items`() = runBlocking {
         val testQuizElement8 = DatabaseQuizElement("id8", 8, "question", "Juist", "explanation")
         quizElementDao.insert(testQuizElement8)
-        val count = quizElementDao.numberOfQuizElements()
+        val count = quizElementDao.getNumberOfQuizElements()
         assertEquals(1, count)
 
         val testQuizElement9 = DatabaseQuizElement("id9", 9, "question", "Juist", "explanation")
         quizElementDao.insert(testQuizElement9)
-        val count2 = quizElementDao.numberOfQuizElements()
+        val count2 = quizElementDao.getNumberOfQuizElements()
         assertEquals(2, count2)
     }
 

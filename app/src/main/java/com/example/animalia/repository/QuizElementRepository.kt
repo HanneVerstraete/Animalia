@@ -28,4 +28,8 @@ class QuizElementRepository(private val database: AnimaliaDatabase) {
     suspend fun getQuizElementByIndex(index: Int): QuizElement? {
         return database.quizElementDatabaseDao.getByIndex(index)?.asDomainModel()
     }
+
+    suspend fun getQuizElementCount(): Int {
+        return database.quizElementDatabaseDao.getNumberOfQuizElements()
+    }
 }
