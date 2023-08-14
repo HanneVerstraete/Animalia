@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.animalia.R
 import com.example.animalia.database.AnimaliaDatabase
@@ -33,6 +34,8 @@ class LessonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lesson, container, false)
+        setOnClickListeners()
+
         binding.lessonViewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -50,5 +53,12 @@ class LessonFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun setOnClickListeners() {
+        binding.quitlessonButton.setOnClickListener { view: View ->
+            view.findNavController()
+                .navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
+        }
     }
 }
