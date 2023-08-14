@@ -15,7 +15,7 @@ interface QuizElementDatabaseDao {
     suspend fun update(quiz: DatabaseQuizElement)
 
     @Query("SELECT * from quiz_element_table WHERE quiz_element_id = :key")
-    suspend fun get(key: Long): DatabaseQuizElement?
+    suspend fun get(key: String): DatabaseQuizElement?
 
     @Query("DELETE FROM quiz_element_table")
     suspend fun clear()
@@ -30,5 +30,5 @@ interface QuizElementDatabaseDao {
     suspend fun numberOfQuizElements(): Int
 
     @Query("SELECT * from quiz_element_table WHERE quiz_element_index = :index")
-    suspend fun getByIndex(index: Int): DatabaseQuizElement
+    suspend fun getByIndex(index: Int): DatabaseQuizElement?
 }
