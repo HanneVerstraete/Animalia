@@ -10,152 +10,200 @@
             type="com.example.animalia.screens.profile.ProfileViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/personal_data_title"
-            style="@style/text_title"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_personal_information"
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/personal_data"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:cardBackgroundColor="@color/secondaryLigthColor">
 
-        <LinearLayout
-            android:id="@+id/personal_data_labels"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/personal_data_labels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/personal_data_title">
+
+
+                <TextView
+                    android:id="@+id/personal_data_title"
+                    style="@style/text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/personal_data"
+                    android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                <TextView
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/firstname"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.currentUser.firstName}"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    tools:text="Jan" />
+
+                <TextView
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lastname"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.currentUser.lastName}"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    tools:text="Jansen" />
+
+                <TextView
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.currentUser.email}"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    tools:text="jan.jansen@mail.com" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/personal_data_title">
+            app:cardBackgroundColor="@color/secondaryLigthColor">
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statistics_card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/firstname" />
+                android:layout_margin="16dp"
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.currentUser.firstName}"
-                tools:text="Jan" />
+                <TextView
+                    android:id="@+id/statistics_title"
+                    style="@style/text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/statistics"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    app:layout_constraintStart_toStartOf="@id/statistics_card"
+                    app:layout_constraintTop_toTopOf="@+id/statistics_card" />
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lastname" />
+                <TextView
+                    android:id="@+id/statistics_level"
+                    style="@style/text_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/level"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/statistics_card"
+                    app:layout_constraintTop_toBottomOf="@+id/statistics_title"
+                    app:levelValue="@{viewModel.currentUser.level}"
+                    tools:text="Level 3" />
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.currentUser.lastName}"
-                tools:text="Jansen" />
+                <LinearLayout
+                    android:id="@+id/statistics_values"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="@id/statistics_card"
+                    app:layout_constraintTop_toBottomOf="@id/statistics_level">
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        app:xpValue="@{viewModel.currentUser.xp}"
+                        tools:text="32" />
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.currentUser.email}"
-                tools:text="jan.jansen@mail.com" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        app:finishedLessonsValue="@{viewModel.currentUser.lastLessonIndex}"
+                        tools:text="10" />
 
-        </LinearLayout>
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        app:finishedQuizzesValue="@{viewModel.currentUser.lastQuestionIndex}"
+                        tools:text="5" />
 
-        <TextView
-            android:id="@+id/statistics_title"
-            style="@style/text_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/statistics"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/personal_data_labels" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/statistics_labels"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/statistics_title">
+                <LinearLayout
+                    android:id="@+id/statistics_labels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/level" />
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/statistics_values"
+                    app:layout_constraintTop_toBottomOf="@id/statistics_level">
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/xp" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/xp"
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/number_finished_lessons" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number_finished_lessons"
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
 
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/number_finished_quizzes" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number_finished_quizzes"
+                        android:textAppearance="?attr/textAppearanceBodyMedium" />
 
-        </LinearLayout>
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/statistics_values"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@+id/statistics_labels"
-            app:layout_constraintTop_toBottomOf="@+id/statistics_title">
-
-            <TextView
-                android:id="@+id/level_value"
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:levelValue="@{viewModel.currentUser.level}"
-                tools:text="Level 3" />
-
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:xpValue="@{viewModel.currentUser.xp}"
-                tools:text="32" />
-
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:finishedLessonsValue="@{viewModel.currentUser.lastLessonIndex}"
-                tools:text="10" />
-
-            <TextView
-                style="@style/text_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:finishedQuizzesValue="@{viewModel.currentUser.lastQuestionIndex}"
-                tools:text="5" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </layout>
