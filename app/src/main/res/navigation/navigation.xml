@@ -59,9 +59,14 @@
     <fragment
         android:id="@+id/lessonOverviewFragment"
         android:name="com.example.animalia.screens.lessonOverview.LessonOverviewFragment"
-        android:label="LessonOverviewFragment">
+        android:label="Overzicht lessen">
         <action
             android:id="@+id/action_lessonOverviewFragment_to_lessonFragment"
             app:destination="@id/lessonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.animalia.screens.profile.ProfileFragment"
+        android:label="Profiel">
     </fragment>
 </navigation>

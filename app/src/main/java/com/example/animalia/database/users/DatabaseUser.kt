@@ -17,10 +17,14 @@ data class DatabaseUser(
     var lastName: String,
     @ColumnInfo(name = "email")
     val email: String,
-    @ColumnInfo(name = "user_finished_lessons")
+    @ColumnInfo(name = "finished_lessons")
     var lastLessonIndex: Int = 0,
-    @ColumnInfo(name = "user_finished_questions")
-    var lastQuestionIndex: Int = 0
+    @ColumnInfo(name = "finished_questions")
+    var lastQuestionIndex: Int = 0,
+    @ColumnInfo(name = "level")
+    var level: Int = 0,
+    @ColumnInfo(name = "xp")
+    var xp: Int = 0
 )
 
 fun DatabaseUser.asDomainModel(): User {
@@ -30,6 +34,8 @@ fun DatabaseUser.asDomainModel(): User {
         lastName = lastName,
         email = email,
         lastLessonIndex = lastLessonIndex,
-        lastQuestionIndex = lastQuestionIndex
+        lastQuestionIndex = lastQuestionIndex,
+        level = level,
+        xp = xp
     )
 }

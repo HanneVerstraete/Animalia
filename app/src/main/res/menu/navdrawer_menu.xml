@@ -5,6 +5,11 @@
             android:id="@+id/lessonOverviewFragment"
             android:title="@string/menu_lesson_overview" />
     </group>
+    <group>
+        <item
+            android:id="@+id/profileFragment"
+            android:title="@string/menu_profile" />
+    </group>
     <group android:id="@+id/authentication">
         <item
             android:id="@+id/login"

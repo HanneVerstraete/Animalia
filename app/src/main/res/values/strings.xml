@@ -20,6 +20,7 @@
     <string name="menu_truefalse">Start juist/fout spel</string>
     <string name="lesson_finished_text">Proficiat, je hebt alle lessen afgewerkt!</string>
     <string name="warning_lesson_not_enabled">Volg eerst voorgaande lessen om deze les vrij te geven</string>
+    <string name="quizElement_finished_text">Proficiat, je hebt alle quizvragen afgewerkt!</string>
 
     <!--    auth0-->
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>
@@ -38,8 +39,21 @@
     <string name="logout_ok">Tot ziens!</string>
     <string name="logout_nok">Logout mislukt, probeer opnieuw aub</string>
 
+    <!--    profile page-->
+    <string name="personal_data">Persoonlijke gegevens</string>
+    <string name="firstname">Voornaam</string>
+    <string name="lastname">Familienaam</string>
+    <string name="email">Email</string>
+    <string name="level">Level</string>
+    <string name="statistics">Statistieken</string>
+    <string name="xp">XP</string>
+    <string name="number_finished_lessons">Afgewerkte lessen</string>
+    <string name="number_finished_quizzes">Afgewerkte quizzen</string>
+    <string name="menu_profile">Profiel</string>
+    <string name="level_value">Level %d</string>
+    <string name="xp_value">%d XP</string>
+
     <string name="about_text">
 Welkom op Animalia!\n\nOnze app biedt je de mogelijkheid om meer te ontdekken over verschillende diersoorten van over de hele wereld.\n\nMaar het gaat niet alleen om leren, we hebben ook quizvragen gecreëerd om je kennis te testen.\n\nDank je voor het kiezen van Animalia om je dierenkennis te vergroten. Veel plezier met ontdekken, leren en spelen!\n\nHet Animalia Team
     </string>
-    <string name="quizElement_finished_text">Proficiat, je hebt alle quizvragen afgewerkt!</string>
 </resources>
