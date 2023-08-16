@@ -34,6 +34,7 @@ class UserRepository(private val database: AnimaliaDatabase) {
         val updatedUser = AnimaliaApi.retrofitService.updateUser(user.id, user.asApiModel()).await()
         database.userDatabaseDao.update(updatedUser.asDatabaseModel())
         sharedPreferences.currentLesson = updatedUser.lastLessonIndex
+        sharedPreferences.currentQuestion = updatedUser.lastQuestionIndex
         return updatedUser.asDomainModel()
     }
 }

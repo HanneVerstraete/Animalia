@@ -12,6 +12,7 @@ import com.example.animalia.R
 import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentTruefalseEndBinding
 import com.example.animalia.repository.QuizElementRepository
+import com.example.animalia.repository.UserRepository
 import com.example.animalia.sharedPreferences
 
 class TruefalseEndFragment : Fragment() {
@@ -24,7 +25,8 @@ class TruefalseEndFragment : Fragment() {
         val appContext = requireNotNull(this.activity).application
         val database = AnimaliaDatabase.getInstance(appContext.applicationContext)
         val quizElementRepository = QuizElementRepository(database)
-        return TruefalseViewModelFactory(quizElementRepository, sharedPreferences.currentQuestion)
+        val userRepository = UserRepository(database)
+        return TruefalseViewModelFactory(quizElementRepository, userRepository,sharedPreferences.currentQuestion)
     }
 
     override fun onCreateView(

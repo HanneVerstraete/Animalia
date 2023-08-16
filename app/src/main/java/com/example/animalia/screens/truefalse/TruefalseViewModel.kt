@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.animalia.R
 import com.example.animalia.domain.QuizElement
 import com.example.animalia.repository.QuizElementRepository
+import com.example.animalia.repository.UserRepository
 import kotlinx.coroutines.*
 import kotlin.math.ceil
 
@@ -12,9 +13,9 @@ const val TOTAL_QUESTIONS = 3
 
 class TruefalseViewModel(
     private val quizElementRepository: QuizElementRepository,
+    private val userRepository: UserRepository,
     private var currentQuestionIndex: Int
 ) : ViewModel() {
-
     private var _currentQuestion = MutableLiveData<QuizElement>()
     val currentQuestion: LiveData<QuizElement>
         get() = _currentQuestion
@@ -28,6 +29,7 @@ class TruefalseViewModel(
         get() = _goodQuestions
 
     var resultMessage = ObservableInt()
+    private var wonTheGame: Boolean = false
 
     private val _shouldEvaluate = MutableLiveData<Boolean>()
     val shouldEvaluate: LiveData<Boolean>
@@ -43,6 +45,7 @@ class TruefalseViewModel(
     private fun initializeLiveData() {
         viewModelScope.launch {
             quizElementRepository.refreshQuizElements()
+            userRepository.refreshUser()
             _currentQuestion.value =
                 quizElementRepository.getQuizElementByIndex(currentQuestionIndex)
         }
@@ -78,8 +81,10 @@ class TruefalseViewModel(
         if (isEnded()) {
             if (isWon()) {
                 resultMessage.set(R.string.textview_question_win)
+                wonTheGame = true
             } else {
                 resultMessage.set(R.string.textview_question_lose)
+                wonTheGame = false
             }
             _shouldEvaluate.value = true
         } else {
@@ -91,6 +96,16 @@ class TruefalseViewModel(
     }
 
     fun endGame() {
+        viewModelScope.launch {
+            val user = userRepository.getUser()
+            if (wonTheGame) {
+                user!!.lastQuestionIndex = currentQuestionIndex
+            }
+            val updatedUser = userRepository.updateUser(user!!)
+            currentQuestionIndex = updatedUser.lastQuestionIndex
+                _currentQuestion.value =
+                quizElementRepository.getQuizElementByIndex(currentQuestionIndex)
+        }
         _goodQuestions.value = 0
         _numberOfQuestionsAsked.value = 0
         _shouldEvaluate.value = false
