@@ -61,6 +61,13 @@ class LessonViewModel(
         }
     }
 
+    fun getPreviousLesson() {
+        lessonNumber--
+        viewModelScope.launch {
+            _currentLesson.value = lessonRepository.getLessonByIndex(lessonNumber)
+        }
+    }
+
     private fun isDoingLastLesson(lessonNumber: Int): Boolean {
         return totalNumberOfLessons - 1 <= lessonNumber
     }

@@ -51,7 +51,7 @@ class LessonFragment : Fragment() {
     }
 
     fun setOnClickListeners() {
-        binding.quitlessonButton.setOnClickListener { view: View ->
+        binding.homeButton?.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
         }

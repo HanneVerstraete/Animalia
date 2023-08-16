@@ -18,11 +18,12 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <!--        TODO remove backgroundcolor when better fitting images/-->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/animal_image"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="@dimen/margin_top"
+            android:background="@color/textDisabled"
             android:contentDescription="@string/description_image_lesson"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +33,11 @@
 
         <TextView
             android:id="@+id/lesson_title_textview"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
+            style="@style/text_title"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:background="@color/secondaryLigthColor"
             android:layout_height="wrap_content"
             android:text="@{lessonViewModel.currentLesson.title}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,24 +73,43 @@
         </ScrollView>
 
         <Button
-            android:id="@+id/nextlesson_button"
+            android:id="@+id/previouslesson_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{()->lessonViewModel.getNextLesson()}"
-            android:text="@string/button_lesson_next"
-            app:layout_constraintBottom_toTopOf="@+id/quitlesson_button"
+            android:layout_margin="@dimen/margin_bottom"
+            android:layout_marginStart="26dp"
+            android:width="140dp"
+            android:onClick="@{()->lessonViewModel.getPreviousLesson()}"
+            android:text="@string/button_lesson_previous"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/home_button"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/home_button"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_bottom"
+            android:backgroundTint="@color/secondaryLigthColor"
+            app:icon="@drawable/ic_baseline_home_24"
+            app:iconTint="@color/secondaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/quitlesson_button"
+            android:id="@+id/nextlesson_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_bottom"
-            android:text="@string/button_lesson_quit"
+            android:layout_margin="@dimen/margin_bottom"
+            android:layout_marginEnd="25dp"
+            android:width="140dp"
+            android:onClick="@{()->lessonViewModel.getNextLesson()}"
+            android:text="@string/button_lesson_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/home_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
