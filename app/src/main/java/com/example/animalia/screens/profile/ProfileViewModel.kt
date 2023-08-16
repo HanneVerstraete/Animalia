@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animalia.domain.User
 import com.example.animalia.repository.UserRepository
-import com.example.animalia.sharedPreferences
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
@@ -19,7 +18,7 @@ class ProfileViewModel(
     init {
         viewModelScope.launch {
             userRepository.refreshUser()
-            _currentUser.value = userRepository.getUserByEmail(sharedPreferences.emailCurrentUser!!)
+            _currentUser.value = userRepository.getUser()
         }
     }
 }

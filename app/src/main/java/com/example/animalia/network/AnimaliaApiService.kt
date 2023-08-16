@@ -11,12 +11,14 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
-//private const val BASE_URL = "http://192.168.0.176:9000/api/"
+private const val BASE_URL = "http://192.168.0.176:9000/api/"
 //private const val BASE_URL = "http://192.168.68.118:9000/api/"
-private const val BASE_URL = "http://192.168.1.46:9000/api/"
+//private const val /BASE_URL = "http://192.168.1.46:9000/api/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -44,6 +46,10 @@ interface AnimaliaApiService{
 
     @GET("users/{email}")
     fun getUserByEmailAsync(@Path("email") email: String): Deferred<ApiUser>
+
+    @PUT("users/{id}")
+    @Throws(Exception::class)
+    fun updateUser(@Path("id") id: String, @Body user: ApiUser): Deferred<ApiUser>
 }
 
 object AnimaliaApi{

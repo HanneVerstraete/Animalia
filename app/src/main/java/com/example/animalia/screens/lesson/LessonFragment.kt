@@ -13,6 +13,7 @@ import com.example.animalia.R
 import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentLessonBinding
 import com.example.animalia.repository.LessonRepository
+import com.example.animalia.repository.UserRepository
 
 class LessonFragment : Fragment() {
     private lateinit var binding: FragmentLessonBinding
@@ -25,7 +26,8 @@ class LessonFragment : Fragment() {
         val appContext = requireNotNull(this.activity).application
         val database = AnimaliaDatabase.getInstance(appContext.applicationContext)
         val lessonRepository = LessonRepository(database)
-        return LessonViewModelFactory(lessonRepository, args.lessonIndex)
+        val userRepository = UserRepository(database)
+        return LessonViewModelFactory(lessonRepository, userRepository, args.lessonIndex)
     }
 
     override fun onCreateView(
