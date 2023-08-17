@@ -3,6 +3,7 @@ package com.example.animalia.viewmodels
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.animalia.domain.QuizElement
 import com.example.animalia.repository.QuizElementRepository
+import com.example.animalia.repository.UserRepository
 import com.example.animalia.screens.truefalse.TruefalseViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +28,9 @@ class TruefalseViewModelTest {
     @Mock
     private lateinit var mockRepository: QuizElementRepository
 
+    @Mock
+    private lateinit var mockUserRepository: UserRepository
+
     private lateinit var viewModel: TruefalseViewModel
 
     private val testDispatcher = StandardTestDispatcher()
@@ -47,7 +51,7 @@ class TruefalseViewModelTest {
     @Test
     fun `when viewModel is initialized, all variables should be set to correct values`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(0)).thenReturn(quizElement0)
-        viewModel = TruefalseViewModel(mockRepository, 0)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 0)
         testDispatcher.scheduler.advanceUntilIdle()
 
         assertEquals(0, viewModel.goodQuestions.value)
@@ -59,7 +63,7 @@ class TruefalseViewModelTest {
     @Test
     fun `when answering correct, good questions should be increased`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(1)).thenReturn(quizElement1True)
-        viewModel = TruefalseViewModel(mockRepository, 1)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 1)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerTrue()
@@ -69,7 +73,7 @@ class TruefalseViewModelTest {
         assertEquals(1, viewModel.goodQuestions.value)
 
         `when`(mockRepository.getQuizElementByIndex(2)).thenReturn(quizElement2False)
-        viewModel = TruefalseViewModel(mockRepository, 2)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 2)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerFalse()
@@ -82,7 +86,7 @@ class TruefalseViewModelTest {
     @Test
     fun `when answering incorrect, good questions should not be increased`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(2)).thenReturn(quizElement2False)
-        viewModel = TruefalseViewModel(mockRepository, 2)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 2)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerTrue()
@@ -92,7 +96,7 @@ class TruefalseViewModelTest {
         assertEquals(0, viewModel.goodQuestions.value)
 
         `when`(mockRepository.getQuizElementByIndex(1)).thenReturn(quizElement1True)
-        viewModel = TruefalseViewModel(mockRepository, 1)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 1)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerFalse()
@@ -105,7 +109,7 @@ class TruefalseViewModelTest {
     @Test
     fun `when answering 3 questions, game should be evaluated`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(0)).thenReturn(quizElement0)
-        viewModel = TruefalseViewModel(mockRepository, 0)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 0)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerTrue()
@@ -118,7 +122,7 @@ class TruefalseViewModelTest {
     @Test
     fun `when game is ended, variables should be reset`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(0)).thenReturn(quizElement0)
-        viewModel = TruefalseViewModel(mockRepository, 0)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 0)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerTrue()
@@ -139,7 +143,7 @@ class TruefalseViewModelTest {
     @Test
     fun `when 3 questions were asked, player should win if he answered at least half of the questions right`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(1)).thenReturn(quizElement1True)
-        viewModel = TruefalseViewModel(mockRepository, 1)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 1)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerTrue()
@@ -152,7 +156,7 @@ class TruefalseViewModelTest {
     @Test
     fun `when 3 questions were asked, player should lose if he answered less than half of the questions right`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(1)).thenReturn(quizElement1True)
-        viewModel = TruefalseViewModel(mockRepository, 1)
+        viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 1)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerFalse()
