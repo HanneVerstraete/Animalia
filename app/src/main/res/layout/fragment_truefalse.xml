@@ -61,7 +61,8 @@
             android:text="@{@string/textview_score(truefalseViewModel.goodQuestions, truefalseViewModel.numberOfQuestionsAsked)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/false_button" />
+            app:layout_constraintTop_toBottomOf="@id/false_button"
+            tools:text="Score 2/3"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

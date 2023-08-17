@@ -21,6 +21,7 @@
     <string name="warning_lesson_not_enabled">Volg eerst voorgaande lessen om deze les vrij te geven</string>
     <string name="quizElement_finished_text">Proficiat, je hebt alle quizvragen afgewerkt!</string>
     <string name="button_lesson_previous">Vorige les</string>
+    <string name="time_text">Tijd: %s:%s</string>
 
     <!--    auth0-->
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>

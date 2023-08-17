@@ -47,4 +47,14 @@ class TruefalseFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.timer.startTimer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.timer.stopTimer()
+    }
 }

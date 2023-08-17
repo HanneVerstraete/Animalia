@@ -35,6 +35,8 @@ class TruefalseViewModel(
     val shouldEvaluate: LiveData<Boolean>
         get() = _shouldEvaluate
 
+    var timer: QuestionTimer = QuestionTimer()
+
     init {
         initializeLiveData()
         _goodQuestions.value = 0
@@ -109,6 +111,7 @@ class TruefalseViewModel(
         _goodQuestions.value = 0
         _numberOfQuestionsAsked.value = 0
         _shouldEvaluate.value = false
+        timer.secondsCount = 0
     }
 
     private fun isEnded() = _numberOfQuestionsAsked.value!! >= TOTAL_QUESTIONS

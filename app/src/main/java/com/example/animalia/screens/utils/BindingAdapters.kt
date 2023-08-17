@@ -49,3 +49,16 @@ fun TextView.setFinishedQuizzesValue(finishedQuizzes: Int?) {
         text = (finishedQuizzes / 3).toString()
     }
 }
+
+@BindingAdapter("time")
+fun TextView.setTime(time: Int) {
+    var seconds = (time%60).toString()
+    if (seconds.length == 1) {
+        seconds = "0${seconds}"
+    }
+    var minutes = kotlin.math.floor(time.toDouble() / 60).toInt().toString()
+    if (minutes.length == 1) {
+        minutes = "0${minutes}"
+    }
+    text = resources.getString(R.string.time_text, minutes, seconds)
+}
