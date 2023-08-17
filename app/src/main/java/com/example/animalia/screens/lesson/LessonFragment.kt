@@ -43,7 +43,15 @@ class LessonFragment : Fragment() {
 
         viewModel.isDoingLastLesson.observe(viewLifecycleOwner) {
             if (it) {
-                binding.nextlessonButton.visibility = View.GONE
+                binding.nextlessonButton.visibility = View.INVISIBLE
+            }
+        }
+
+        viewModel.currentLesson.observe(viewLifecycleOwner) {
+            if (it.index == 0) {
+                binding.previouslessonButton!!.visibility = View.INVISIBLE
+            } else {
+                binding.previouslessonButton!!.visibility = View.VISIBLE
             }
         }
 
