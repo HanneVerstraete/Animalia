@@ -8,6 +8,7 @@ data class ApiLesson(
     var index: Int = 0,
     var content: String = "",
     var title: String = "",
+    var imageUrl: String = ""
 )
 
 fun Array<ApiLesson>.asDomainModel(): Array<Lesson>{
@@ -16,7 +17,8 @@ fun Array<ApiLesson>.asDomainModel(): Array<Lesson>{
             lessonId = it.id,
             index = it.index,
             content = it.content,
-            title = it.title
+            title = it.title,
+            imageUrl = it.imageUrl
         )
     }.toTypedArray()
 }
@@ -27,7 +29,8 @@ fun Array<ApiLesson>.asDatabaseModel(): Array<DatabaseLesson>{
             lessonId = it.id,
             index = it.index,
             content = it.content,
-            title = it.title
+            title = it.title,
+            imageUrl = it.imageUrl
         )
     }.toTypedArray()
 }
@@ -37,6 +40,7 @@ fun ApiLesson.asDatabaseLesson(): DatabaseLesson{
         lessonId = id,
         index = index,
         content = content,
-        title = title
+        title = title,
+        imageUrl = imageUrl
     )
 }

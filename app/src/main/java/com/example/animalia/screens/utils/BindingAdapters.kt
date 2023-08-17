@@ -3,21 +3,18 @@ package com.example.animalia.screens.utils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.example.animalia.R
 import com.example.animalia.domain.Lesson
 import com.example.animalia.sharedPreferences
+import kotlinx.android.synthetic.main.lesson_overview_row_item.view.*
 import java.util.*
 
 @BindingAdapter("lessonImage")
-fun ImageView.setLessonImage(lesson: Lesson?) {
-    setImageResource(
-        when (lesson?.index) {
-            0 -> R.drawable.dog
-            1 -> R.drawable.lion
-            2 -> R.drawable.duck
-            else -> R.drawable.empty_vector
-        }
-    )
+fun setLessonImage(view: ImageView, lesson: Lesson?) {
+    if (lesson != null) {
+        Glide.with(view.context).load(lesson.imageUrl).into(view)
+    }
 }
 
 @BindingAdapter("lessonCompletedImage")

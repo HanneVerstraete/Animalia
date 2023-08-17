@@ -11,7 +11,7 @@ import com.example.animalia.database.questions.QuizElementDatabaseDao
 import com.example.animalia.database.users.DatabaseUser
 import com.example.animalia.database.users.UserDatabaseDao
 
-@Database(entities = [DatabaseLesson::class, DatabaseQuizElement::class, DatabaseUser::class], version = 8, exportSchema = false)
+@Database(entities = [DatabaseLesson::class, DatabaseQuizElement::class, DatabaseUser::class], version = 9, exportSchema = false)
 abstract class AnimaliaDatabase : RoomDatabase() {
     abstract val lessonDatabaseDao: LessonDatabaseDao
     abstract val quizElementDatabaseDao: QuizElementDatabaseDao

@@ -18,18 +18,17 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <!--        TODO remove backgroundcolor when better fitting images/-->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/animal_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/textDisabled"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/description_image_lesson"
+            android:src="@drawable/empty_vector"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:lessonImage="@{lessonViewModel.currentLesson}"
-            tools:srcCompat="@drawable/dog" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/empty_vector" />
 
         <TextView
             android:id="@+id/lesson_title_textview"
@@ -49,8 +48,8 @@
             android:id="@+id/lesson_scrollview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/margin"
-            app:layout_constraintBottom_toTopOf="@+id/nextlesson_button"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/home_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lesson_title_textview">
@@ -65,8 +64,6 @@
                     style="@style/text_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:layout_marginBottom="@dimen/margin_bottom"
                     android:text="@{lessonViewModel.currentLesson.content}"
                     tools:text="Here comes a lesson" />
             </LinearLayout>

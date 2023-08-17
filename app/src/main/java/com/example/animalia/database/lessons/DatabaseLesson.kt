@@ -17,6 +17,8 @@ data class DatabaseLesson(
     var content: String = "",
     @ColumnInfo(name = "lesson_title")
     var title: String = "",
+    @ColumnInfo(name = "lesson_image_url")
+    var imageUrl: String = "",
 )
 
 fun Array<DatabaseLesson>.asDomainModel(): Array<Lesson> {
@@ -25,7 +27,8 @@ fun Array<DatabaseLesson>.asDomainModel(): Array<Lesson> {
             lessonId = it.lessonId,
             index = it.index,
             content = it.content,
-            title = it.title
+            title = it.title,
+            imageUrl = it.imageUrl
         )
     }.toTypedArray()
 }
@@ -35,6 +38,7 @@ fun DatabaseLesson.asDomainModel(): Lesson {
         lessonId = lessonId,
         index = index,
         content = content,
-        title = title
+        title = title,
+        imageUrl = imageUrl
     )
 }
