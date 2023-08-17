@@ -18,18 +18,67 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-
         <TextView
-            android:id="@+id/lesson_textview"
+            android:id="@+id/lesson_total_questions_textview"
             style="@style/text_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{truefalseViewModel.currentQuestion.question}"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/textview_total_questions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Totaal aantal vragen: 3" />
+
+        <TextView
+            android:id="@+id/lesson_score_textview"
+            style="@style/text_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{@string/textview_score(truefalseViewModel.goodQuestions, truefalseViewModel.numberOfQuestionsAsked)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lesson_total_questions_textview"
+            tools:text="Score 1/2" />
+
+        <TextView
+            style="@style/text_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/true_or_false"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/lesson_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Is dit juist of fout?" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/lesson_textview"
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@color/secondaryLigthColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Is dit juist of fout" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/text_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textAlignment="center"
+                android:text="@{truefalseViewModel.currentQuestion.question}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Dit is de vraag" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <Button
             android:id="@+id/true_button"
@@ -48,21 +97,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:onClick="@{()->truefalseViewModel.answerFalse()}"
+            android:backgroundTint="@color/falseButton"
             android:text="@string/button_question_false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/true_button"
             app:layout_constraintTop_toBottomOf="@+id/lesson_textview" />
 
-        <TextView
-            android:id="@+id/lesson_score_textview"
-            style="@style/text_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{@string/textview_score(truefalseViewModel.goodQuestions, truefalseViewModel.numberOfQuestionsAsked)}"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/monkey_thinking"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/false_button"
-            tools:text="Score 2/3"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

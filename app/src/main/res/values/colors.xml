@@ -18,4 +18,5 @@
 
     <!--    specific color-->
     <color name="textDisabled">#979797</color>
+    <color name="falseButton">#C9F85245</color>
 </resources>
