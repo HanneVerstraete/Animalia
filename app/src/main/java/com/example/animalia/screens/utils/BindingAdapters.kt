@@ -21,9 +21,9 @@ fun setLessonImage(view: ImageView, lesson: Lesson?) {
 fun ImageView.setLessonCompletedImage(lesson: Lesson?) {
     setImageResource(
         if (lesson?.index is Int && sharedPreferences.currentLesson > lesson.index) {
-            R.drawable.star_gold
+            R.drawable.ic_baseline_check_box_24
         } else {
-            R.drawable.star_empty
+            R.drawable.ic_baseline_check_box_outline_blank_24
         }
     )
 }
