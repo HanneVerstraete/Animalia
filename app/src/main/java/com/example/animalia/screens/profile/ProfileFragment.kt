@@ -11,6 +11,8 @@ import com.example.animalia.R
 import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentProfileBinding
 import com.example.animalia.repository.UserRepository
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputLayout
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -35,6 +37,27 @@ class ProfileFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.editButton.setOnClickListener {
+            _openDialog()
+        }
+
         return binding.root
+    }
+
+    fun _openDialog() {
+        val messageBoxView = LayoutInflater.from(activity).inflate(R.layout.fragment_dialog_edit_info, null)
+        context?.let { it1 ->
+            MaterialAlertDialogBuilder(it1)
+                .setTitle("Gegevens bewerken")
+                .setView(messageBoxView)
+                .setNeutralButton("Annuleer") { _, _ -> }
+                .setPositiveButton("Opslaan") { _, _ ->
+                    val firstname: String = (messageBoxView.findViewById(R.id.firstname_textfield) as TextInputLayout).editText?.text.toString()
+                    val lastname: String = (messageBoxView.findViewById(R.id.lastname_textfield) as TextInputLayout).editText?.text.toString()
+
+                    viewModel.editUserPersonalInfo(firstname, lastname)
+                }
+                .show()
+        }
     }
 }

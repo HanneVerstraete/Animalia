@@ -55,6 +55,8 @@
     <string name="menu_profile">Profiel</string>
     <string name="level_value">Level %d</string>
     <string name="xp_value">%d</string>
+    <string name="textfield_firstname">Voornaam</string>
+    <string name="textfield_lastname">Familienaam</string>
 
     <string name="about_text">
 Welkom op Animalia!\n\nOnze app biedt je de mogelijkheid om meer te ontdekken over verschillende diersoorten van over de hele wereld.\n\nMaar het gaat niet alleen om leren, we hebben ook quizvragen gecreëerd om je kennis te testen.\n\nDank je voor het kiezen van Animalia om je dierenkennis te vergroten. Veel plezier met ontdekken, leren en spelen!\n\nHet Animalia Team

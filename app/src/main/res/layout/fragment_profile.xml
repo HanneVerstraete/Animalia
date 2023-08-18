@@ -16,81 +16,101 @@
         android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_personal_information"
-            style="?attr/materialCardViewFilledStyle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/secondaryLigthColor">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/personal_data_labels"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_personal_information"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:orientation="vertical"
+                app:cardBackgroundColor="@color/secondaryLigthColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/personal_data_title">
+                app:layout_constraintTop_toTopOf="parent">
 
-
-                <TextView
-                    android:id="@+id/personal_data_title"
-                    style="@style/text_title"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/personal_data_labels"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/personal_data"
-                    android:textAppearance="?attr/textAppearanceTitleMedium" />
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/personal_data_title">
 
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/firstname"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/personal_data_title"
+                        style="@style/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/personal_data"
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
 
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.currentUser.firstName}"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    tools:text="Jan" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/firstname"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textStyle="bold" />
 
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lastname"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textStyle="bold" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.currentUser.firstName}"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        tools:text="Jan" />
 
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.currentUser.lastName}"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    tools:text="Jansen" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lastname"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textStyle="bold" />
 
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textStyle="bold" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.currentUser.lastName}"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        tools:text="Jansen" />
 
-                <TextView
-                    style="@style/text_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.currentUser.email}"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    tools:text="jan.jansen@mail.com" />
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textStyle="bold" />
 
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        style="@style/text_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.currentUser.email}"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        tools:text="jan.jansen@mail.com" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <Button
+                android:id="@+id/edit_button"
+                style="?attr/materialIconButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:icon="@drawable/ic_baseline_edit_24"
+                app:iconTint="@color/secondaryColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <com.google.android.material.card.MaterialCardView

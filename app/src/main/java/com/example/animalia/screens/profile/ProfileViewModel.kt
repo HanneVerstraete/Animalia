@@ -21,4 +21,13 @@ class ProfileViewModel(
             _currentUser.value = userRepository.getUser()
         }
     }
+
+    fun editUserPersonalInfo(firstname: String, lastname: String) {
+        _currentUser.value?.firstName = firstname
+        _currentUser.value?.lastName = lastname
+        viewModelScope.launch {
+            userRepository.updateUser(_currentUser.value!!)
+            _currentUser.value = userRepository.getUser()
+        }
+    }
 }
