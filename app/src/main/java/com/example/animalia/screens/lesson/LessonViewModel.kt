@@ -5,6 +5,7 @@ import com.example.animalia.domain.Lesson
 import com.example.animalia.repository.LessonRepository
 import com.example.animalia.repository.UserRepository
 import kotlinx.coroutines.launch
+import kotlin.math.ceil
 
 class LessonViewModel(
     private val lessonRepository: LessonRepository,
@@ -48,6 +49,8 @@ class LessonViewModel(
             val user = userRepository.getUser()
             if (user!!.lastLessonIndex < lessonNumber) {
                 user.lastLessonIndex = lessonNumber
+                user.xp = user.xp + 2
+                user.level = ceil((user.xp).toDouble() / 10).toInt()
                 userRepository.updateUser(user)
             }
         }
