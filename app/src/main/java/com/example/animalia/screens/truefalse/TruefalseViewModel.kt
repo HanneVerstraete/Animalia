@@ -98,10 +98,13 @@ class TruefalseViewModel(
     }
 
     fun endGame() {
+        val correctQuesions = _goodQuestions.value ?: 0
         viewModelScope.launch {
             val user = userRepository.getUser()
             if (wonTheGame) {
                 user!!.lastQuestionIndex = currentQuestionIndex
+                user.xp = user.xp + (2 * correctQuesions)
+                user.level = ceil((user.xp).toDouble() / 10).toInt()
             }
             val updatedUser = userRepository.updateUser(user!!)
             currentQuestionIndex = updatedUser.lastQuestionIndex
