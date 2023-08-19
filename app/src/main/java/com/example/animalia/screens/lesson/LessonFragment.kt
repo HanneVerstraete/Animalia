@@ -41,9 +41,13 @@ class LessonFragment : Fragment() {
         binding.lessonViewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.isDoingLastLesson.observe(viewLifecycleOwner) {
-            if (it) {
+        viewModel.currentLesson.observe(viewLifecycleOwner) {
+            if (it.index + 1 == viewModel.totalNumberOfLessons) {
                 binding.nextlessonButton.visibility = View.INVISIBLE
+                binding.finishlessonButton?.visibility  = View.VISIBLE
+            } else {
+                binding.nextlessonButton.visibility = View.VISIBLE
+                binding.finishlessonButton?.visibility = View.INVISIBLE
             }
         }
 
@@ -60,6 +64,12 @@ class LessonFragment : Fragment() {
 
     fun setOnClickListeners() {
         binding.homeButton?.setOnClickListener { view: View ->
+            view.findNavController()
+                .navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
+        }
+
+        binding.finishlessonButton?.setOnClickListener { view: View ->
+            viewModel.getNextLesson()
             view.findNavController()
                 .navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
         }

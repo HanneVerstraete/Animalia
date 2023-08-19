@@ -1,6 +1,9 @@
 package com.example.animalia.screens.lesson
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.animalia.domain.Lesson
 import com.example.animalia.repository.LessonRepository
 import com.example.animalia.repository.UserRepository
@@ -16,15 +19,7 @@ class LessonViewModel(
     val currentLesson: LiveData<Lesson>
         get() = _currentLesson
 
-    private val _isDoingLastLesson = MutableLiveData<Boolean>()
-    val isDoingLastLesson: LiveData<Boolean>
-        get() = _isDoingLastLesson
-
-    private val _isFinished = MutableLiveData<Boolean>()
-    val isFinished: LiveData<Boolean>
-        get() = _isFinished
-
-    private var totalNumberOfLessons = 0
+    var totalNumberOfLessons = 0
 
     init {
         initializeLiveData()
@@ -35,9 +30,7 @@ class LessonViewModel(
             lessonRepository.refreshLessons()
             userRepository.refreshUser()
             totalNumberOfLessons = lessonRepository.getLessonCount()
-            _isDoingLastLesson.value = isDoingLastLesson(lessonNumber)
-            _isFinished.value = isFinished(lessonNumber)
-            if (!isFinished.value!!) {
+            if (!isFinished(lessonNumber)) {
                 _currentLesson.value = lessonRepository.getLessonByIndex(lessonNumber)
             }
         }
@@ -45,19 +38,8 @@ class LessonViewModel(
 
     fun getNextLesson() {
         lessonNumber++
-        viewModelScope.launch {
-            val user = userRepository.getUser()
-            if (user!!.lastLessonIndex < lessonNumber) {
-                user.lastLessonIndex = lessonNumber
-                user.xp = user.xp + 2
-                user.level = ceil((user.xp).toDouble() / 10).toInt()
-                userRepository.updateUser(user)
-            }
-        }
-        if (isFinished(lessonNumber)) {
-            _isFinished.value = true
-        } else {
-            _isDoingLastLesson.value = isDoingLastLesson(lessonNumber)
+        updateUser()
+        if (!isFinished(lessonNumber)) {
             viewModelScope.launch {
                 _currentLesson.value = lessonRepository.getLessonByIndex(lessonNumber)
             }
@@ -71,8 +53,16 @@ class LessonViewModel(
         }
     }
 
-    private fun isDoingLastLesson(lessonNumber: Int): Boolean {
-        return totalNumberOfLessons - 1 <= lessonNumber
+    fun updateUser() {
+        viewModelScope.launch {
+            val user = userRepository.getUser()
+            if (user!!.lastLessonIndex < lessonNumber) {
+                user.lastLessonIndex = lessonNumber
+                user.xp = user.xp + 2
+                user.level = ceil((user.xp).toDouble() / 10).toInt()
+                userRepository.updateUser(user)
+            }
+        }
     }
 
     private fun isFinished(lessonNumber: Int): Boolean {
