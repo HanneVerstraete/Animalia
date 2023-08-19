@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,7 +10,7 @@
             type="com.example.animalia.screens.home.HomeViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,44 +18,34 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/greeting"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_margin="16dp"
-            android:id="@+id/startLessonFinishedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone"
-            android:text="@string/lesson_finished_text" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_background" />
 
         <Button
             android:id="@+id/start_lesson_button"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/button_learn" />
-
-        <TextView
-            android:layout_margin="16dp"
-            android:id="@+id/startTruefalseFinishedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone"
-            android:text="@string/quizElement_finished_text" />
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/button_learn"
+            app:layout_constraintBottom_toTopOf="@+id/start_truefalse_button"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/start_truefalse_button"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/button_skill" />
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/button_skill"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

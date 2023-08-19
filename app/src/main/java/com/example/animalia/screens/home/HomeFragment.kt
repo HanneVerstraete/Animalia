@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.animalia.R
 import com.example.animalia.databinding.FragmentHomeBinding
 import com.example.animalia.sharedPreferences
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
@@ -33,15 +34,29 @@ class HomeFragment : Fragment() {
 
         viewModel.isFinishedLessons.observe(viewLifecycleOwner) {
             if (it) {
-                binding.startLessonButton.visibility = View.GONE
-                binding.startLessonFinishedText.visibility = View.VISIBLE
+                binding.startLessonButton.setOnClickListener {
+                    context?.let { it1 ->
+                        MaterialAlertDialogBuilder(it1)
+                            .setTitle("Alle lessen afgewerkt")
+                            .setMessage("Proficiat! Je hebt al alle lessen afgewerkt. Open het zijmenu om het lesoverzicht te openen als je lessen wilt herbekijken")
+                            .setPositiveButton("Verder") { _, _ -> }
+                            .show()
+                    }
+                }
             }
         }
 
         viewModel.isFinishedQuizElements.observe(viewLifecycleOwner) {
             if (it) {
-                binding.startTruefalseButton.visibility = View.GONE
-                binding.startTruefalseFinishedText.visibility = View.VISIBLE
+                binding.startTruefalseButton.setOnClickListener {
+                    context?.let { it1 ->
+                        MaterialAlertDialogBuilder(it1)
+                            .setTitle("Alle oefeningen afgewerkt")
+                            .setMessage("Proficiat! Je hebt al oefeningen afgewerkt.")
+                            .setPositiveButton("Verder") { _, _ -> }
+                            .show()
+                    }
+                }
             }
         }
 
