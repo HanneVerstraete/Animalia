@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,9 +31,9 @@ import com.example.animalia.databinding.FragmentLoginBinding
 import com.example.animalia.sharedPreferences
 import timber.log.Timber
 
-class LoginFragment: Fragment() {
+class LoginFragment : Fragment() {
 
-    private lateinit var account : Auth0
+    private lateinit var account: Auth0
     private lateinit var loginLogoutMessage: TextView
     private lateinit var loginButton: Button
     private lateinit var logoutButton: Button
@@ -98,25 +99,25 @@ class LoginFragment: Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item,
-            requireView().findNavController()) || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            requireView().findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
-    private fun checkIfToken(){
+    private fun checkIfToken() {
         val token = CredentialsManager.getAccessToken(requireContext())
-        if(token != null){
+        if (token != null) {
             showUserProfile(token)
-        }
-        else {
+        } else {
             Toast.makeText(context, getText(R.string.invalid_login), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun setLoggedInText() {
-        if(sharedPrefs.loggedIn == "true") {
+        if (sharedPrefs.loggedIn == "true") {
             loginLogoutMessage.text = getText(R.string.logout_text_confirm)
-        }
-        else {
+        } else {
             loginLogoutMessage.text = getText(R.string.logout_text)
         }
     }
@@ -151,7 +152,7 @@ class LoginFragment: Fragment() {
                     showUserProfile(result.accessToken)
 
                     // Go to next fragment
-                    val intent = Intent (activity, MainActivity::class.java)
+                    val intent = Intent(activity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     activity?.startActivity(intent)
                 }
@@ -161,7 +162,7 @@ class LoginFragment: Fragment() {
     private fun logout() {
         WebAuthProvider.logout(account)
             .withScheme("demo")
-            .start(requireContext(), object: Callback<Void?, AuthenticationException> {
+            .start(requireContext(), object : Callback<Void?, AuthenticationException> {
                 override fun onSuccess(result: Void?) {
                     Toast.makeText(context, getText(R.string.logout_ok), Toast.LENGTH_SHORT).show()
                     // Set visibility for login
@@ -170,6 +171,14 @@ class LoginFragment: Fragment() {
                     loginButton.setVisibility(View.VISIBLE)
 
                     setLoggedInText()
+
+                    if (sharedPrefs.loggedIn !== "true") {
+                        try {
+                            (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+                        } catch (ex: Exception) {
+                            ex.printStackTrace()
+                        }
+                    }
                 }
 
                 override fun onFailure(error: AuthenticationException) {
@@ -183,7 +192,7 @@ class LoginFragment: Fragment() {
             })
     }
 
-    private fun showUserProfile(accessToken: String){
+    private fun showUserProfile(accessToken: String) {
         val client = AuthenticationAPIClient(account)
 
         client.userInfo(accessToken)
