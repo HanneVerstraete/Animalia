@@ -79,7 +79,7 @@ class TruefalseViewModel(
         currentQuestionIndex++
     }
 
-    private fun getQuestion() {
+    fun getQuestion() {
         if (isEnded()) {
             if (isWon()) {
                 resultMessage.set(R.string.textview_question_win)

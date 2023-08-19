@@ -14,6 +14,7 @@ import com.example.animalia.databinding.FragmentTruefalseBinding
 import com.example.animalia.repository.QuizElementRepository
 import com.example.animalia.repository.UserRepository
 import com.example.animalia.sharedPreferences
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TruefalseFragment : Fragment() {
     private lateinit var binding: FragmentTruefalseBinding
@@ -26,7 +27,11 @@ class TruefalseFragment : Fragment() {
         val database = AnimaliaDatabase.getInstance(appContext.applicationContext)
         val quizElementRepository = QuizElementRepository(database)
         val userRepository = UserRepository(database)
-        return TruefalseViewModelFactory(quizElementRepository, userRepository, sharedPreferences.currentQuestion)
+        return TruefalseViewModelFactory(
+            quizElementRepository,
+            userRepository,
+            sharedPreferences.currentQuestion
+        )
     }
 
     override fun onCreateView(
@@ -45,6 +50,14 @@ class TruefalseFragment : Fragment() {
             }
         }
 
+        binding.trueButton.setOnClickListener {
+            openTrueDialog()
+        }
+
+        binding.falseButton.setOnClickListener {
+            openFalseDialog()
+        }
+
         return binding.root
     }
 
@@ -56,5 +69,35 @@ class TruefalseFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         viewModel.timer.stopTimer()
+    }
+
+    private fun openTrueDialog() {
+        val style = if (viewModel.currentQuestion.value!!.answer == "Juist") {
+            R.style.ThemeOverlay_WrightAnswer
+        } else {
+            R.style.ThemeOverlay_WrongAnswer
+        }
+        createDialog(style)
+    }
+
+    private fun openFalseDialog() {
+        val style = if (viewModel.currentQuestion.value!!.answer == "Fout") {
+            R.style.ThemeOverlay_WrightAnswer
+        } else {
+            R.style.ThemeOverlay_WrongAnswer
+        }
+        createDialog(style)
+    }
+
+    private fun createDialog(style: Int) {
+        context?.let { it1 ->
+            MaterialAlertDialogBuilder(it1, style)
+                .setTitle("Antwoord: ${viewModel.currentQuestion.value!!.answer}")
+                .setMessage(viewModel.currentQuestion.value!!.explanation)
+                .setPositiveButton("Verder") { _, _ ->
+                    viewModel.answerTrue()
+                }
+                .show()
+        }
     }
 }

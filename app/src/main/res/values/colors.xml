@@ -18,5 +18,7 @@
 
     <!--    specific color-->
     <color name="textDisabled">#979797</color>
-    <color name="falseButton">#C9F85245</color>
+    <color name="falseButton">#C9FF3829</color>
+    <color name="wrongText">#C9AF0D00</color>
+    <color name="wrongCardBackground">#FFDADA</color>
 </resources>

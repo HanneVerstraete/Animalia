@@ -14,4 +14,36 @@
     <style name="button_regular">
         <item name="android:textSize">16sp</item>
     </style>
+
+    <!--    custom dialog wright answer-->
+    <style name="ThemeOverlay.WrightAnswer" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:backgroundTint">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyleWright</item>
+        <item name="shapeAppearanceOverlay">@style/DialogCorners</item>
+    </style>
+
+    <style name="PositiveButtonStyleWright" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="DialogCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!--    custom dialog wrong answer-->
+    <style name="ThemeOverlay.WrongAnswer" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:backgroundTint">@color/wrongCardBackground</item>
+        <item name="colorOnSurface">@color/wrongText</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyleWrong</item>
+        <item name="shapeAppearanceOverlay">@style/DialogCorners</item>
+    </style>
+
+    <style name="PositiveButtonStyleWrong" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/wrongText</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
 </resources>
