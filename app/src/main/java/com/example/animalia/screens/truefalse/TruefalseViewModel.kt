@@ -4,6 +4,7 @@ import androidx.databinding.ObservableInt
 import androidx.lifecycle.*
 import com.example.animalia.R
 import com.example.animalia.domain.QuizElement
+import com.example.animalia.domain.User
 import com.example.animalia.repository.QuizElementRepository
 import com.example.animalia.repository.UserRepository
 import kotlinx.coroutines.*
@@ -29,13 +30,16 @@ class TruefalseViewModel(
         get() = _goodQuestions
 
     var resultMessage = ObservableInt()
-    private var wonTheGame: Boolean = false
+    var wonTheGame: Boolean = false
 
     private val _shouldEvaluate = MutableLiveData<Boolean>()
     val shouldEvaluate: LiveData<Boolean>
         get() = _shouldEvaluate
 
     var timer: QuestionTimer = QuestionTimer()
+    var level: Int = 0
+    var xp: Int = 0
+    var addedXP: Int = 0
 
     init {
         initializeLiveData()
@@ -81,14 +85,7 @@ class TruefalseViewModel(
 
     fun getQuestion() {
         if (isEnded()) {
-            if (isWon()) {
-                resultMessage.set(R.string.textview_question_win)
-                wonTheGame = true
-            } else {
-                resultMessage.set(R.string.textview_question_lose)
-                wonTheGame = false
-            }
-            _shouldEvaluate.value = true
+            handleEndGame()
         } else {
             viewModelScope.launch {
                 _currentQuestion.value =
@@ -97,20 +94,44 @@ class TruefalseViewModel(
         }
     }
 
-    fun endGame() {
-        val correctQuesions = _goodQuestions.value ?: 0
+    private fun handleEndGame() {
         viewModelScope.launch {
-            val user = userRepository.getUser()
-            if (wonTheGame) {
-                user!!.lastQuestionIndex = currentQuestionIndex
-                user.xp = user.xp + (2 * correctQuesions)
-                user.level = ceil((user.xp).toDouble() / 10).toInt()
+            val user = userRepository.getUser()!!
+            if (isWon()) {
+                handleWonGame(user)
+            } else {
+                handleLostGame(user)
             }
-            val updatedUser = userRepository.updateUser(user!!)
+
+            _shouldEvaluate.value = true
+            val updatedUser = userRepository.updateUser(user)
+
             currentQuestionIndex = updatedUser.lastQuestionIndex
-                _currentQuestion.value =
+            _currentQuestion.value =
                 quizElementRepository.getQuizElementByIndex(currentQuestionIndex)
         }
+    }
+
+    private fun handleWonGame(user: User) {
+        addedXP = (_goodQuestions.value ?: 0) * 2
+        xp = user.xp + (2 * (_goodQuestions.value ?: 0))
+        level = ceil((user.xp).toDouble() / 10).toInt()
+        resultMessage.set(R.string.textview_question_win)
+        wonTheGame = true
+        user.lastQuestionIndex = currentQuestionIndex
+        user.xp = xp
+        user.level = level
+    }
+
+    private fun handleLostGame(user: User) {
+        addedXP = 0
+        xp = user.xp + (2 * (_goodQuestions.value ?: 0))
+        level = ceil((user.xp).toDouble() / 10).toInt()
+        resultMessage.set(R.string.textview_question_lose)
+        wonTheGame = false
+    }
+
+    fun endGame() {
         _goodQuestions.value = 0
         _numberOfQuestionsAsked.value = 0
         _shouldEvaluate.value = false

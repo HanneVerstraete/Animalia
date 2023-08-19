@@ -2,11 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.animalia.screens.truefalse.TruefalseViewModel" />
+
         <variable
             name="fragment"
             type="com.example.animalia.screens.truefalse.TruefalseEndFragment" />
@@ -20,50 +22,141 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="32dp"
+            app:quizCompletedImage="@{viewModel.wonTheGame}"
+            tools:src="@drawable/won_game_animal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32" />
 
         <TextView
             android:id="@+id/lesson_textview"
             style="@style/text_regular"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:text="@{viewModel.resultMessage}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:text="Hoera! Gewonnen!" />
 
-        <TextView
-            android:id="@+id/lesson_score_textview"
-            style="@style/text_regular"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_statistics"
+            style="?attr/materialCardViewFilledStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/textview_score(viewModel.goodQuestions, viewModel.numberOfQuestionsAsked)}"
-            app:layout_constraintBottom_toTopOf="@id/continue_button"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:cardBackgroundColor="@color/secondaryColor"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toStartOf="@+id/card_new_statistics"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lesson_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-        <TextView
-            android:id="@+id/time_textview"
-            style="@style/text_regular"
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lesson_score_textview"
+                    style="@style/text_regular"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/primaryTextColor"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/textview_score(viewModel.goodQuestions, viewModel.numberOfQuestionsAsked)}"
+                    android:textAlignment="center"
+                    tools:text="Score: 2/3" />
+
+                <TextView
+                    android:id="@+id/lesson_xp_textview"
+                    style="@style/text_regular"
+                    android:textColor="@color/primaryTextColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/textview_added_xp(viewModel.addedXP)}"
+                    android:textAlignment="center"
+                    tools:text="+ 4XP" />
+
+                <TextView
+                    android:id="@+id/lesson_time_textview"
+                    style="@style/text_regular"
+                    android:textColor="@color/primaryTextColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    app:time="@{viewModel.timer.secondsCount}"
+                    tools:text="Tijd 1:23" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_new_statistics"
+            style="?attr/materialCardViewFilledStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:time="@{viewModel.timer.secondsCount}"
+            app:cardBackgroundColor="@color/secondaryLigthColor"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lesson_score_textview"
-            tools:text="Tijd 1:23"/>
+            app:layout_constraintStart_toEndOf="@id/card_statistics"
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/continue_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/new_statistics"
+                    style="@style/text_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@string/textview_new_stats" />
+
+                <TextView
+                    android:id="@+id/new_level"
+                    style="@style/text_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@{@string/textview_new_level(viewModel.level)}"
+                    tools:text="Level 2" />
+
+                <TextView
+                    android:id="@+id/newxp"
+                    style="@style/text_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@{@string/textview_new_xp(viewModel.xp)}"
+                    tools:text="24xp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Button
             android:id="@+id/continue_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/button_question_continue"
+            android:layout_margin="16dp"
             android:onClick="@{()->fragment.endGame()}"
+            android:text="@string/button_question_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lesson_score_textview" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

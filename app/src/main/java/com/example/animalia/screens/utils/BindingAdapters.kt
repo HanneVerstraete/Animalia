@@ -28,6 +28,17 @@ fun ImageView.setLessonCompletedImage(lesson: Lesson?) {
     )
 }
 
+@BindingAdapter("quizCompletedImage")
+fun ImageView.setQuizCompletedImage(isWon: Boolean) {
+    setImageResource(
+        if (isWon) {
+            R.drawable.won_game_animal
+        } else {
+            R.drawable.lose_game_animal
+        }
+    )
+}
+
 @BindingAdapter("levelValue")
 fun TextView.setLevelValue(level: Int?) {
     text = resources.getString(R.string.level_value, level ?: 0)

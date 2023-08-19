@@ -25,6 +25,10 @@
     <string name="textview_total_questions">Totaal aantal vragen: 3</string>
     <string name="true_or_false">Juist of fout?</string>
     <string name="finished_button">Klaar</string>
+    <string name="textview_added_xp">+ %dXP</string>
+    <string name="textview_new_level">Level %d</string>
+    <string name="textview_new_xp">%dXP</string>
+    <string name="textview_new_stats">Nieuwe stand</string>
 
     <!--    auth0-->
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>

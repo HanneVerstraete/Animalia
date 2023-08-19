@@ -77,19 +77,6 @@ class TruefalseFragment : Fragment() {
         } else {
             R.style.ThemeOverlay_WrongAnswer
         }
-        createDialog(style)
-    }
-
-    private fun openFalseDialog() {
-        val style = if (viewModel.currentQuestion.value!!.answer == "Fout") {
-            R.style.ThemeOverlay_WrightAnswer
-        } else {
-            R.style.ThemeOverlay_WrongAnswer
-        }
-        createDialog(style)
-    }
-
-    private fun createDialog(style: Int) {
         context?.let { it1 ->
             MaterialAlertDialogBuilder(it1, style)
                 .setTitle("Antwoord: ${viewModel.currentQuestion.value!!.answer}")
@@ -100,4 +87,22 @@ class TruefalseFragment : Fragment() {
                 .show()
         }
     }
+
+    private fun openFalseDialog() {
+        val style = if (viewModel.currentQuestion.value!!.answer == "Fout") {
+            R.style.ThemeOverlay_WrightAnswer
+        } else {
+            R.style.ThemeOverlay_WrongAnswer
+        }
+        context?.let { it1 ->
+            MaterialAlertDialogBuilder(it1, style)
+                .setTitle("Antwoord: ${viewModel.currentQuestion.value!!.answer}")
+                .setMessage(viewModel.currentQuestion.value!!.explanation)
+                .setPositiveButton("Verder") { _, _ ->
+                    viewModel.answerFalse()
+                }
+                .show()
+        }
+    }
+
 }

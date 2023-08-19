@@ -20,7 +20,7 @@ class LessonOverviewViewModel(application: Application) : AndroidViewModel(appli
     val lessons = Transformations.switchMap(_filter) {
         when (it) {
             "gedaan" -> lessonRepository.doneLessons
-            "nieuw" -> lessonRepository.newLessons
+            "te doen" -> lessonRepository.newLessons
             else -> lessonRepository.lessons
         }
     }
