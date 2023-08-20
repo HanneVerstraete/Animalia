@@ -49,7 +49,7 @@ class LessonOverviewFragment : Fragment() {
             }
         })
 
-        addChips(listOf("gedaan", "nieuw", "alles"))
+        addChips(listOf("gedaan", "te doen", "alles"))
 
         binding.lessonOverview.adapter = adapter
 

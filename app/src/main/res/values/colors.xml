@@ -10,6 +10,9 @@
     <color name="secondaryDarkColor">#152737</color>
     <color name="secondaryTextColor">#ffffff</color>
 
+    <color name="secondaryContainerColor">#628A34</color>
+    <color name="secondaryOnContainerColor">#273715</color>
+
     <color name="colorOnSurface">#273715</color>
 
     <color name="backGroundColor">#fefcf6</color>
