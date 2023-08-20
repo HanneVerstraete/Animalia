@@ -115,7 +115,7 @@ class TruefalseViewModel(
     private fun handleWonGame(user: User) {
         addedXP = (_goodQuestions.value ?: 0) * 2
         xp = user.xp + (2 * (_goodQuestions.value ?: 0))
-        level = ceil((user.xp).toDouble() / 10).toInt()
+        level = ceil((xp).toDouble() / 10).toInt()
         resultMessage.set(R.string.textview_question_win)
         wonTheGame = true
         user.lastQuestionIndex = currentQuestionIndex
@@ -125,8 +125,8 @@ class TruefalseViewModel(
 
     private fun handleLostGame(user: User) {
         addedXP = 0
-        xp = user.xp + (2 * (_goodQuestions.value ?: 0))
-        level = ceil((user.xp).toDouble() / 10).toInt()
+        xp = user.xp
+        level = user.level
         resultMessage.set(R.string.textview_question_lose)
         wonTheGame = false
     }
