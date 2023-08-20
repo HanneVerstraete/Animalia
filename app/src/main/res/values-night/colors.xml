@@ -26,4 +26,5 @@
     <color name="wrongText">#FFDADA</color>
     <color name="rightCardBackground">#273715</color>
     <color name="rightText">#dde6cd</color>
+    <color name="backgroundHome">#111111</color>
 </resources>
