@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animalia.domain.User
 import com.example.animalia.repository.UserRepository
+import com.example.animalia.sharedPreferences
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
@@ -29,5 +30,21 @@ class ProfileViewModel(
             userRepository.updateUser(_currentUser.value!!)
             _currentUser.value = userRepository.getUser()
         }
+    }
+
+    fun resetStats() {
+        sharedPreferences.currentLesson = 0
+        sharedPreferences.currentQuestion = 0
+
+        _currentUser.value?.level = 1
+        _currentUser.value?.xp = 0
+        _currentUser.value?.lastLessonIndex = 0
+        _currentUser.value?.lastQuestionIndex = 0
+
+        viewModelScope.launch {
+            userRepository.updateUser(_currentUser.value!!)
+            _currentUser.value = userRepository.getUser()
+        }
+
     }
 }

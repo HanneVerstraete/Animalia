@@ -38,26 +38,48 @@ class ProfileFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.editButton.setOnClickListener {
-            _openDialog()
+            openEditPersonalInfoDialog()
+        }
+
+        binding.profileRestButton.setOnClickListener {
+            openResetProfileDialog()
         }
 
         return binding.root
     }
 
-    fun _openDialog() {
-        val messageBoxView = LayoutInflater.from(activity).inflate(R.layout.fragment_dialog_edit_info, null)
+    private fun openEditPersonalInfoDialog() {
+        val messageBoxView =
+            LayoutInflater.from(activity).inflate(R.layout.fragment_dialog_edit_info, null)
         context?.let { it1 ->
             MaterialAlertDialogBuilder(it1)
                 .setTitle("Gegevens bewerken")
                 .setView(messageBoxView)
                 .setNeutralButton("Annuleer") { _, _ -> }
                 .setPositiveButton("Opslaan") { _, _ ->
-                    val firstname: String = (messageBoxView.findViewById(R.id.firstname_textfield) as TextInputLayout).editText?.text.toString()
-                    val lastname: String = (messageBoxView.findViewById(R.id.lastname_textfield) as TextInputLayout).editText?.text.toString()
+                    val firstname: String =
+                        (messageBoxView.findViewById(R.id.firstname_textfield) as TextInputLayout).editText?.text.toString()
+                    val lastname: String =
+                        (messageBoxView.findViewById(R.id.lastname_textfield) as TextInputLayout).editText?.text.toString()
 
                     viewModel.editUserPersonalInfo(firstname, lastname)
                 }
                 .show()
         }
     }
+
+    private fun openResetProfileDialog() {
+        context?.let { it1 ->
+            MaterialAlertDialogBuilder(it1)
+                .setTitle("Statistieken resetten?")
+                .setMessage("Ben je zeker dat je je statistieken wilt resetten? Al je voortgang zal hierdoor verloren gaan.")
+                .setNeutralButton("Annuleer") { _, _ -> }
+                .setPositiveButton("Reset") { _, _ ->
+                    viewModel.resetStats()
+                }
+                .show()
+        }
+
+    }
+
 }
