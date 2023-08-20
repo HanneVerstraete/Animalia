@@ -37,9 +37,9 @@ class HomeFragment : Fragment() {
                 binding.startLessonButton.setOnClickListener {
                     context?.let { it1 ->
                         MaterialAlertDialogBuilder(it1)
-                            .setTitle("Alle lessen afgewerkt")
-                            .setMessage("Proficiat! Je hebt al alle lessen afgewerkt. Open het zijmenu om het lesoverzicht te openen als je lessen wilt herbekijken")
-                            .setPositiveButton("Verder") { _, _ -> }
+                            .setTitle(resources.getString(R.string.finished_lessons_dialog_title))
+                            .setMessage(resources.getString(R.string.finished_lessons_dialog_message))
+                            .setPositiveButton(resources.getString(R.string.continue_button)) { _, _ -> }
                             .show()
                     }
                 }
@@ -51,9 +51,9 @@ class HomeFragment : Fragment() {
                 binding.startTruefalseButton.setOnClickListener {
                     context?.let { it1 ->
                         MaterialAlertDialogBuilder(it1)
-                            .setTitle("Alle oefeningen afgewerkt")
-                            .setMessage("Proficiat! Je hebt al oefeningen afgewerkt.")
-                            .setPositiveButton("Verder") { _, _ -> }
+                            .setTitle(resources.getString(R.string.finished_questions_dialog_title))
+                            .setMessage(resources.getString(R.string.finished_questions_dialog_message))
+                            .setPositiveButton(resources.getString(R.string.continue_button)) { _, _ -> }
                             .show()
                     }
                 }

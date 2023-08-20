@@ -36,7 +36,7 @@
             tools:src="@drawable/won_game_animal" />
 
         <TextView
-            android:id="@+id/lesson_textview"
+            android:id="@+id/resultMessage_textview"
             style="@style/text_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                     tools:text="Level 2" />
 
                 <TextView
-                    android:id="@+id/newxp"
+                    android:id="@+id/new_xp"
                     style="@style/text_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

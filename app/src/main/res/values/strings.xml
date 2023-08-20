@@ -30,6 +30,13 @@
     <string name="textview_new_xp">%dXP</string>
     <string name="textview_new_stats">Nieuwe stand</string>
     <string name="added_lesson_xp">+2XP</string>
+    <string name="finished_lessons_dialog_title">Alle lessen afgewerkt</string>
+    <string name="finished_lessons_dialog_message">Proficiat! Je hebt alle lessen afgewerkt. Open het zijmenu om het lesoverzicht te openen als je lessen wilt herbekijken.</string>
+    <string name="finished_questions_dialog_title">Alle oefeningen afgewerkt</string>
+    <string name="finished_questions_dialog_message">Proficiat! Je hebt alle oefeningen afgewerkt.</string>
+    <string name="continue_button">Verder</string>
+    <string name="correct_title">Correct!</string>
+    <string name="incorrect_title">Incorrect</string>
 
     <!--    auth0-->
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>
@@ -65,6 +72,13 @@
     <string name="textfield_lastname">Familienaam</string>
     <string name="reset_button">Reset</string>
     <string name="user_reset">Gebruiker is reset</string>
+    <string name="profile_dialog_edit_title">Gegevens bewerken</string>
+    <string name="profile_dialog_edit_save">Opslaan</string>
+    <string name="profile_dialog_edit_cancel">Annuleer</string>
+    <string name="profile_dialog_reset_title">Statistieken resetten?</string>
+    <string name="profile_dialog_reset_message">Ben je zeker dat je je statistieken wilt resetten? Al je voortgang zal hierdoor verloren gaan.</string>
+    <string name="profile_dialog_reset_button">Reset</string>
+    <string name="profile_dialog_reset_cancel">Annuleer</string>
 
     <string name="about_text">
 Welkom op Animalia!\n\nOnze app biedt je de mogelijkheid om meer te ontdekken over verschillende diersoorten van over de hele wereld.\n\nMaar het gaat niet alleen om leren, we hebben ook quizvragen gecreëerd om je kennis te testen.\n\nDank je voor het kiezen van Animalia om je dierenkennis te vergroten. Veel plezier met ontdekken, leren en spelen!\n\nHet Animalia Team

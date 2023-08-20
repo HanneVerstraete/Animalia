@@ -55,10 +55,10 @@ class ProfileFragment : Fragment() {
             LayoutInflater.from(activity).inflate(R.layout.fragment_dialog_edit_info, null)
         context?.let { it1 ->
             MaterialAlertDialogBuilder(it1)
-                .setTitle("Gegevens bewerken")
+                .setTitle(resources.getString(R.string.profile_dialog_edit_title))
                 .setView(messageBoxView)
-                .setNeutralButton("Annuleer") { _, _ -> }
-                .setPositiveButton("Opslaan") { _, _ ->
+                .setNeutralButton(resources.getString(R.string.profile_dialog_edit_cancel)) { _, _ -> }
+                .setPositiveButton(resources.getString(R.string.profile_dialog_edit_save)) { _, _ ->
                     val firstname: String =
                         (messageBoxView.findViewById(R.id.firstname_textfield) as TextInputLayout).editText?.text.toString()
                     val lastname: String =
@@ -73,10 +73,10 @@ class ProfileFragment : Fragment() {
     private fun openResetProfileDialog() {
         context?.let { it1 ->
             MaterialAlertDialogBuilder(it1)
-                .setTitle("Statistieken resetten?")
-                .setMessage("Ben je zeker dat je je statistieken wilt resetten? Al je voortgang zal hierdoor verloren gaan.")
-                .setNeutralButton("Annuleer") { _, _ -> }
-                .setPositiveButton("Reset") { _, _ ->
+                .setTitle(resources.getString(R.string.profile_dialog_reset_title))
+                .setMessage(resources.getString(R.string.profile_dialog_reset_message))
+                .setNeutralButton(resources.getString(R.string.profile_dialog_reset_cancel)) { _, _ -> }
+                .setPositiveButton(resources.getString(R.string.profile_dialog_reset_button)) { _, _ ->
                     viewModel.resetStats()
                     view?.findNavController()
                         ?.navigate(ProfileFragmentDirections.actionProfileFragmentToHomeFragment())

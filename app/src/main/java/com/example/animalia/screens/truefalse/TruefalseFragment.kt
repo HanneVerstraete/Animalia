@@ -87,16 +87,16 @@ class TruefalseFragment : Fragment() {
 
         if (isCorrect) {
             style = R.style.ThemeOverlay_WrightAnswer
-            title = "Correct!"
+            title = resources.getString(R.string.correct_title)
         } else {
             style = R.style.ThemeOverlay_WrongAnswer
-            title = "Incorrect"
+            title = resources.getString(R.string.incorrect_title)
         }
         context?.let { it1 ->
             MaterialAlertDialogBuilder(it1, style)
                 .setTitle(title)
                 .setMessage(viewModel.currentQuestion.value!!.explanation)
-                .setPositiveButton("Verder") { _, _ ->
+                .setPositiveButton(resources.getString(R.string.continue_button)) { _, _ ->
                     if (hasAnsweredTrue) {
                         viewModel.answerTrue()
                     } else {

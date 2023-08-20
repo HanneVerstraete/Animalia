@@ -117,7 +117,6 @@
             style="?attr/materialCardViewFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/secondaryLigthColor">
 
@@ -194,7 +193,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-
                     android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toEndOf="@id/statistics_values"
@@ -227,8 +225,8 @@
                     android:id="@+id/profile_rest_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/reset_button"
                     android:backgroundTint="@color/secondaryColor"
+                    android:text="@string/reset_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
