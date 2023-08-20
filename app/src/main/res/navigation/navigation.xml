@@ -17,7 +17,8 @@
             app:destination="@id/lessonFragment" />
         <action
             android:id="@+id/action_homeFragment_to_truefalseFragment"
-            app:destination="@id/truefalseFragment" />
+            app:destination="@id/truefalseFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/lessonFragment"
@@ -47,8 +48,7 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/truefalseEndFragment"
@@ -62,6 +62,9 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_trueFalseEndFragment_to_trueFalseFragment"
+            app:destination="@id/truefalseFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"

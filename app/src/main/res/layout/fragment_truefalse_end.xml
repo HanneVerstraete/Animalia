@@ -27,13 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_margin="32dp"
-            app:quizCompletedImage="@{viewModel.wonTheGame}"
-            tools:src="@drawable/won_game_animal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.32" />
+            app:layout_constraintVertical_bias="0.32"
+            app:quizCompletedImage="@{viewModel.wonTheGame}"
+            tools:src="@drawable/won_game_animal" />
 
         <TextView
             android:id="@+id/lesson_textview"
@@ -69,29 +69,29 @@
                     android:id="@+id/lesson_score_textview"
                     style="@style/text_regular"
                     android:layout_width="match_parent"
-                    android:textColor="@color/primaryTextColor"
                     android:layout_height="wrap_content"
                     android:text="@{@string/textview_score(viewModel.goodQuestions, viewModel.numberOfQuestionsAsked)}"
                     android:textAlignment="center"
+                    android:textColor="@color/primaryTextColor"
                     tools:text="Score: 2/3" />
 
                 <TextView
                     android:id="@+id/lesson_xp_textview"
                     style="@style/text_regular"
-                    android:textColor="@color/primaryTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{@string/textview_added_xp(viewModel.addedXP)}"
                     android:textAlignment="center"
+                    android:textColor="@color/primaryTextColor"
                     tools:text="+ 4XP" />
 
                 <TextView
                     android:id="@+id/lesson_time_textview"
                     style="@style/text_regular"
-                    android:textColor="@color/primaryTextColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
+                    android:textColor="@color/primaryTextColor"
                     app:time="@{viewModel.timer.secondsCount}"
                     tools:text="Tijd 1:23" />
             </LinearLayout>
@@ -123,16 +123,16 @@
                     style="@style/text_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:text="@string/textview_new_stats" />
+                    android:text="@string/textview_new_stats"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/new_level"
                     style="@style/text_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:text="@{@string/textview_new_level(viewModel.level)}"
+                    android:textAlignment="center"
                     tools:text="Level 2" />
 
                 <TextView
@@ -140,23 +140,39 @@
                     style="@style/text_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:text="@{@string/textview_new_xp(viewModel.xp)}"
+                    android:textAlignment="center"
                     tools:text="24xp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/continue_button"
+            android:id="@+id/home_button"
+            style="?attr/materialIconButtonFilledTonalStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:onClick="@{()->fragment.endGame()}"
-            android:text="@string/button_question_continue"
+            android:backgroundTint="@color/secondaryLigthColor"
+            android:onClick="@{()->fragment.endGameAndGoToHome()}"
+            app:icon="@drawable/ic_baseline_home_24"
+            app:iconTint="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/continue_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="32dp"
+            android:onClick="@{()->fragment.endGameAndStartNextGame()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:iconTint="@color/primaryTextColor"
+            style="?attr/materialIconButtonFilledTonalStyle"
+            app:icon="@drawable/ic_baseline_arrow_forward_24"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

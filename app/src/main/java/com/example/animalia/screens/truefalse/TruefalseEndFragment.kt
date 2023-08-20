@@ -47,10 +47,15 @@ class TruefalseEndFragment : Fragment() {
         binding.fragment = this
     }
 
-    fun endGame() {
+    fun endGameAndGoToHome() {
         view?.findNavController()
             ?.navigate(TruefalseEndFragmentDirections.actionTrueFalseEndFragmentToHomeFragment())
         viewModel.endGame()
+    }
 
+    fun endGameAndStartNextGame() {
+        view?.findNavController()
+            ?.navigate(TruefalseEndFragmentDirections.actionTrueFalseEndFragmentToTrueFalseFragment())
+        viewModel.endGame()
     }
 }
