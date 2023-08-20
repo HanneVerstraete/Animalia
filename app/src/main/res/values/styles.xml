@@ -17,14 +17,14 @@
 
     <!--    custom dialog wright answer-->
     <style name="ThemeOverlay.WrightAnswer" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="android:backgroundTint">@color/colorSurface</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="android:backgroundTint">@color/rightCardBackground</item>
+        <item name="colorOnSurface">@color/rightText</item>
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyleWright</item>
         <item name="shapeAppearanceOverlay">@style/DialogCorners</item>
     </style>
 
     <style name="PositiveButtonStyleWright" parent="@style/Widget.MaterialComponents.Button">
-        <item name="android:textColor">@color/colorOnSurface</item>
+        <item name="android:textColor">@color/rightText</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 

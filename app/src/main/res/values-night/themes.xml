@@ -1,4 +1,5 @@
-<resources >
+<resources>
+
     <style name="Theme.AnimaliaApp" parent="Theme.Material3.Dark">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColor</item>
@@ -9,11 +10,22 @@
         <item name="colorSecondary">@color/secondaryColor</item>
         <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
         <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorSecondaryContainer">@color/secondaryContainerColor</item>
+        <item name="colorOnSecondaryContainer">@color/secondaryOnContainerColor</item>
 
         <item name="android:windowBackground">@color/backGroundColor</item>
         <item name="android:textColor">@color/textColor</item>
         <item name="colorSurface">@color/colorSurface</item>
         <!--        chip-->
         <item name="colorOnSurface">@color/colorOnSurface</item>
+        <!--        card-->
+        <item name="colorOnSurfaceVariant">@color/primaryColor</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
+        </item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
     </style>
 </resources>

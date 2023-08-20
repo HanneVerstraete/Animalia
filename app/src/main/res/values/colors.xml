@@ -24,4 +24,6 @@
     <color name="falseButton">#C9FF3829</color>
     <color name="wrongText">#C9AF0D00</color>
     <color name="wrongCardBackground">#FFDADA</color>
+    <color name="rightText">#273715</color>
+    <color name="rightCardBackground">#dde6cd</color>
 </resources>

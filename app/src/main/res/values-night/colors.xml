@@ -3,11 +3,15 @@
     <color name="primaryColor">#324f10</color>
     <color name="primaryLightColor">#aed285</color>
     <color name="primaryDarkColor">#414937</color>
-    <color name="primaryTextColor">#c9ee9e</color>
+    <color name="primaryTextColor">#ffffff</color>
 
     <color name="secondaryColor">#2b4c4a</color>
+    <color name="secondaryLigthColor">#6B97AF</color>
     <color name="secondaryDarkColor">#1c2b2a</color>
     <color name="secondaryTextColor">#c5eae7</color>
+
+    <color name="secondaryContainerColor">#324f10</color>
+    <color name="secondaryOnContainerColor">#aed285</color>
 
     <color name="colorOnSurface">#414937</color>
 
@@ -17,4 +21,9 @@
 
     <!--    specific color-->
     <color name="textDisabled">#727272</color>
+    <color name="falseButton">#C9FF3829</color>
+    <color name="wrongCardBackground">#751E17</color>
+    <color name="wrongText">#FFDADA</color>
+    <color name="rightCardBackground">#273715</color>
+    <color name="rightText">#dde6cd</color>
 </resources>
