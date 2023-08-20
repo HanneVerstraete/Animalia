@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +15,7 @@ import com.example.animalia.databinding.FragmentLessonBinding
 import com.example.animalia.repository.LessonRepository
 import com.example.animalia.repository.UserRepository
 import com.example.animalia.sharedPreferences
+import com.google.android.material.snackbar.Snackbar
 
 class LessonFragment : Fragment() {
     private lateinit var binding: FragmentLessonBinding
@@ -46,15 +46,15 @@ class LessonFragment : Fragment() {
         viewModel.currentLesson.observe(viewLifecycleOwner) {
             if (it.index + 1 == viewModel.totalNumberOfLessons) {
                 binding.nextlessonButton.visibility = View.INVISIBLE
-                binding.finishlessonButton?.visibility = View.VISIBLE
+                binding.finishlessonButton.visibility = View.VISIBLE
             } else {
                 binding.nextlessonButton.visibility = View.VISIBLE
-                binding.finishlessonButton?.visibility = View.INVISIBLE
+                binding.finishlessonButton.visibility = View.INVISIBLE
             }
             if (it.index == 0) {
-                binding.previouslessonButton!!.visibility = View.INVISIBLE
+                binding.previouslessonButton.visibility = View.INVISIBLE
             } else {
-                binding.previouslessonButton!!.visibility = View.VISIBLE
+                binding.previouslessonButton.visibility = View.VISIBLE
             }
         }
 
@@ -62,20 +62,22 @@ class LessonFragment : Fragment() {
     }
 
     fun setOnClickListeners() {
-        binding.homeButton?.setOnClickListener { view: View ->
+        binding.homeButton.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
         }
 
-        binding.finishlessonButton?.setOnClickListener { view: View ->
+        binding.finishlessonButton.setOnClickListener { view: View ->
             viewModel.getNextLesson()
             view.findNavController()
                 .navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
         }
 
-        binding.nextlessonButton.setOnClickListener {
+        binding.nextlessonButton.setOnClickListener { view: View ->
             if (sharedPreferences.currentLesson <= viewModel.currentLesson.value!!.index) {
-                Toast.makeText(context, getText(R.string.added_lesson_xp), Toast.LENGTH_SHORT)
+                Snackbar.make(view, R.string.added_lesson_xp, Snackbar.LENGTH_SHORT)
+                    .setAction(R.string.ok) {}
+                    .setAnchorView(view)
                     .show()
             }
             viewModel.getNextLesson()

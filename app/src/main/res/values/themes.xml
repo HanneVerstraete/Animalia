@@ -21,6 +21,8 @@
         <!--        card-->
         <item name="colorOnSurfaceVariant">@color/primaryColor</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+
+        <item name="colorPrimaryInverse">@color/primaryLightColor</item>
     </style>
 
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">

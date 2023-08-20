@@ -29,7 +29,7 @@
     <string name="textview_new_level">Level %d</string>
     <string name="textview_new_xp">%dXP</string>
     <string name="textview_new_stats">Nieuwe stand</string>
-    <string name="added_lesson_xp">+2XP</string>
+    <string name="added_lesson_xp">Gained 2XP!</string>
     <string name="finished_lessons_dialog_title">Alle lessen afgewerkt</string>
     <string name="finished_lessons_dialog_message">Proficiat! Je hebt alle lessen afgewerkt. Open het zijmenu om het lesoverzicht te openen als je lessen wilt herbekijken.</string>
     <string name="finished_questions_dialog_title">Alle oefeningen afgewerkt</string>
@@ -37,6 +37,7 @@
     <string name="continue_button">Verder</string>
     <string name="correct_title">Correct!</string>
     <string name="incorrect_title">Incorrect</string>
+    <string name="ok">OK</string>
 
     <!--    auth0-->
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>

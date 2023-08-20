@@ -1,10 +1,11 @@
 package com.example.animalia.screens.profile
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.FrameLayout.LayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +15,7 @@ import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentProfileBinding
 import com.example.animalia.repository.UserRepository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
 class ProfileFragment : Fragment() {
@@ -80,7 +82,14 @@ class ProfileFragment : Fragment() {
                     viewModel.resetStats()
                     view?.findNavController()
                         ?.navigate(ProfileFragmentDirections.actionProfileFragmentToHomeFragment())
-                    Toast.makeText(context, getString(R.string.user_reset), Toast.LENGTH_LONG).show()
+                    val snack =
+                        Snackbar.make(requireView(), R.string.user_reset, Snackbar.LENGTH_SHORT)
+                            .setAction(R.string.ok) {}
+                    val view = snack.view
+                    val params: LayoutParams = view.layoutParams as LayoutParams
+                    params.gravity = Gravity.TOP
+                    view.layoutParams = params
+                    snack.show()
                 }
                 .show()
         }

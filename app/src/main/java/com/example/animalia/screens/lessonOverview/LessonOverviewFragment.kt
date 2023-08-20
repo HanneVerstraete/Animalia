@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -19,6 +18,7 @@ import com.example.animalia.databinding.LessonOverviewRowItemBinding
 import com.example.animalia.domain.Lesson
 import com.example.animalia.sharedPreferences
 import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 
 class LessonOverviewFragment : Fragment() {
     private lateinit var binding: FragmentLessonOverviewBinding
@@ -45,7 +45,11 @@ class LessonOverviewFragment : Fragment() {
                     )
                 )
             } else {
-                Toast.makeText(context, getString(R.string.warning_lesson_not_enabled), Toast.LENGTH_LONG).show()
+                view?.let {
+                    Snackbar.make(it, R.string.warning_lesson_not_enabled, Snackbar.LENGTH_SHORT)
+                        .setAction(R.string.ok) {}
+                        .show()
+                }
             }
         })
 
