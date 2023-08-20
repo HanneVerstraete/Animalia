@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/truefalseFragment"
         android:name="com.example.animalia.screens.truefalse.TruefalseFragment"
-        android:label="True/false spel"
+        android:label="Oefening"
         tools:layout="@layout/fragment_truefalse">
         <action
             android:id="@+id/action_truefalseFragment_to_truefalseEndFragment"
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/truefalseEndFragment"
         android:name="com.example.animalia.screens.truefalse.TruefalseEndFragment"
-        android:label="Verloren"
+        android:label="Einde oefening"
         tools:layout="@layout/fragment_truefalse_end">
         <action
             android:id="@+id/action_trueFalseEndFragment_to_homeFragment"
@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.animalia.screens.about.AboutFragment"
-        android:label="About"
+        android:label="Over ons"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/lessonOverviewFragment"
