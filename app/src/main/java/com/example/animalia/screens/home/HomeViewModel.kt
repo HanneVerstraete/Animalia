@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.repository.LessonRepository
 import com.example.animalia.repository.QuizElementRepository
+import com.example.animalia.screens.truefalse.TOTAL_QUESTIONS
 import com.example.animalia.sharedPreferences
 import kotlinx.coroutines.launch
 
@@ -38,7 +39,7 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
             quizElementRepository.refreshQuizElements()
             val currentUserQuizElement = sharedPreferences.currentQuestion
             val totalQuizElements = quizElementRepository.getQuizElementCount()
-            _isFinishedQuizElements.value = currentUserQuizElement + 3 > totalQuizElements
+            _isFinishedQuizElements.value = currentUserQuizElement + TOTAL_QUESTIONS > totalQuizElements
         }
     }
 }

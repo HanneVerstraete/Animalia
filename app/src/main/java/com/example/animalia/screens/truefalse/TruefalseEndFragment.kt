@@ -39,6 +39,14 @@ class TruefalseEndFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        viewModel.currentQuestion.observe(viewLifecycleOwner) {
+            if (it.index + TOTAL_QUESTIONS > viewModel.totalAmountOfQuestions) {
+                binding.continueButton.visibility = View.INVISIBLE
+            } else {
+                binding.continueButton.visibility = View.VISIBLE
+            }
+        }
+
         return binding.root
     }
 

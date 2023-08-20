@@ -40,6 +40,7 @@ class TruefalseViewModel(
     var level: Int = 0
     var xp: Int = 0
     var addedXP: Int = 0
+    var totalAmountOfQuestions = 0
 
     init {
         initializeLiveData()
@@ -54,6 +55,7 @@ class TruefalseViewModel(
             userRepository.refreshUser()
             _currentQuestion.value =
                 quizElementRepository.getQuizElementByIndex(currentQuestionIndex)
+            totalAmountOfQuestions = quizElementRepository.getQuizElementCount()
         }
     }
 
