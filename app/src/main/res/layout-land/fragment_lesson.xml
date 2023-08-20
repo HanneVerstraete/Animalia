@@ -15,16 +15,94 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/animal_image"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:contentDescription="@string/description_image_lesson"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lessonImage="@{lessonViewModel.currentLesson}"
-            tools:srcCompat="@drawable/empty_vector" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/animal_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/description_image_lesson"
+                android:src="@drawable/empty_vector"
+                app:lessonImage="@{lessonViewModel.currentLesson}"
+                tools:srcCompat="@drawable/empty_vector" />
+
+            <TextView
+                android:id="@+id/lesson_title_textview"
+                style="@style/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondaryLigthColor"
+                android:padding="8dp"
+                android:text="@{lessonViewModel.currentLesson.title}"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/animal_image"
+                tools:text="Here comes a title" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/previouslesson_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginEnd="33dp"
+                    android:layout_marginBottom="28dp"
+                    android:width="110dp"
+                    android:onClick="@{()->lessonViewModel.getPreviousLesson()}"
+                    android:text="@string/button_lesson_previous_short"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/home_button"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/home_button"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:backgroundTint="@color/secondaryLigthColor"
+                    app:icon="@drawable/ic_baseline_home_24"
+                    app:iconTint="@color/secondaryColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/nextlesson_button"
+                    app:layout_constraintStart_toEndOf="@+id/previouslesson_button" />
+
+                <Button
+                    android:id="@+id/nextlesson_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginStart="22dp"
+                    android:width="110dp"
+                    android:text="@string/button_lesson_next_short"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/home_button" />
+
+                <Button
+                    android:id="@+id/finishlesson_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:width="110dp"
+                    android:text="@string/finished_button"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/home_button" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -39,8 +117,7 @@
                 android:id="@+id/lesson_scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/nextlesson_button"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -59,26 +136,6 @@
                         tools:text="Here comes a lesson" />
                 </LinearLayout>
             </ScrollView>
-
-            <Button
-                android:id="@+id/nextlesson_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="@string/button_lesson_next"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/quitlesson_button"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/quitlesson_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="Stop les"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/nextlesson_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

@@ -69,4 +69,6 @@
     <string name="about_text">
 Welkom op Animalia!\n\nOnze app biedt je de mogelijkheid om meer te ontdekken over verschillende diersoorten van over de hele wereld.\n\nMaar het gaat niet alleen om leren, we hebben ook quizvragen gecreëerd om je kennis te testen.\n\nDank je voor het kiezen van Animalia om je dierenkennis te vergroten. Veel plezier met ontdekken, leren en spelen!\n\nHet Animalia Team
     </string>
+    <string name="button_lesson_previous_short">Vorige</string>
+    <string name="button_lesson_next_short">Volgende</string>
 </resources>
