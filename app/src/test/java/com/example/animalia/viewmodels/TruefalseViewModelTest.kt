@@ -2,6 +2,7 @@ package com.example.animalia.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.animalia.domain.QuizElement
+import com.example.animalia.domain.User
 import com.example.animalia.repository.QuizElementRepository
 import com.example.animalia.repository.UserRepository
 import com.example.animalia.screens.truefalse.TruefalseViewModel
@@ -9,6 +10,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -41,6 +43,9 @@ class TruefalseViewModelTest {
         QuizElement("id1", 1, "dit is een question 1", "Juist", "dit is een uitleg 1")
     private val quizElement2False =
         QuizElement("id2", 2, "dit is een question 2", "Fout", "dit is een uitleg 2")
+
+    private val user = User("ida", "firstName", "lastName", "email", 0, 0, 1, 0)
+    private val updatedUser = User("idb", "firstName", "lastName", "email", 0, 3, 1, 4)
 
     @Before
     fun setup() {
@@ -109,12 +114,17 @@ class TruefalseViewModelTest {
     @Test
     fun `when answering 3 questions, game should be evaluated`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(0)).thenReturn(quizElement0)
+        `when`(mockUserRepository.getUser()).thenReturn(user)
+        `when`(mockUserRepository.updateUser(user)).thenReturn(updatedUser)
         viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 0)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerTrue()
         viewModel.answerTrue()
         viewModel.answerTrue()
+        viewModel.getQuestion()
+
+        advanceUntilIdle()
 
         assertEquals(true, viewModel.shouldEvaluate.value)
     }
@@ -122,12 +132,17 @@ class TruefalseViewModelTest {
     @Test
     fun `when game is ended, variables should be reset`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(0)).thenReturn(quizElement0)
+        `when`(mockUserRepository.getUser()).thenReturn(user)
+        `when`(mockUserRepository.updateUser(user)).thenReturn(updatedUser)
         viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 0)
         testDispatcher.scheduler.advanceUntilIdle()
 
         viewModel.answerTrue()
         viewModel.answerTrue()
         viewModel.answerTrue()
+        viewModel.getQuestion()
+
+        advanceUntilIdle()
 
         assertEquals(3, viewModel.goodQuestions.value)
         assertEquals(3, viewModel.numberOfQuestionsAsked.value)
@@ -143,6 +158,8 @@ class TruefalseViewModelTest {
     @Test
     fun `when 3 questions were asked, player should win if he answered at least half of the questions right`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(1)).thenReturn(quizElement1True)
+        `when`(mockUserRepository.getUser()).thenReturn(user)
+        `when`(mockUserRepository.updateUser(user)).thenReturn(updatedUser)
         viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 1)
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -156,6 +173,8 @@ class TruefalseViewModelTest {
     @Test
     fun `when 3 questions were asked, player should lose if he answered less than half of the questions right`() = runTest {
         `when`(mockRepository.getQuizElementByIndex(1)).thenReturn(quizElement1True)
+        `when`(mockUserRepository.getUser()).thenReturn(user)
+        `when`(mockUserRepository.updateUser(user)).thenReturn(updatedUser)
         viewModel = TruefalseViewModel(mockRepository, mockUserRepository, 1)
         testDispatcher.scheduler.advanceUntilIdle()
 

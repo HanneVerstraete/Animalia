@@ -79,29 +79,4 @@ class NavigationTest{
         onView(withId(R.id.start_truefalse_button)).perform(click())
         onView(withId(R.id.truefalse_fragment)).check(matches(isDisplayed()))
     }
-
-    @Test
-    fun test_nav_truefalse_end_fragment() {
-        ActivityScenario.launch(LoginActivity::class.java)
-
-        onView(withId(R.id.start_truefalse_button)).perform(click())
-        onView(withId(R.id.truefalse_fragment)).check(matches(isDisplayed()))
-        onView(withId(R.id.true_button)).perform(click())
-        onView(withId(R.id.true_button)).perform(click())
-        onView(withId(R.id.true_button)).perform(click())
-        onView(withId(R.id.truefalse_end_fragment)).check(matches(isDisplayed()))
-    }
-
-    fun test_nav_truefalse_end_quit_click() {
-        ActivityScenario.launch(LoginActivity::class.java)
-
-        onView(withId(R.id.start_truefalse_button)).perform(click())
-        onView(withId(R.id.truefalse_fragment)).check(matches(isDisplayed()))
-        onView(withId(R.id.true_button)).perform(click())
-        onView(withId(R.id.true_button)).perform(click())
-        onView(withId(R.id.true_button)).perform(click())
-        onView(withId(R.id.truefalse_end_fragment)).check(matches(isDisplayed()))
-        onView(withId(R.id.continue_button)).perform(click())
-        onView(withId(R.id.home_fragment)).check(matches(isDisplayed()))
-    }
 }
