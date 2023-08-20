@@ -72,34 +72,36 @@ class TruefalseFragment : Fragment() {
     }
 
     private fun openTrueDialog() {
-        val style = if (viewModel.currentQuestion.value!!.answer == "Juist") {
-            R.style.ThemeOverlay_WrightAnswer
-        } else {
-            R.style.ThemeOverlay_WrongAnswer
-        }
-        context?.let { it1 ->
-            MaterialAlertDialogBuilder(it1, style)
-                .setTitle("Antwoord: ${viewModel.currentQuestion.value!!.answer}")
-                .setMessage(viewModel.currentQuestion.value!!.explanation)
-                .setPositiveButton("Verder") { _, _ ->
-                    viewModel.answerTrue()
-                }
-                .show()
-        }
+        val isCorrect = viewModel.currentQuestion.value!!.answer == "Juist"
+        openDialog(isCorrect, true)
     }
 
     private fun openFalseDialog() {
-        val style = if (viewModel.currentQuestion.value!!.answer == "Fout") {
-            R.style.ThemeOverlay_WrightAnswer
+        val isCorrect = viewModel.currentQuestion.value!!.answer == "Fout"
+        openDialog(isCorrect, false)
+    }
+
+    private fun openDialog(isCorrect: Boolean, hasAnsweredTrue: Boolean) {
+        val style: Int
+        val title: String
+
+        if (isCorrect) {
+            style = R.style.ThemeOverlay_WrightAnswer
+            title = "Correct!"
         } else {
-            R.style.ThemeOverlay_WrongAnswer
+            style = R.style.ThemeOverlay_WrongAnswer
+            title = "Incorrect"
         }
         context?.let { it1 ->
             MaterialAlertDialogBuilder(it1, style)
-                .setTitle("Antwoord: ${viewModel.currentQuestion.value!!.answer}")
+                .setTitle(title)
                 .setMessage(viewModel.currentQuestion.value!!.explanation)
                 .setPositiveButton("Verder") { _, _ ->
-                    viewModel.answerFalse()
+                    if (hasAnsweredTrue) {
+                        viewModel.answerTrue()
+                    } else {
+                        viewModel.answerFalse()
+                    }
                 }
                 .show()
         }
