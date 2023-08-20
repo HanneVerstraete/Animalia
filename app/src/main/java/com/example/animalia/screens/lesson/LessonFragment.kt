@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +15,7 @@ import com.example.animalia.database.AnimaliaDatabase
 import com.example.animalia.databinding.FragmentLessonBinding
 import com.example.animalia.repository.LessonRepository
 import com.example.animalia.repository.UserRepository
+import com.example.animalia.sharedPreferences
 
 class LessonFragment : Fragment() {
     private lateinit var binding: FragmentLessonBinding
@@ -44,14 +46,11 @@ class LessonFragment : Fragment() {
         viewModel.currentLesson.observe(viewLifecycleOwner) {
             if (it.index + 1 == viewModel.totalNumberOfLessons) {
                 binding.nextlessonButton.visibility = View.INVISIBLE
-                binding.finishlessonButton?.visibility  = View.VISIBLE
+                binding.finishlessonButton?.visibility = View.VISIBLE
             } else {
                 binding.nextlessonButton.visibility = View.VISIBLE
                 binding.finishlessonButton?.visibility = View.INVISIBLE
             }
-        }
-
-        viewModel.currentLesson.observe(viewLifecycleOwner) {
             if (it.index == 0) {
                 binding.previouslessonButton!!.visibility = View.INVISIBLE
             } else {
@@ -72,6 +71,14 @@ class LessonFragment : Fragment() {
             viewModel.getNextLesson()
             view.findNavController()
                 .navigate(LessonFragmentDirections.actionLessonFragmentToHomeFragment())
+        }
+
+        binding.nextlessonButton.setOnClickListener {
+            if (sharedPreferences.currentLesson <= viewModel.currentLesson.value!!.index) {
+                Toast.makeText(context, getText(R.string.added_lesson_xp), Toast.LENGTH_SHORT)
+                    .show()
+            }
+            viewModel.getNextLesson()
         }
     }
 }

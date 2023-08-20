@@ -29,6 +29,7 @@
     <string name="textview_new_level">Level %d</string>
     <string name="textview_new_xp">%dXP</string>
     <string name="textview_new_stats">Nieuwe stand</string>
+    <string name="added_lesson_xp">+2XP</string>
 
     <!--    auth0-->
     <string name="auth_client_id">lSTcwHGwt3BGvoUn2DdCNV63JbFotUHt</string>
